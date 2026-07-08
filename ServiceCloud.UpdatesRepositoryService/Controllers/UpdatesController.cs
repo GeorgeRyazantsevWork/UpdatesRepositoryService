@@ -5,14 +5,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
     [ApiController]
     [Route("api/updates")]
-    public class UpdatesController : ControllerBase
+    public class UpdatesController(IUpdatesRepository repositoryService) : ControllerBase
     {
-        private readonly IUpdatesRepository repository;
-
-        public UpdatesController(IUpdatesRepository repositoryService)
-        {
-            repository = repositoryService;
-        }
+        private readonly IUpdatesRepository repository = repositoryService;
 
         /// <summary>
         /// Получить количество обновлений
