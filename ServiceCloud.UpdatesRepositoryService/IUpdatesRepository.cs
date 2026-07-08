@@ -2,6 +2,9 @@
 
 namespace ServiceCloud.UpdatesRepositoryService
 {
+    /// <summary>
+    /// Интерфейс репозитория с обновлениями конфигураций информационных баз 1С
+    /// </summary>
     public interface IUpdatesRepository
     {
         /// <summary>
@@ -13,5 +16,39 @@ namespace ServiceCloud.UpdatesRepositoryService
         /// Количество доступных обновлений конфигураций информационных баз 1С
         /// </summary>
         int UpdatesCount { get; }
+
+        /// <summary>
+        /// Проверить наличие обновления для заданной конфигурации информационной базы
+        /// </summary>
+        /// <param name="config">Конфигурации информационной базы</param>
+        /// <returns>TRUE - обновление присутствует в репозитории, FALSE - в противном случае</returns>
+        bool ContainsUpdate(ConfigurationModel ? config);
+
+        /// <summary>
+        /// Получить данные об обновлении информационной базы до указанной конфигурации с учётом необходимости перехода на новую редакцию
+        /// </summary>
+        /// <param name="config">Конфигурация информационной базы</param>
+        /// <param name="transitive">TRUE - Обновление должно быть переходным (с редакции, отличной он указанной в параметре config), FALSE - обновление не изменяет редакцию базы</param>
+        /// <exception cref="ArgumentException">Целевая конфигурация задана не полностью</exception>
+        /// <exception cref="ArgumentNullException">Не задана целевая конфигурация</exception>
+        /// <exception cref="KeyNotFoundException">Обновление для конфигурации не найдено в репозитории</exception>
+        /// <returns>Данные об обновлении</returns>
+        UpdateModel GetUpdate(ConfigurationModel? config, bool transitive);
+
+        /// <summary>
+        /// Получить список обновлений, которые предположительно можно установить на указанную конфигурацию
+        /// </summary>
+        /// <param name="config">Конфигурация информационной базы 1С</param>
+        /// <returns>Коллекция обновлений</returns>
+        IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config);
+
+        /// <summary>
+        /// Получить информацию о расположении данных обновления конфигурации информационной базы 1С
+        /// </summary>
+        /// <param name="updateId">Идентификатор обновлении конфигурации информационной базы 1С в репозитории</param>
+        /// <exception cref="ArgumentException">Не задан идентификатор обновления</exception>
+        /// <exception cref="KeyNotFoundException">Обновление для конфигурации не найдено в репозитории</exception>
+        /// <returns>Расположение данных обновления</returns>
+        string GetLocation(string? updateId);
     }
 }
