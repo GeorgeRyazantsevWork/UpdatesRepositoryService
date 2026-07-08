@@ -1,0 +1,6 @@
+@ServiceCloud.UpdatesRepositoryService_HostAddress = http://localhost:5072
+
+GET {{ServiceCloud.UpdatesRepositoryService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
