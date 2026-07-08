@@ -1,6 +1,6 @@
 ﻿using ServiceCloud.UpdatesRepositoryService.Models;
 
-namespace ServiceCloud.UpdatesRepositoryService
+namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
     /// <summary>
     /// Интерфейс репозитория с обновлениями конфигураций информационных баз 1С

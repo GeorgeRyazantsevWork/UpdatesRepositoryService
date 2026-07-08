@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
+using ServiceCloud.UpdatesRepositoryService.Repository;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {

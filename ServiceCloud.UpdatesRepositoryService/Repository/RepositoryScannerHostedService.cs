@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Services
+﻿namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
     public class RepositoryScannerHostedService(RepositoryScanner repositoryScanner) : BackgroundService
     {
