@@ -7,7 +7,7 @@
     {
         public async Task<RepositoryIndex> ScanAsync()
         {
-
+            throw new NotImplementedException();
         }
     }
 }
