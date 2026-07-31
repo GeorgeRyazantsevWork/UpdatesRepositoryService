@@ -1,4 +1,6 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Models
+﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
+
+namespace ServiceCloud.UpdatesRepositoryService.Models
 {
     /// <summary>
     /// Описывает версию конфигурации информационной базы

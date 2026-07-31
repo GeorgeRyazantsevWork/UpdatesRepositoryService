@@ -4,7 +4,27 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
     public class RepositoryIndex : IRepositoryIndex
     {
-        public IReadOnlyCollection<UpdateModel> Updates => throw new NotImplementedException();
+        private Dictionary<string, UpdateModel> Updates;
+
+        private Dictionary<string, UpdateModel> StructedUpdates;
+
+        public RepositoryIndex()
+        {
+            Updates = new();
+            StructedUpdates = new();
+        }
+
+        public int Count => throw new NotImplementedException();
+
+        public bool Contains(ConfigurationModel targetConfig)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UpdateModel> GetPotentialUpdatesFor(ConfigurationModel? config)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Replace(IReadOnlyCollection<UpdateModel> updates)
         {
