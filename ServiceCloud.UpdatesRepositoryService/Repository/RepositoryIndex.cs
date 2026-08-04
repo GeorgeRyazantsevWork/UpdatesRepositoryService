@@ -26,6 +26,12 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         public int Count => updates.Count;
 
         /// <inheritdoc/>
+        public IEnumerable<UpdateModel> GetUpdates()
+        {
+            return updates.Values;
+        }
+
+        /// <inheritdoc/>
         public bool Contains(ConfigurationModel? targetConfig)
         {
             if (targetConfig is not null && CheckConfig(targetConfig))
@@ -36,7 +42,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             return false;
         }
 
-        public UpdateModel? GetUpdate(ConfigurationModel? targetConfig, bool transitive)
+        /// <inheritdoc/>
+        public UpdateModel? GetUpdate(ConfigurationModel? targetConfig, bool transitive) // TODO перенести логику transitive
         {
             if (targetConfig is not null)
             {
@@ -66,20 +73,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 case InfoBaseConfigEdition.BASE:
 
                     var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
-                    var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher, newConfigName));
+                    var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher!, newConfigName));
 
                     return candidateUpdates.Where(update => update.IsTransitive
                                             && update.DestinationConfig!.Version == config.Version);
 
                 case InfoBaseConfigEdition.PROF:
 
-                    var filteredCorpTransitives = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher, config.Name + "КОРП"))
-                         .Where(u => u.IsTransitive);
+                    var filteredCorpTransitives = updatesByConfig
+                        .GetValueOrDefault(CreateConfigKey(config.Publisher!, config.Name + "КОРП"))?
+                        .Where(u => u.IsTransitive);
 
                     candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-                   // candidateUpdates = candidateUpdates.Concat(filteredCorpTransitives);
+                    var fullcandidateUpdates = candidateUpdates.Concat(filteredCorpTransitives);
 
-                    return candidateUpdates.Where(update => update.DestinationConfig != config
+                    return fullcandidateUpdates.Where(update => update.DestinationConfig != config
                                                          && update.DestinationConfig!.Version >= config.Version);
 
                 default:
@@ -89,6 +97,18 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                     return candidateUpdates.Where(update => update.DestinationConfig != config
                                                 && update.DestinationConfig!.Version > config.Version);
             }
+            // TODO Добавить проверку на Null
+        }
+
+        /// <inheritdoc/>
+        public void Add(UpdateModel? update)
+        {
+            if (update == null)
+            {
+                throw new ArgumentNullException();
+            }
+            var config = update.DestinationConfig;
+            CheckConfig(config);
 
         }
 
