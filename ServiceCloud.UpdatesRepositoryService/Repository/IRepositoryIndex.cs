@@ -22,6 +22,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// </summary>
         /// <param name="targetConfig">Конфигурация искомого обновления</param>
         /// <returns>true - обновление существует в репозитории, false - в обратном случае</returns>
-        public bool Contains(ConfigurationModel targetConfig);
+        public bool Contains(ConfigurationModel? targetConfig);
     }
 }

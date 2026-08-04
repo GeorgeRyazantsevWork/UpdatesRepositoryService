@@ -10,5 +10,5 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository.Keys
     /// <param name="Publisher">Наименование издателя конфигурации</param>
     /// <param name="Name">Наименование конфигурации</param>
     /// <param name="Version">Версия конфигурации</param>
-    public readonly record struct UpdateKey(string Publisher, InfoBaseConfigVersion Version, string Name);
+    public readonly record struct UpdateKey(string Publisher, string Name, InfoBaseConfigVersion Version);
 }
