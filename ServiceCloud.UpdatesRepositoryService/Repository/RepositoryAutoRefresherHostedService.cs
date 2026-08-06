@@ -13,7 +13,7 @@
         /// <param name="updatesRepository"></param>
         /// <param name="refreshInterval"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public RepositoryAutoRefresherHostedService( IUpdatesRepository updatesRepository, TimeSpan refreshInterval = default)
+        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, TimeSpan refreshInterval = default)
         {
             repository = updatesRepository ?? throw new ArgumentNullException(nameof(updatesRepository));
             RefreshInterval = refreshInterval == default ? TimeSpan.FromMinutes(30) : refreshInterval;
@@ -32,20 +32,13 @@
         /// <inheritdoc/>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await RefreshRepositoryAsync(stoppingToken);
+            await repository.Refresh();
             using var timer = new PeriodicTimer(RefreshInterval);
 
             while (await timer.WaitForNextTickAsync(stoppingToken))
             {
-                await RefreshRepositoryAsync(stoppingToken);
+                await repository.Refresh();
             }
-        }
-
-        private async Task RefreshRepositoryAsync(CancellationToken cancellationToken)
-        {
-
-          //  await repository.Refresh();
-
         }
     }
 }

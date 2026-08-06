@@ -103,13 +103,26 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public void Add(UpdateModel? update)
         {
-            if (update == null)
-            {
-                throw new ArgumentNullException();
-            }
-            var config = update.DestinationConfig;
-            CheckConfig(config);
+            ArgumentNullException.ThrowIfNull(update);
 
+            var config = update.DestinationConfig ?? throw new ArgumentException(nameof(update.DestinationConfig));
+
+            if (!CheckConfig(config))
+            {
+                throw new ArgumentException(nameof(update));
+            }
+
+            updates.Add(CreateUpdateKey(config), update); // TODO ?
+
+            var configKey = CreateConfigKey(config);
+
+            if (!updatesByConfig.TryGetValue(configKey, out var list))
+            {
+                list = new List<UpdateModel>();
+                updatesByConfig.Add(configKey, list);
+            }
+
+            list.Add(update);
         }
 
         private bool CheckConfig(ConfigurationModel config)
