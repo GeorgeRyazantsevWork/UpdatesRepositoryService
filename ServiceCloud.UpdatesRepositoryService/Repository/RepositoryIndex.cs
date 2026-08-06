@@ -125,6 +125,13 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             list.Add(update);
         }
 
+        /// <inheritdoc/>
+        public void Clear()
+        {
+            updates.Clear();
+            updatesByConfig.Clear();
+        }
+
         private bool CheckConfig(ConfigurationModel config)
         {
             return !(string.IsNullOrEmpty(config.Publisher) ||

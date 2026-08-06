@@ -55,5 +55,10 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <exception cref="KeyNotFoundException">Обновление для конфигурации не найдено в репозитории</exception>
         /// <returns>Расположение данных обновления</returns>
         string GetLocation(string? updateId);
+
+        /// <summary>
+        /// Очистка индекса репозитория
+        /// </summary>
+        void Clear();
     }
 }

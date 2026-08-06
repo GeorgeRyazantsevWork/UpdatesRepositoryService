@@ -32,12 +32,19 @@
         /// <inheritdoc/>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await repository.Refresh();
-            using var timer = new PeriodicTimer(RefreshInterval);
-
-            while (await timer.WaitForNextTickAsync(stoppingToken))
+            try
             {
                 await repository.Refresh();
+                using var timer = new PeriodicTimer(RefreshInterval);
+
+                while (await timer.WaitForNextTickAsync(stoppingToken))
+                {
+                    await repository.Refresh();
+                }
+            }
+            catch (Exception ex)// TODO Добавить логирование ошибки
+            {
+                repository.Clear();
             }
         }
     }

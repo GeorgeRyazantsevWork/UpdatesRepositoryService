@@ -20,7 +20,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         {
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
             RootDirectoryPath = rootDirPath;
-            LocationMap = new Dictionary<string, string>();
+            LocationMap = new();
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        protected Dictionary<string, string> LocationMap { get; set; }
+        public Dictionary<string, string> LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<UpdateModel> Updates => repository.GetUpdates();
@@ -109,6 +109,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             LocationMap = internalLocationMap; // TODO нужен ли дубликат вообще
         }
 
+        /// <summary>
+        /// Очистка индекса репозитория
+        /// </summary>
+        public void Clear()
+        {
+            repository.Clear();
+            LocationMap.Clear();
+        }
 
         /// <inheritdoc/>
         public string GetLocation(string? updateId)
