@@ -18,6 +18,11 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         int UpdatesCount { get; }
 
         /// <summary>
+        /// Обновить данные о доступных обновлениях в репозитории
+        /// </summary>
+        void Refresh();
+
+        /// <summary>
         /// Проверить наличие обновления для заданной конфигурации информационной базы
         /// </summary>
         /// <param name="config">Конфигурации информационной базы</param>
