@@ -95,5 +95,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
                 return ResourceManager.GetString("LogMessage_RefreshWasFinished", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Недопустимое значение свойства &quot;{0}&quot;: {1}.
+        /// </summary>
+        internal static string MessageTemplate_IncorrectPropertyValue {
+            get {
+                return ResourceManager.GetString("MessageTemplate_IncorrectPropertyValue", resourceCulture);
+            }
+        }
     }
 }

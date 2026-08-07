@@ -1,5 +1,7 @@
 ﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
 using ServiceCloud.UpdatesRepositoryService.Models;
+using ServiceCloud.UpdatesRepositoryService.Properties;
+using System.Collections.Concurrent;
 
 namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
@@ -9,8 +11,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     public class UpdatesRepository : IUpdatesRepository
     {
         private readonly SemaphoreSlim refreshLock = new(1, 1);
-        private const int SEARCH_DEPTH = 64;
+        private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
+        private const int SEARCH_DEPTH = 64;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -30,25 +33,45 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        public Dictionary<string, string> LocationMap { get; set; }
+        private Dictionary<string, string> LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<UpdateModel> Updates => repository.GetUpdates();
 
         /// <inheritdoc/>
-        public int UpdatesCount => repository.Count;
+        public int UpdatesCount
+        {
+            get
+            {
+                cacheAccessLock.EnterReadLock();
+                try
+                {
+                    return repository.Count;
+                }
+                finally
+                {
+                    cacheAccessLock.ExitReadLock();
+                }
+            }
+        }
 
         /// <inheritdoc/>
         public bool ContainsUpdate(ConfigurationModel? config)
         {
-            if (config != null)
+            if (config is null)
+            {
+                return false;
+            }
+
+            cacheAccessLock.EnterReadLock();
+            try
             {
                 return repository.Contains(config);
             }
-
-            return false;
-
-            // TODO проверять из обоих словарей? + добавить cacheAccessLock
+            finally
+            {
+                cacheAccessLock.ExitReadLock();
+            }
         }
 
         /// <inheritdoc/>
@@ -63,15 +86,24 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
-                var internalLocationMap = new Dictionary<string, string>();
+                var internalLocationMap = new ConcurrentDictionary<string, string>();
 
                 BuildRepository(directory, 0, internalLocationMap);
-                LocationMap = internalLocationMap;
+
+                cacheAccessLock.EnterWriteLock();
+                try
+                {
+                    LocationMap = new Dictionary<string, string>(internalLocationMap);
+                }
+                finally
+                {
+                    cacheAccessLock.ExitWriteLock();
+                }
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                throw new InvalidOperationException(
-                    $"Недопустимое значение свойства \"{nameof(RootDirectoryPath)}\".", e);
+                throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue, 
+                    nameof(RootDirectoryPath), RootDirectoryPath));
             }
             finally
             {
@@ -79,11 +111,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
         }
 
-        private void BuildRepository(DirectoryInfo directory, int depth, Dictionary<string, string> map)
+        private void BuildRepository(DirectoryInfo directory, int depth, ConcurrentDictionary<string, string> map)
         {
-            // TODO Реализовать потокозащищенность
-            depth++;
-            if (depth > SEARCH_DEPTH)
+            if (depth++ > SEARCH_DEPTH)
             {
                 return;
             }
@@ -98,7 +128,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 
                         if (map.TryAdd(update.Id!, directory.FullName))
                         {
-                            repository.Add(update);
+                            cacheAccessLock.EnterWriteLock();
+                            try
+                            {
+                                repository.Add(update);
+                            }
+                            finally
+                            {
+                                cacheAccessLock.ExitWriteLock();
+                            }
                         }
                     }
                 }
@@ -111,7 +149,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public string GetLocation(string? updateId)
         {
-            return LocationMap[updateId!];
+            cacheAccessLock.EnterReadLock();
+            try
+            {
+                return LocationMap[updateId!];
+            }
+            finally
+            {
+                cacheAccessLock.ExitReadLock();
+            }
         }
 
         /// <summary>
@@ -119,8 +165,16 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// </summary>
         public void Clear()
         {
-            repository.Clear();
-            LocationMap.Clear();
+            cacheAccessLock.EnterWriteLock();
+            try
+            {
+                repository.Clear();
+                LocationMap.Clear();
+            }
+            finally
+            {
+                cacheAccessLock.ExitWriteLock();
+            }
         }
 
         /// <inheritdoc/>
@@ -128,7 +182,16 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         {
             ArgumentNullException.ThrowIfNull(config, nameof(config));
 
-            return repository.GetPotentialUpdates(config);
+
+            cacheAccessLock.EnterReadLock();
+            try
+            {
+                return repository.GetPotentialUpdates(config);
+            }
+            finally
+            {
+                cacheAccessLock.ExitReadLock();
+            }
         }
 
         /// <inheritdoc/>
@@ -136,7 +199,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         {
             ArgumentNullException.ThrowIfNull(config, nameof(config));
 
-            return repository.GetUpdate(config, transitive)!;
+            cacheAccessLock.EnterReadLock();
+            try
+            {
+                return repository.GetUpdate(config, transitive)!;
+            }
+            finally
+            {
+                cacheAccessLock.ExitReadLock();
+            }
         }
     }
 }

@@ -129,4 +129,7 @@
   <data name="LogMessage_RefreshWasFinished" xml:space="preserve">
     <value>Обновление репозитория успешно завершено за {0} мс</value>
   </data>
+  <data name="MessageTemplate_IncorrectPropertyValue" xml:space="preserve">
+    <value>Недопустимое значение свойства "{0}": {1}</value>
+  </data>
 </root>
