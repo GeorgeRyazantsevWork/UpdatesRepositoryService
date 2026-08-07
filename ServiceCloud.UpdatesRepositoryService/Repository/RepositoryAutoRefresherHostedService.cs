@@ -1,32 +1,40 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Repository
+﻿using ServiceCloud.UpdatesRepositoryService.Properties;
+using System.Diagnostics;
+
+namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
     /// <summary>
-    /// 
+    /// Фоновый сервис, выполняющий обновление репозитория с заданной периодичностью
     /// </summary>
     public class RepositoryAutoRefresherHostedService : BackgroundService
     {
         private IUpdatesRepository repository;
+        private ILogger logger;
 
         /// <summary>
-        /// 
+        /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
-        /// <param name="updatesRepository"></param>
-        /// <param name="refreshInterval"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, TimeSpan refreshInterval = default)
+        /// <param name="updatesRepository">Репозиторий с обновлениями конфигураций ИБ</param>
+        /// <param name="refreshInterval">Интервал между запусками обновления репозитория</param>
+        /// <param name="logger">Регистратор событий работы сервиса</param>
+        /// <exception cref="ArgumentNullException">Не задан обязательный аргумент</exception>
+        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, ILogger logger, TimeSpan refreshInterval = default)
         {
             repository = updatesRepository ?? throw new ArgumentNullException(nameof(updatesRepository));
             RefreshInterval = refreshInterval == default ? TimeSpan.FromMinutes(30) : refreshInterval;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
-        /// Интервал между запусками сканирования репозитория
+        /// Интервал между запусками обновления репозитория
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Значение не может быть меньше нуля</exception>
         public TimeSpan RefreshInterval
         {
             get;
-            set => field = value > TimeSpan.Zero ? value : throw new ArgumentOutOfRangeException(nameof(RefreshInterval));
+            set => field = value > TimeSpan.Zero ?
+                 value :
+                 throw new ArgumentOutOfRangeException(nameof(RefreshInterval));
         }
 
         /// <inheritdoc/>
@@ -34,17 +42,37 @@
         {
             try
             {
-                await repository.Refresh();
+                await RefreshRepository();
                 using var timer = new PeriodicTimer(RefreshInterval);
 
                 while (await timer.WaitForNextTickAsync(stoppingToken))
                 {
-                    await repository.Refresh();
+                    await RefreshRepository();
                 }
             }
-            catch (Exception ex)// TODO Добавить логирование ошибки
+            catch (Exception ex)
             {
+                logger.LogError(ex, Resource.LogMessage_RefreshRepositoryError);
                 repository.Clear();
+            }
+        }
+
+        private async Task RefreshRepository()
+        {
+            logger.LogInformation(Resource.LogMessage_RefreshingWasStarted);
+
+            var stopwatch = Stopwatch.StartNew();
+            try
+            {
+                await repository.Refresh();
+                stopwatch.Stop();
+                logger.LogInformation(string.Format(Resource.LogMessage_RefreshWasFinished, stopwatch.ElapsedMilliseconds));
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                logger.LogError(ex, string.Format(Resource.LogMessage_RefreshErrorWithDuration, stopwatch.ElapsedMilliseconds));
+                throw;
             }
         }
     }

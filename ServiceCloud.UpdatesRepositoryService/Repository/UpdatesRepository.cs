@@ -1,6 +1,5 @@
 ﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
 using ServiceCloud.UpdatesRepositoryService.Models;
-using System.Reflection.Emit;
 
 namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
@@ -14,7 +13,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private IRepositoryIndex repository;
 
         /// <summary>
-        /// 
+        /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
         public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirPath)
         {
@@ -26,11 +25,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Полный путь к директории, в которой находятся файлы обновлений
         /// </summary>
-        public string? RootDirectoryPath
-        {
-            get;
-            set;
-        }
+        public string? RootDirectoryPath { get; set; }
 
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
@@ -68,7 +63,10 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
-                BuildRepository(directory, 0);
+                var internalLocationMap = new Dictionary<string, string>();
+
+                BuildRepository(directory, 0, internalLocationMap);
+                LocationMap = internalLocationMap;
             }
             catch (ArgumentException e)
             {
@@ -81,10 +79,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
         }
 
-        private void BuildRepository(DirectoryInfo directory, int depth)
+        private void BuildRepository(DirectoryInfo directory, int depth, Dictionary<string, string> map)
         {
-            // TODO Реализовать потокозащищенность + parallel.foreach
-            var internalLocationMap = new Dictionary<string, string>();
+            // TODO Реализовать потокозащищенность
             depth++;
             if (depth > SEARCH_DEPTH)
             {
@@ -99,14 +96,22 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                     {
                         update.Id = idGenerator.NewId(update);
 
-                        if (internalLocationMap.TryAdd(update.Id!, directory.FullName))
+                        if (map.TryAdd(update.Id!, directory.FullName))
                         {
                             repository.Add(update);
                         }
                     }
                 }
             }
-            LocationMap = internalLocationMap; // TODO нужен ли дубликат вообще
+
+            Parallel.ForEach(directory.EnumerateDirectories(), subDir =>
+               BuildRepository(subDir, depth, map));
+        }
+
+        /// <inheritdoc/>
+        public string GetLocation(string? updateId)
+        {
+            return LocationMap[updateId!];
         }
 
         /// <summary>
@@ -119,21 +124,19 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public string GetLocation(string? updateId)
+        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel? config)
         {
-            return LocationMap[updateId!];
-        }
+            ArgumentNullException.ThrowIfNull(config, nameof(config));
 
-        /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config)
-        {
             return repository.GetPotentialUpdates(config);
         }
 
         /// <inheritdoc/>
-        public UpdateModel GetUpdate(ConfigurationModel? config, bool transitive)
+        public UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive)
         {
-            return repository.GetUpdate(config, transitive);
+            ArgumentNullException.ThrowIfNull(config, nameof(config));
+
+            return repository.GetUpdate(config, transitive)!;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// Добавляет описание обновления в репозиторий
         /// </summary>
         /// <param name="update">добавляемое обновление</param>
-        public void Add(UpdateModel? update);
+        public void Add(UpdateModel update);
 
         /// <summary>
         /// Получить обновление по целевой конфигурации
@@ -30,21 +30,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <param name="targetConfig">Целевая конфигурация</param>
         /// <param name="transitive">Признак, означающий является ли конфигурация переходной</param>
         /// <returns>Обновление для заданной конфигурации</returns>
-        public UpdateModel? GetUpdate(ConfigurationModel? targetConfig, bool transitive);
+        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive);
 
         /// <summary>
         /// Получить список обновлений, теоретически подходящих для указанной конфигурации
         /// </summary>
         /// <param name="config">Указанная конфигурация информационной базы 1С</param>
         /// <returns>Список обновлений</returns>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config);
+        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config);
 
         /// <summary>
         /// Определить по целевой конфигурации обновления содержится ли оно в репозитории 
         /// </summary>
         /// <param name="targetConfig">Конфигурация искомого обновления</param>
         /// <returns>true - обновление существует в репозитории, false - в обратном случае</returns>
-        public bool Contains(ConfigurationModel? targetConfig);
+        public bool Contains(ConfigurationModel targetConfig);
 
         /// <summary>ы
         /// Очистить индекс репозитория

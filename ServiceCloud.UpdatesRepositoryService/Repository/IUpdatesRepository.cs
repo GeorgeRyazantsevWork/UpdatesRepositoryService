@@ -38,14 +38,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <exception cref="ArgumentNullException">Не задана целевая конфигурация</exception>
         /// <exception cref="KeyNotFoundException">Обновление для конфигурации не найдено в репозитории</exception>
         /// <returns>Данные об обновлении</returns>
-        UpdateModel GetUpdate(ConfigurationModel? config, bool transitive);
+        UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive);
 
         /// <summary>
         /// Получить список обновлений, которые предположительно можно установить на указанную конфигурацию
         /// </summary>
         /// <param name="config">Конфигурация информационной базы 1С</param>
         /// <returns>Коллекция обновлений</returns>
-        IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config);
+        IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel? config);
 
         /// <summary>
         /// Получить информацию о расположении данных обновления конфигурации информационной базы 1С

@@ -32,9 +32,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public bool Contains(ConfigurationModel? targetConfig)
+        public bool Contains(ConfigurationModel targetConfig)
         {
-            if (targetConfig is not null && CheckConfig(targetConfig))
+            if (CheckConfig(targetConfig))
             {
                 return updates.ContainsKey(CreateUpdateKey(targetConfig));
             }
@@ -43,20 +43,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public UpdateModel? GetUpdate(ConfigurationModel? targetConfig, bool transitive) // TODO перенести логику transitive
+        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive) // TODO перенести логику transitive
         {
-            if (targetConfig is not null)
-            {
                 return CheckConfig(targetConfig) ?
                     updates.GetValueOrDefault(CreateUpdateKey(targetConfig)) :
                     throw new ArgumentException();
-            }
-
-            throw new ArgumentException(); // TODO Дописать 
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config)
+        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config)
         {
             if (CheckConfig(config))
             {
@@ -66,7 +61,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             return SelectUpdates(config);
         }
 
-        private IEnumerable<UpdateModel> SelectUpdates(ConfigurationModel config)
+        private IEnumerable<UpdateModel>? SelectUpdates(ConfigurationModel config)
         {
             switch (config.Edition)
             {
@@ -75,7 +70,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                     var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
                     var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher!, newConfigName));
 
-                    return candidateUpdates.Where(update => update.IsTransitive
+                    return candidateUpdates?.Where(update => update.IsTransitive
                                             && update.DestinationConfig!.Version == config.Version);
 
                 case InfoBaseConfigEdition.PROF:
@@ -85,19 +80,18 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                         .Where(u => u.IsTransitive);
 
                     candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-                    var fullcandidateUpdates = candidateUpdates.Concat(filteredCorpTransitives);
+                    var fullcandidateUpdates = candidateUpdates?.Concat(filteredCorpTransitives);
 
-                    return fullcandidateUpdates.Where(update => update.DestinationConfig != config
+                    return fullcandidateUpdates?.Where(update => update.DestinationConfig != config
                                                          && update.DestinationConfig!.Version >= config.Version);
 
                 default:
 
                     candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
 
-                    return candidateUpdates.Where(update => update.DestinationConfig != config
+                    return candidateUpdates?.Where(update => update.DestinationConfig != config
                                                 && update.DestinationConfig!.Version > config.Version);
             }
-            // TODO Добавить проверку на Null
         }
 
         /// <inheritdoc/>
