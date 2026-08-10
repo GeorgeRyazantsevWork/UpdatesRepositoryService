@@ -132,4 +132,7 @@
   <data name="MessageTemplate_IncorrectPropertyValue" xml:space="preserve">
     <value>Недопустимое значение свойства "{0}": {1}</value>
   </data>
+  <data name="Message_RequestProcessingError" xml:space="preserve">
+    <value>Ошибка обработки запроса</value>
+  </data>
 </root>

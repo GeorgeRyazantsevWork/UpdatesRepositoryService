@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
+using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository;
+using System.Net.NetworkInformation;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
@@ -18,7 +20,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         public IActionResult GetUpdatesCount()
         {
             var count = repository.UpdatesCount;
-
             return Ok(new
             {
                 Count = count
@@ -41,8 +42,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// Проверить наличие обновления
         /// POST api/updates/contains
         /// </summary>
-        [HttpPost("contains")]
-        public IActionResult ContainsUpdate([FromBody] ConfigurationModel config)
+        [HttpGet("contains")]
+        public IActionResult ContainsUpdate(ConfigurationModel config)
         {
             var result = repository.ContainsUpdate(config);
 
@@ -56,7 +57,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// Получить конкретное обновление
         /// POST api/updates/get
         /// </summary>
-        [HttpPost("get")]
+        [HttpGet("get")]
         public IActionResult GetUpdate([FromBody] ConfigurationModel request)
         {
             var update = repository.GetUpdate(request, transitive: false); // TODO добавить булевый параметр в запрос
@@ -74,7 +75,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// Получить потенциальные обновления
         /// POST api/updates/potential
         /// </summary>
-        [HttpPost("potential")]
+        [HttpGet("potential")]
         public IActionResult GetPotentialUpdates([FromBody] ConfigurationModel config)
         {
             var updates =
@@ -87,7 +88,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// Получить расположение обновления
         /// POST api/updates/location
         /// </summary>
-        [HttpPost("location")]
+        [HttpGet("location")]
         public IActionResult GetLocation(string updateId)
         {
             var location = repository.GetLocation(updateId);

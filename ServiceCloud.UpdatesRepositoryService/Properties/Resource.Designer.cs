@@ -97,6 +97,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка обработки запроса.
+        /// </summary>
+        internal static string Message_RequestProcessingError {
+            get {
+                return ResourceManager.GetString("Message_RequestProcessingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Недопустимое значение свойства &quot;{0}&quot;: {1}.
         /// </summary>
         internal static string MessageTemplate_IncorrectPropertyValue {

@@ -102,7 +102,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
             catch (ArgumentException)
             {
-                throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue, 
+                throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue,
                     nameof(RootDirectoryPath), RootDirectoryPath));
             }
             finally
@@ -181,7 +181,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel? config)
         {
             ArgumentNullException.ThrowIfNull(config, nameof(config));
-
 
             cacheAccessLock.EnterReadLock();
             try
