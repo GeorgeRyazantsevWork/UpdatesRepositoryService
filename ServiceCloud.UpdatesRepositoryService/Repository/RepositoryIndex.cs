@@ -1,4 +1,5 @@
 ﻿using ServiceCloud.UpdatesRepositoryService.Models;
+using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository.Keys;
 
 namespace ServiceCloud.UpdatesRepositoryService.Repository
@@ -34,31 +35,25 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public bool Contains(ConfigurationModel targetConfig)
         {
-            if (CheckConfig(targetConfig))
-            {
-                return updates.ContainsKey(CreateUpdateKey(targetConfig));
-            }
-
-            return false;
+            return CheckConfig(targetConfig) ?
+               updates.ContainsKey(CreateUpdateKey(targetConfig)) :
+                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
         /// <inheritdoc/>
         public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive) // TODO перенести логику transitive
         {
-                return CheckConfig(targetConfig) ?
-                    updates.GetValueOrDefault(CreateUpdateKey(targetConfig)) :
-                    throw new ArgumentException();
+            return CheckConfig(targetConfig) ?
+                updates.GetValueOrDefault(CreateUpdateKey(targetConfig)) :
+                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
         /// <inheritdoc/>
         public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config)
         {
-            if (CheckConfig(config))
-            {
-                throw new ArgumentException(); // TODO Дописать 
-            }
-
-            return SelectUpdates(config);
+            return CheckConfig(config) ?
+               SelectUpdates(config) :
+               throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
         private IEnumerable<UpdateModel>? SelectUpdates(ConfigurationModel config)
@@ -103,7 +98,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 
             if (!CheckConfig(config))
             {
-                throw new ArgumentException(nameof(update));
+                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
             }
 
             updates.Add(CreateUpdateKey(config), update); // TODO ?

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository;
-using System.Net.NetworkInformation;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
@@ -58,7 +56,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// POST api/updates/get
         /// </summary>
         [HttpGet("get")]
-        public IActionResult GetUpdate([FromBody] ConfigurationModel request)
+        public IActionResult GetUpdate(ConfigurationModel request)
         {
             var update = repository.GetUpdate(request, transitive: false); // TODO добавить булевый параметр в запрос
 
@@ -76,7 +74,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// POST api/updates/potential
         /// </summary>
         [HttpGet("potential")]
-        public IActionResult GetPotentialUpdates([FromBody] ConfigurationModel config)
+        public IActionResult GetPotentialUpdates(ConfigurationModel config)
         {
             var updates =
                 repository.GetPotentialUpdates(config);

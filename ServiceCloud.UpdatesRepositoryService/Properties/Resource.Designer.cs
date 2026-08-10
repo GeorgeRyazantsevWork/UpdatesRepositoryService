@@ -97,6 +97,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации.
+        /// </summary>
+        internal static string Message_IncorrectConfigProperties {
+            get {
+                return ResourceManager.GetString("Message_IncorrectConfigProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка обработки запроса.
         /// </summary>
         internal static string Message_RequestProcessingError {
@@ -106,11 +115,47 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсутствует идентификатор целевой конфигурации для проверки наличия обновлений.
+        /// </summary>
+        internal static string Message_TargetConfigIDdNotSpecified {
+            get {
+                return ResourceManager.GetString("Message_TargetConfigIDdNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсутствует целевая конфигурация информационной базы.
+        /// </summary>
+        internal static string Message_TargetConfigNotSpecified {
+            get {
+                return ResourceManager.GetString("Message_TargetConfigNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Недопустимое значение свойства &quot;{0}&quot;: {1}.
         /// </summary>
         internal static string MessageTemplate_IncorrectPropertyValue {
             get {
                 return ResourceManager.GetString("MessageTemplate_IncorrectPropertyValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задан обязательный параметр запроса: {0}.
+        /// </summary>
+        internal static string ReplyErrorMessageTemplate_RequestFieldNotDefined {
+            get {
+                return ResourceManager.GetString("ReplyErrorMessageTemplate_RequestFieldNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректные параметры запроса: {0}.
+        /// </summary>
+        internal static string ReplyMessageTemplate_IncorrectRequestData {
+            get {
+                return ResourceManager.GetString("ReplyMessageTemplate_IncorrectRequestData", resourceCulture);
             }
         }
     }

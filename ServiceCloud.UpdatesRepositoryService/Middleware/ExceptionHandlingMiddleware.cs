@@ -1,4 +1,6 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Middleware
+﻿using ServiceCloud.UpdatesRepositoryService.Properties;
+
+namespace ServiceCloud.UpdatesRepositoryService.Middleware
 {
     /// <summary>
     /// Middleware для централизованной обработки исключений,
@@ -45,10 +47,10 @@
             var (statusCode, message) = exception switch
             {
                 ArgumentNullException =>
-                    (StatusCodes.Status404NotFound, "Ресурс не найден"),
+                    (StatusCodes.Status400BadRequest, string.Format(Resource.ReplyErrorMessageTemplate_RequestFieldNotDefined, exception.Message)),
 
                 ArgumentException =>
-                    (StatusCodes.Status400BadRequest, "Некорректные параметры запроса"),
+                    (StatusCodes.Status400BadRequest, string.Format(Resource.ReplyMessageTemplate_IncorrectRequestData, exception.Message)),
 
                 _ =>
                     (StatusCodes.Status500InternalServerError,

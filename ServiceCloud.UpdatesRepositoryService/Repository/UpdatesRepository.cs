@@ -58,10 +58,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public bool ContainsUpdate(ConfigurationModel? config)
         {
-            if (config is null)
-            {
-                return false;
-            }
+            ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
             cacheAccessLock.EnterReadLock();
             try
@@ -149,6 +146,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public string GetLocation(string? updateId)
         {
+            ArgumentNullException.ThrowIfNull(updateId, Resource.Message_TargetConfigIDdNotSpecified);
+
             cacheAccessLock.EnterReadLock();
             try
             {
@@ -180,7 +179,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel? config)
         {
-            ArgumentNullException.ThrowIfNull(config, nameof(config));
+            ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
             cacheAccessLock.EnterReadLock();
             try
@@ -196,7 +195,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive)
         {
-            ArgumentNullException.ThrowIfNull(config, nameof(config));
+            ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
             cacheAccessLock.EnterReadLock();
             try
