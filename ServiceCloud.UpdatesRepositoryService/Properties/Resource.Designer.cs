@@ -63,9 +63,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка при обновлении репозитория! Длительность до ошибки: {0} мс.
         /// </summary>
-        internal static string LogMessage_RefreshErrorWithDuration {
+        internal static string LogMessage_RefreshError {
             get {
-                return ResourceManager.GetString("LogMessage_RefreshErrorWithDuration", resourceCulture);
+                return ResourceManager.GetString("LogMessage_RefreshError", resourceCulture);
             }
         }
         

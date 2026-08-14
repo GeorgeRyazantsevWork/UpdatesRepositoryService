@@ -100,7 +100,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
             {
                 Location = location
             });
-
         }
     }
 }

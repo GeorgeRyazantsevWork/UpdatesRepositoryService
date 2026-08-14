@@ -71,7 +71,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                logger.LogError(ex, string.Format(Resource.LogMessage_RefreshErrorWithDuration, stopwatch.ElapsedMilliseconds));
+                logger.LogError(ex, string.Format(Resource.LogMessage_RefreshError, stopwatch.ElapsedMilliseconds));
                 throw;
             }
         }
