@@ -22,7 +22,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         {
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
             RootDirectoryPath = rootDirPath;
-            LocationMap = new();
         }
 
         /// <summary>
@@ -36,7 +35,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private Dictionary<string, string> LocationMap { get; set; }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> Updates => repository.GetUpdates();
+        public IEnumerable<UpdateModel> Updates
+        {
+            get
+            {
+                cacheAccessLock.EnterReadLock();
+                try
+                {
+                    return repository.GetUpdates();
+                }
+                finally
+                {
+                    cacheAccessLock.ExitReadLock();
+                }
+            }
+        }
 
         /// <inheritdoc/>
         public int UpdatesCount
@@ -84,12 +97,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
                 var internalLocationMap = new ConcurrentDictionary<string, string>();
+                var newRepository = new RepositoryIndex();
 
-                BuildRepository(directory, 0, internalLocationMap);
+                BuildRepository(directory, 0, newRepository, internalLocationMap);
 
                 cacheAccessLock.EnterWriteLock();
                 try
                 {
+                    repository = newRepository;
                     LocationMap = new Dictionary<string, string>(internalLocationMap);
                 }
                 finally
@@ -108,7 +123,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
         }
 
-        private void BuildRepository(DirectoryInfo directory, int depth, ConcurrentDictionary<string, string> map)
+        private void BuildRepository(DirectoryInfo directory, int depth, IRepositoryIndex repository, ConcurrentDictionary<string, string> map)
         {
             if (depth++ > SEARCH_DEPTH)
             {
@@ -125,22 +140,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 
                         if (map.TryAdd(update.Id!, directory.FullName))
                         {
-                            cacheAccessLock.EnterWriteLock();
-                            try
-                            {
-                                repository.Add(update);
-                            }
-                            finally
-                            {
-                                cacheAccessLock.ExitWriteLock();
-                            }
+                            repository.Add(update);
                         }
                     }
                 }
             }
 
             Parallel.ForEach(directory.EnumerateDirectories(), subDir =>
-               BuildRepository(subDir, depth, map));
+               BuildRepository(subDir, depth, repository, map));
         }
 
         /// <inheritdoc/>
@@ -168,7 +175,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             try
             {
                 repository.Clear();
-                LocationMap.Clear();
+                LocationMap?.Clear();
             }
             finally
             {

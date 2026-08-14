@@ -1,6 +1,7 @@
 ﻿using ServiceCloud.UpdatesRepositoryService.Models;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository.Keys;
+using System.Collections.Concurrent;
 
 namespace ServiceCloud.UpdatesRepositoryService.Repository
 {
@@ -11,8 +12,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     /// </summary>
     public class RepositoryIndex : IRepositoryIndex
     {
-        private Dictionary<UpdateKey, UpdateModel> updates;
-        private Dictionary<ConfigKey, List<UpdateModel>> updatesByConfig;
+        private readonly ConcurrentDictionary<UpdateKey, UpdateModel> updates;
+        private readonly ConcurrentDictionary<ConfigKey, ConcurrentBag<UpdateModel>> updatesByConfig;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -61,57 +62,57 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             switch (config.Edition)
             {
                 case InfoBaseConfigEdition.BASE:
+                    {
+                        var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
+                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher!, newConfigName));
 
-                    var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
-                    var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher!, newConfigName));
+                        return candidateUpdates?.Where(update => update.IsTransitive
+                                                && update.DestinationConfig!.Version == config.Version);
 
-                    return candidateUpdates?.Where(update => update.IsTransitive
-                                            && update.DestinationConfig!.Version == config.Version);
-
+                    }
                 case InfoBaseConfigEdition.PROF:
+                    {
+                        var filteredCorpTransitives = updatesByConfig
+                            .GetValueOrDefault(CreateConfigKey(config.Publisher!, config.Name + "КОРП"))?
+                            .Where(u => u.IsTransitive);
 
-                    var filteredCorpTransitives = updatesByConfig
-                        .GetValueOrDefault(CreateConfigKey(config.Publisher!, config.Name + "КОРП"))?
-                        .Where(u => u.IsTransitive);
+                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
+                        var fullcandidateUpdates = candidateUpdates?.Concat(filteredCorpTransitives);
 
-                    candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-                    var fullcandidateUpdates = candidateUpdates?.Concat(filteredCorpTransitives);
-
-                    return fullcandidateUpdates?.Where(update => update.DestinationConfig != config
+                        return fullcandidateUpdates?.Where(update => update.DestinationConfig != config
                                                          && update.DestinationConfig!.Version >= config.Version);
+                    }
 
                 default:
+                    {
+                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
 
-                    candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-
-                    return candidateUpdates?.Where(update => update.DestinationConfig != config
-                                                && update.DestinationConfig!.Version > config.Version);
+                        return candidateUpdates?.Where(update => update.DestinationConfig != config
+                                                    && update.DestinationConfig!.Version > config.Version);
+                    }
             }
         }
 
         /// <inheritdoc/>
-        public void Add(UpdateModel? update)
+        public void Add(UpdateModel update)
         {
-            ArgumentNullException.ThrowIfNull(update);
+            var config = update.DestinationConfig;
 
-            var config = update.DestinationConfig ?? throw new ArgumentException(nameof(update.DestinationConfig));
-
-            if (!CheckConfig(config))
+            if (config == null)
             {
-                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
+                return;
             }
 
-            updates.Add(CreateUpdateKey(config), update); // TODO ?
+            var updateKey = CreateUpdateKey(config);
+
+            if (!updates.TryAdd(updateKey, update))
+            {
+                return;
+            }
 
             var configKey = CreateConfigKey(config);
-
-            if (!updatesByConfig.TryGetValue(configKey, out var list))
-            {
-                list = new List<UpdateModel>();
-                updatesByConfig.Add(configKey, list);
-            }
-
-            list.Add(update);
+            var bag = updatesByConfig.GetOrAdd(configKey, static _ => []);
+            bag.Add(update);
         }
 
         /// <inheritdoc/>

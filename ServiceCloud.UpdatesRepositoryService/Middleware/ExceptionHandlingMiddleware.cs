@@ -55,7 +55,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Middleware
                 _ =>
                     (StatusCodes.Status500InternalServerError,
                      "Ошибка при обработке запроса")
-
             };
 
             context.Response.StatusCode = statusCode;
