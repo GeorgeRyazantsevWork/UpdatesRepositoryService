@@ -11,7 +11,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         private readonly IUpdatesRepository repository = repositoryService;
 
         /// <summary>
-        /// Получить количество обновлений
+        /// Получить общее количество обновлений
         /// GET api/updates/count
         /// </summary>
         [HttpGet("count")]
@@ -38,7 +38,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
         /// <summary>
         /// Проверить наличие обновления
-        /// POST api/updates/contains
+        /// GET api/updates/contains
         /// </summary>
         [HttpGet("contains")]
         public IActionResult ContainsUpdate(ConfigurationModel config)
@@ -53,7 +53,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
         /// <summary>
         /// Получить конкретное обновление
-        /// POST api/updates/get
+        /// GET api/updates/get
         /// </summary>
         [HttpGet("get")]
         public IActionResult GetUpdate(ConfigurationModel request)
@@ -71,7 +71,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
         /// <summary>
         /// Получить потенциальные обновления
-        /// POST api/updates/potential
+        /// GET api/updates/potential
         /// </summary>
         [HttpGet("potential")]
         public IActionResult GetPotentialUpdates(ConfigurationModel config)

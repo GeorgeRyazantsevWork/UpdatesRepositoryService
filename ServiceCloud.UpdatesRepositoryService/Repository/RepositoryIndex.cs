@@ -36,16 +36,20 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public bool Contains(ConfigurationModel targetConfig)
         {
-            return CheckConfig(targetConfig) ?
-               updates.ContainsKey(CreateUpdateKey(targetConfig)) :
+            if (CheckConfig(targetConfig))
+            {
                 throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
+            }
+
+            return updates.ContainsKey(CreateUpdateKey(targetConfig)) ||
+                updates.ContainsKey(CreateUpdateKey(targetConfig, true));
         }
 
         /// <inheritdoc/>
-        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive) // TODO перенести логику transitive
+        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive)
         {
             return CheckConfig(targetConfig) ?
-                updates.GetValueOrDefault(CreateUpdateKey(targetConfig)) :
+                updates.GetValueOrDefault(CreateUpdateKey(targetConfig, transitive)) :
                 throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
@@ -103,7 +107,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 return;
             }
 
-            var updateKey = CreateUpdateKey(config);
+            var updateKey = CreateUpdateKey(config, update.IsTransitive);
 
             if (!updates.TryAdd(updateKey, update))
             {
@@ -129,9 +133,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 string.IsNullOrEmpty(config.VersionString));
         }
 
-        private UpdateKey CreateUpdateKey(ConfigurationModel config)
+        private UpdateKey CreateUpdateKey(ConfigurationModel config, bool transitive = false)
         {
-            return new(config.Publisher!, config.Name!, config.Version!);
+            return new(config.Publisher!, config.Name!, config.Version!, transitive);
         }
 
         private ConfigKey CreateConfigKey(ConfigurationModel config)
