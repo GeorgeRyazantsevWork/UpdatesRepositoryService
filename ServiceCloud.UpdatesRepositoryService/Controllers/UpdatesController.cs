@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
 using ServiceCloud.UpdatesRepositoryService.Repository;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
     [ApiController]
-    [Route("api/updates")]
+    [ApiVersion(1.0)]
+    [Route("api/v{version:apiVersion}/updates")]
     public class UpdatesController(IUpdatesRepository repositoryService) : ControllerBase
     {
         private readonly IUpdatesRepository repository = repositoryService;

@@ -36,7 +36,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public bool Contains(ConfigurationModel targetConfig)
         {
-            if (CheckConfig(targetConfig))
+            if (!CheckConfig(targetConfig))
             {
                 throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
             }
