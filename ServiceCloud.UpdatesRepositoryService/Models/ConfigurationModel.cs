@@ -5,7 +5,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
     /// </summary>
-    public class ConfigurationModel 
+    public class ConfigurationModel : IEquatable<ConfigurationModel>, IComparable<ConfigurationModel>
     {
         private static ConfigurationModel empty = new ConfigurationModel() { Name = "Конфигурация" };
 

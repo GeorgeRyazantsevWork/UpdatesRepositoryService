@@ -14,7 +14,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
-        private object syncRoot = new object();
+        private readonly UpdateIdGenerator idGenerator = new();
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -33,7 +33,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        private Dictionary<string, string> LocationMap { get; set; }
+        private Dictionary<string, string>? LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<UpdateModel> Updates
@@ -132,19 +132,16 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
             if (RepositoryParser.ValidateUpdateFiles(directory.FullName))
             {
-                using var idGenerator = new UpdateIdGenerator();
                 foreach (var cucFile in directory.EnumerateFiles("*.cuc"))
                 {
                     if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
                     {
-                        lock (syncRoot) // TODO переписать реализацию NewId с поддержкой потокозащищенности
-                        {
-                            update.Id = idGenerator.NewId(update);
+                        // TODO переписать реализацию NewId с поддержкой потокозащищенности
+                        update.Id = idGenerator.NewId(update);
 
-                            if (map.TryAdd(update.Id!, directory.FullName))
-                            {
-                                repository.Add(update);
-                            }
+                        if (map.TryAdd(update.Id!, directory.FullName))
+                        {
+                            repository.Add(update);
                         }
                     }
                 }
@@ -162,7 +159,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             cacheAccessLock.EnterReadLock();
             try
             {
-                return LocationMap[updateId!];
+                return LocationMap![updateId!];
             }
             finally
             {
