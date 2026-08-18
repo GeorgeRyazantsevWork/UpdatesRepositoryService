@@ -49,4 +49,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
 
+Console.WriteLine("Нажмите Enter, чтобы запустить сервер...");
+Console.ReadLine();
+
 app.Run();

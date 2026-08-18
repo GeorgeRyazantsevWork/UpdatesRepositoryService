@@ -136,7 +136,10 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 {
                     if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
                     {
-                        update.Id = idGenerator.NewId(update);
+                        lock (update)
+                        {
+                            update.Id = idGenerator.NewId(update);
+                        }
 
                         if (map.TryAdd(update.Id!, directory.FullName))
                         {

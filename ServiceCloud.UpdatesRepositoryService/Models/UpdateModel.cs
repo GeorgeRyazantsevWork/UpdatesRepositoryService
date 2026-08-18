@@ -1,4 +1,6 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Models
+﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
+
+namespace ServiceCloud.UpdatesRepositoryService.Models
 {
     /// <summary>
     /// Данные об обновлении конфигурации информационной базы 1С
@@ -113,7 +115,10 @@
             if (DestinationConfig != null)
                 hash ^= DestinationConfig.GetHashCode();
 
-         //   hash ^= HashCalculator.CalculateHash(SourseConfigs);
+            if (SourseConfigs != null)
+            {
+                hash ^= HashCalculator.CalculateHash(SourseConfigs);
+            }
 
             return hash;
         }
