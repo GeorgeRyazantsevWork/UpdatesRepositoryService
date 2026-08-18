@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.OpenApi;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
 using ServiceCloud.UpdatesRepositoryService.Repository;
 
@@ -16,8 +17,17 @@ builder.Services.AddApiVersioning(options =>
 {
     options.GroupNameFormat = "'v'VVV";
     options.SubstituteApiVersionInUrl = true;
-})
-.AddOpenApi();
+});
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Updates Repository Service",
+        Version = "v1",
+        Description = "Сервис репозитория обновлений"
+    });
+});
 
 var repositoryPath = builder.Configuration["Repository:Path"];
 if (string.IsNullOrWhiteSpace(repositoryPath))
@@ -42,7 +52,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();                
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Updates Repository Service v1");
+    });
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

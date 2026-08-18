@@ -55,12 +55,12 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
         /// <summary>
         /// Получить конкретное обновление
-        /// GET api/updates/get
+        /// GET api/updates/concrete
         /// </summary>
-        [HttpGet("get")]
+        [HttpGet("concrete")]
         public IActionResult GetUpdate(ConfigurationModel request)
         {
-            var update = repository.GetUpdate(request, transitive: false); // TODO добавить булевый параметр в запрос
+            var update = repository.GetUpdate(request, transitive: false); 
 
             if (update == null)
             {

@@ -14,6 +14,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
+        private object syncRoot = new object();
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -136,14 +137,14 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 {
                     if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
                     {
-                        lock (update)
+                        lock (syncRoot) // TODO переписать реализацию NewId с поддержкой потокозащищенности
                         {
                             update.Id = idGenerator.NewId(update);
-                        }
 
-                        if (map.TryAdd(update.Id!, directory.FullName))
-                        {
-                            repository.Add(update);
+                            if (map.TryAdd(update.Id!, directory.FullName))
+                            {
+                                repository.Add(update);
+                            }
                         }
                     }
                 }
