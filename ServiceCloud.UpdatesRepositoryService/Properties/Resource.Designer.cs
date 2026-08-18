@@ -106,6 +106,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задан путь к репозиторию обновлений!.
+        /// </summary>
+        internal static string Message_IncorrectRepositoryPath {
+            get {
+                return ResourceManager.GetString("Message_IncorrectRepositoryPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка обработки запроса.
         /// </summary>
         internal static string Message_RequestProcessingError {

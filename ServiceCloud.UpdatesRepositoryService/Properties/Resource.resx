@@ -135,6 +135,9 @@
   <data name="Message_IncorrectConfigProperties" xml:space="preserve">
     <value>Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации</value>
   </data>
+  <data name="Message_IncorrectRepositoryPath" xml:space="preserve">
+    <value>Не задан путь к репозиторию обновлений!</value>
+  </data>
   <data name="Message_RequestProcessingError" xml:space="preserve">
     <value>Ошибка обработки запроса</value>
   </data>

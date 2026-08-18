@@ -36,19 +36,19 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public bool Contains(ConfigurationModel targetConfig)
         {
-            if (!CheckConfig(targetConfig))
+            if (!ValidateConfig(targetConfig))
             {
                 throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
             }
 
             return updates.ContainsKey(CreateUpdateKey(targetConfig)) ||
-                updates.ContainsKey(CreateUpdateKey(targetConfig, true));
+                updates.ContainsKey(CreateUpdateKey(targetConfig, transitive: true));
         }
 
         /// <inheritdoc/>
         public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive)
         {
-            return CheckConfig(targetConfig) ?
+            return ValidateConfig(targetConfig) ?
                 updates.GetValueOrDefault(CreateUpdateKey(targetConfig, transitive)) :
                 throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
@@ -56,7 +56,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <inheritdoc/>
         public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config)
         {
-            return CheckConfig(config) ?
+            return ValidateConfig(config) ?
                SelectUpdates(config) :
                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
@@ -126,7 +126,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             updatesByConfig.Clear();
         }
 
-        private bool CheckConfig(ConfigurationModel config)
+        private bool ValidateConfig(ConfigurationModel config)
         {
             return !(string.IsNullOrEmpty(config.Publisher) ||
                 string.IsNullOrEmpty(config.Name) ||

@@ -14,7 +14,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
-        private readonly UpdateIdGenerator idGenerator = new();
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -97,16 +96,29 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
-                var internalLocationMap = new ConcurrentDictionary<string, string>();
-                var newRepository = new RepositoryIndex();
+                var parsedUpdates = new ConcurrentBag<(UpdateModel Update, string Directory)>();
 
-                BuildRepository(directory, 0, newRepository, internalLocationMap);
+                BuildRepository(directory, 0, parsedUpdates);
+
+                var newIndex = new RepositoryIndex();
+                var newLocationMap = new Dictionary<string, string>(parsedUpdates.Count);
+
+                using var idGenerator = new UpdateIdGenerator();
+                foreach (var (update, updateDirectory) in parsedUpdates)
+                {
+                    update.Id = idGenerator.NewId(update);
+
+                    if (newLocationMap.TryAdd(update.Id!, updateDirectory))
+                    {
+                        newIndex.Add(update);
+                    }
+                }
 
                 cacheAccessLock.EnterWriteLock();
                 try
                 {
-                    repository = newRepository;
-                    LocationMap = new Dictionary<string, string>(internalLocationMap);
+                    repository = newIndex;
+                    LocationMap = newLocationMap;
                 }
                 finally
                 {
@@ -124,31 +136,34 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
         }
 
-        private void BuildRepository(DirectoryInfo directory, int depth, IRepositoryIndex repository, ConcurrentDictionary<string, string> map)
+        private void BuildRepository(DirectoryInfo directory, int depth,
+            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
         {
             if (depth++ > SEARCH_DEPTH)
             {
                 return;
             }
+
             if (RepositoryParser.ValidateUpdateFiles(directory.FullName))
             {
-                foreach (var cucFile in directory.EnumerateFiles("*.cuc"))
-                {
-                    if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
-                    {
-                        // TODO переписать реализацию NewId с поддержкой потокозащищенности
-                        update.Id = idGenerator.NewId(update);
-
-                        if (map.TryAdd(update.Id!, directory.FullName))
-                        {
-                            repository.Add(update);
-                        }
-                    }
-                }
+                ParseUpdateDirectory(directory, parsedUpdates);
+                return;
             }
 
             Parallel.ForEach(directory.EnumerateDirectories(), subDir =>
-               BuildRepository(subDir, depth, repository, map));
+                BuildRepository(subDir, depth, parsedUpdates));
+        }
+
+        private static void ParseUpdateDirectory(DirectoryInfo directory,
+            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
+        {
+            foreach (var cucFile in directory.EnumerateFiles("*.cuc"))
+            {
+                if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
+                {
+                    parsedUpdates.Add((update, directory.FullName));
+                }
+            }
         }
 
         /// <inheritdoc/>

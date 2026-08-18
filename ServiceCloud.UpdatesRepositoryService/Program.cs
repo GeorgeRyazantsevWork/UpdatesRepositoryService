@@ -1,7 +1,9 @@
 using Asp.Versioning;
 using Microsoft.OpenApi;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
+using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository;
+using System.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,7 @@ builder.Services.AddSwaggerGen(c =>
 var repositoryPath = builder.Configuration["Repository:Path"];
 if (string.IsNullOrWhiteSpace(repositoryPath))
 {
-    throw new InvalidOperationException("Не задан путь к репозиторию обновлений (Repository:Path).");
+    throw new InvalidOperationException(Resource.Message_IncorrectRepositoryPath);
 }
 
 builder.Services.AddSingleton<IRepositoryIndex, RepositoryIndex>();
@@ -41,7 +43,7 @@ builder.Services.AddSingleton<IUpdatesRepository>(sp =>
 
 builder.Services.AddHostedService(sp =>
 {
-    var refreshInterval = builder.Configuration.GetValue("Repository:RefreshInterval", TimeSpan.Zero);
+    var refreshInterval = builder.Configuration.GetValue("Repository:RefreshInterval", TimeSpan.Zero);// TODO убрать магические строки, вынести отдельный класс настроек
     return new RepositoryAutoRefresherHostedService(
         sp.GetRequiredService<IUpdatesRepository>(),
         sp.GetRequiredService<ILogger<RepositoryAutoRefresherHostedService>>(),
