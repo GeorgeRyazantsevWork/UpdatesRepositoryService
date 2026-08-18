@@ -5,6 +5,11 @@ using ServiceCloud.UpdatesRepositoryService.Repository;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
+    /// <summary>
+    /// Предоставляет API-методы для работы с обновлениями через репозиторий 
+    /// </summary>
+    /// <param name="repositoryService">Интерфейс репозитория с обновлениями конфигураций ИБ</param>
+
     [ApiController]
     [ApiVersion(1.0)]
     [Route("api/v{version:apiVersion}/updates")]

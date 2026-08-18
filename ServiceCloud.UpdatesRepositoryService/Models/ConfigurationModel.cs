@@ -2,6 +2,9 @@
 
 namespace ServiceCloud.UpdatesRepositoryService.Models
 {
+    /// <summary>
+    /// Данные о конфигурации информационной базы 1С
+    /// </summary>
     public class ConfigurationModel 
     {
         private static ConfigurationModel empty = new ConfigurationModel() { Name = "Конфигурация" };

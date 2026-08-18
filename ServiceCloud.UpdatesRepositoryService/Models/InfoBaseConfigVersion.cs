@@ -5,9 +5,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
     /// <summary>
     /// Описывает версию конфигурации информационной базы
     /// </summary>
-    public class InfoBaseConfigVersion : IComparable,
-                                         IComparable<InfoBaseConfigVersion>,
-                                         IEquatable<InfoBaseConfigVersion>
+    public class InfoBaseConfigVersion : IComparable, IComparable<InfoBaseConfigVersion>, IEquatable<InfoBaseConfigVersion>
     {
         private readonly string value = string.Empty;
 
@@ -188,6 +186,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
             return right == null;
         }
 
-        #endregion // Операторы сравнения
+        #endregion
     }
 }
