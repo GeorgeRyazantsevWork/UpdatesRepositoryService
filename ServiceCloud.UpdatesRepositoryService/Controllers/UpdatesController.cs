@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
 using ServiceCloud.UpdatesRepositoryService.Repository;
+using static ServiceCloud.UpdatesRepositoryService.Models.Responses.ApiResponses;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
@@ -12,30 +13,32 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
     [ApiController]
     [ApiVersion(1.0)]
-    [Route("api/v{version:apiVersion}/updates")]
+    [Route("urs/v{version:apiVersion}/updates")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
     public class UpdatesController(IUpdatesRepository repositoryService) : ControllerBase
     {
         private readonly IUpdatesRepository repository = repositoryService;
 
         /// <summary>
         /// Получить общее количество обновлений
-        /// GET api/updates/count
         /// </summary>
+        /// <returns>Количество доступных обновлений</returns>
+        /// <response code="200">Количество обновлений успешно получено</response>
         [HttpGet("count")]
+        [ProducesResponseType(typeof(UpdatesCountResponse), StatusCodes.Status200OK)]
         public IActionResult GetUpdatesCount()
         {
-            var count = repository.UpdatesCount;
-            return Ok(new
-            {
-                Count = count
-            });
+            return Ok(new UpdatesCountResponse(repository.UpdatesCount));
         }
 
         /// <summary>
         /// Получить список всех обновлений
-        /// GET api/updates
         /// </summary>
+        /// <returns>Коллекция описаний обновлений</returns>
+        /// <response code="200">Список обновлений успешно получен</response>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UpdateModel>), StatusCodes.Status200OK)]
         public IActionResult GetUpdatesList()
         {
             var updates = repository.Updates;
@@ -45,27 +48,34 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
         /// <summary>
         /// Проверить наличие обновления
-        /// GET api/updates/contains
         /// </summary>
+        /// <returns>Признак наличия обновления в репозитории</returns>
+        /// <response code="200">Проверка выполнена</response>
+        /// <response code="400">Конфигурация не задана или задана не полностью</response>
         [HttpGet("contains")]
-        public IActionResult ContainsUpdate(ConfigurationModel config)
+        [ProducesResponseType(typeof(ContainsUpdateResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        public ActionResult<ContainsUpdateResponse> ContainsUpdate([FromQuery] ConfigurationModel config)
         {
             var result = repository.ContainsUpdate(config);
-
-            return Ok(new
-            {
-                Contains = result
-            });
+            return Ok(new ContainsUpdateResponse(result));
         }
 
         /// <summary>
         /// Получить конкретное обновление
-        /// GET api/updates/concrete
         /// </summary>
+        /// <param name="request">Целевая конфигурация информационной базы</param>
+        /// <returns>Описание найденного обновления</returns>
+        /// <response code="200">Обновление найдено</response>
+        /// <response code="400">Конфигурация не задана или задана не полностью</response>
+        /// <response code="404">Обновление для указанной конфигурации отсутствует</response>
         [HttpGet("concrete")]
-        public IActionResult GetUpdate(ConfigurationModel request)
+        [ProducesResponseType(typeof(UpdateModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UpdateModel> GetUpdate([FromQuery] ConfigurationModel request)
         {
-            var update = repository.GetUpdate(request, transitive: false); 
+            var update = repository.GetUpdate(request, transitive: false);
 
             if (update == null)
             {
@@ -75,26 +85,35 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
             return Ok(update);
         }
 
-
         /// <summary>
-        /// Получить потенциальные обновления
-        /// GET api/updates/potential
+        /// Получить потенциальные обновления для заданной конфигурации
         /// </summary>
+        /// <param name="config">Конфигурация информационной базы, для которой подбираются обновления</param>
+        /// <returns>Коллекция подходящих обновлений</returns>
+        /// <response code="200">Список потенциальных обновлений успешно получен</response>
+        /// <response code="400">Конфигурация не задана или задана не полностью</response>
         [HttpGet("potential")]
-        public IActionResult GetPotentialUpdates(ConfigurationModel config)
+        [ProducesResponseType(typeof(IEnumerable<UpdateModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<UpdateModel>> GetPotentialUpdates([FromQuery] ConfigurationModel config)
         {
-            var updates =
-                repository.GetPotentialUpdates(config);
-
+            var updates = repository.GetPotentialUpdates(config);
             return Ok(updates);
         }
 
         /// <summary>
-        /// Получить расположение обновления
-        /// POST api/updates/location
+        /// Получить расположение файлов обновления в репозитории
         /// </summary>
+        /// <param name="updateId">Идентификатор обновления в репозитории</param>
+        /// <returns>Путь к каталогу с файлами обновления</returns>
+        /// <response code="200">Расположение обновления успешно получено</response>
+        /// <response code="400">Идентификатор обновления не задан</response>
+        /// <response code="404">Обновление с указанным идентификатором отсутствует</response>
         [HttpGet("location")]
-        public IActionResult GetLocation(string updateId)
+        [ProducesResponseType(typeof(UpdateLocationResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UpdateLocationResponse> GetLocation([FromQuery] string updateId)
         {
             var location = repository.GetLocation(updateId);
 
@@ -103,10 +122,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
                 return NotFound();
             }
 
-            return Ok(new
-            {
-                Location = location
-            });
+            return Ok(new UpdateLocationResponse(location));
         }
-    }
+    }   
 }
