@@ -1,7 +1,6 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Models.Responses;
 using ServiceCloud.UpdatesRepositoryService.Repository;
 using static ServiceCloud.UpdatesRepositoryService.Models.Responses.ApiResponses;
 
@@ -125,5 +124,5 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
 
             return Ok(new UpdateLocationResponse(location));
         }
-    }   
+    }
 }

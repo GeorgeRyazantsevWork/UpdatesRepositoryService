@@ -13,7 +13,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     public class RepositoryIndex : IRepositoryIndex
     {
         private readonly ConcurrentDictionary<UpdateKey, UpdateModel> updates;
-        private readonly ConcurrentDictionary<ConfigKey, ConcurrentBag<UpdateModel>> updatesByConfig;
+        private readonly ConcurrentDictionary<ConfigKey, List<UpdateModel>> updatesByConfig;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -54,47 +54,75 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config)
+        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel config)
         {
             return ValidateConfig(config) ?
                SelectUpdates(config) :
                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
-        private IEnumerable<UpdateModel>? SelectUpdates(ConfigurationModel config)
+        private IEnumerable<UpdateModel> SelectUpdates(ConfigurationModel config)
         {
-            switch (config.Edition)
+            var version = config.Version!;
+            var result = new List<UpdateModel>();
+
+            if (config.Edition == InfoBaseConfigEdition.BASE)
             {
-                case InfoBaseConfigEdition.BASE:
+                var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
+                if (updatesByConfig.TryGetValue(CreateConfigKey(config.Publisher!, newConfigName), out var candidates))
+                {
+                    lock (candidates)
                     {
-                        var newConfigName = config.Name!.Substring(0, config.Name!.Length - 7);
-                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config.Publisher!, newConfigName));
-
-                        return candidateUpdates?.Where(update => update.IsTransitive
-                                                && update.DestinationConfig!.Version == config.Version);
-
+                        foreach (var update in candidates)
+                        {
+                            if (update.IsTransitive && update.DestinationConfig!.Version == version)
+                            {
+                                result.Add(update);
+                            }
+                        }
                     }
-                case InfoBaseConfigEdition.PROF:
-                    {
-                        var filteredCorpTransitives = updatesByConfig
-                            .GetValueOrDefault(CreateConfigKey(config.Publisher!, config.Name + "КОРП"))?
-                            .Where(u => u.IsTransitive);
+                }
 
-                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-                        var fullcandidateUpdates = candidateUpdates?.Concat(filteredCorpTransitives);
-
-                        return fullcandidateUpdates?.Where(update => update.DestinationConfig != config
-                                                         && update.DestinationConfig!.Version >= config.Version);
-                    }
-
-                default:
-                    {
-                        var candidateUpdates = updatesByConfig.GetValueOrDefault(CreateConfigKey(config));
-
-                        return candidateUpdates?.Where(update => update.DestinationConfig != config
-                                                    && update.DestinationConfig!.Version > config.Version);
-                    }
+                return result;
             }
+
+            if (updatesByConfig.TryGetValue(CreateConfigKey(config), out var ownUpdates))
+            {
+                var includeEqualVersion = config.Edition == InfoBaseConfigEdition.PROF;
+                lock (ownUpdates)
+                {
+                    foreach (var update in ownUpdates)
+                    {
+                        var destination = update.DestinationConfig!;
+                        if (destination == config)
+                        {
+                            continue;
+                        }
+
+                        if (includeEqualVersion ? destination.Version >= version : destination.Version > version)
+                        {
+                            result.Add(update);
+                        }
+                    }
+                }
+            }
+
+            if (config.Edition == InfoBaseConfigEdition.PROF &&
+                updatesByConfig.TryGetValue(CreateConfigKey(config.Publisher!, config.Name + "КОРП"), out var corpUpdates))
+            {
+                lock (corpUpdates)
+                {
+                    foreach (var update in corpUpdates)
+                    {
+                        if (update.IsTransitive && update.DestinationConfig!.Version >= version)
+                        {
+                            result.Add(update);
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <inheritdoc/>
@@ -115,8 +143,11 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
 
             var configKey = CreateConfigKey(config);
-            var bag = updatesByConfig.GetOrAdd(configKey, static _ => []);
-            bag.Add(update);
+            var updatesOfConfig = updatesByConfig.GetOrAdd(configKey, static _ => []);
+            lock (updatesOfConfig)
+            {
+                updatesOfConfig.Add(update);
+            }
         }
 
         /// <inheritdoc/>

@@ -205,7 +205,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel? config)
+        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 

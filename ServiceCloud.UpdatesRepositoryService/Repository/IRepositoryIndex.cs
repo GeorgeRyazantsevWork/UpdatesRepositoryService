@@ -37,7 +37,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// </summary>
         /// <param name="config">Указанная конфигурация информационной базы 1С</param>
         /// <returns>Список обновлений</returns>
-        public IEnumerable<UpdateModel>? GetPotentialUpdates(ConfigurationModel config);
+        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel config);
 
         /// <summary>
         /// Определить по целевой конфигурации обновления содержится ли оно в репозитории 
