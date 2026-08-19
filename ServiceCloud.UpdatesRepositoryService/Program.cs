@@ -22,30 +22,21 @@ builder.Services.AddApiVersioning(options =>
 {
     options.Document.AddDocumentTransformer((document, context, cancellationToken) =>
     {
-        document.Info.Title = "Updates Repository Service";
-        document.Info.Description = "Сервис репозитория обновлений конфигураций информационных баз 1С";
+        document.Info.Title = RepositoryOptions.ServiceName;
+        document.Info.Description = RepositoryOptions.ServiceDescription;
         return Task.CompletedTask;
     });
 });
 
-var repositoryPath = builder.Configuration["Repository:Path"];
-if (string.IsNullOrWhiteSpace(repositoryPath))
-{
-    throw new InvalidOperationException(Resource.Message_IncorrectRepositoryPath);
-}
+builder.Services
+    .AddOptions<RepositoryOptions>()
+    .BindConfiguration(RepositoryOptions.SectionName)
+    .Validate(options => !string.IsNullOrWhiteSpace(options.Path), Resource.Message_IncorrectRepositoryPath)
+    .ValidateOnStart();
 
 builder.Services.AddSingleton<IRepositoryIndex, RepositoryIndex>();
-builder.Services.AddSingleton<IUpdatesRepository>(sp =>
-    new UpdatesRepository(sp.GetRequiredService<IRepositoryIndex>(), repositoryPath));
-
-builder.Services.AddHostedService(sp =>
-{
-    var refreshInterval = builder.Configuration.GetValue("Repository:RefreshInterval", TimeSpan.Zero);// TODO убрать магические строки, вынести отдельный класс настроек
-    return new RepositoryAutoRefresherHostedService(
-        sp.GetRequiredService<IUpdatesRepository>(),
-        sp.GetRequiredService<ILogger<RepositoryAutoRefresherHostedService>>(),
-        refreshInterval);
-});
+builder.Services.AddSingleton<IUpdatesRepository, UpdatesRepository>();
+builder.Services.AddHostedService<RepositoryAutoRefresherHostedService>();
 
 var app = builder.Build();
 
@@ -58,16 +49,16 @@ if (app.Environment.IsDevelopment())
         {
             options.SwaggerEndpoint(
                 $"/openapi/{description.GroupName}.json",
-                $"Updates Repository Service {description.GroupName}");
+                $"{RepositoryOptions.ServiceName} {description.GroupName}");
         }
     });
+
+    Console.WriteLine(Resource.DebugMessage_PressAnyKeyToContinue);
+    Console.ReadLine();
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
-
-Console.WriteLine("Нажмите Enter, чтобы запустить сервер...");
-Console.ReadLine();
 
 app.Run();

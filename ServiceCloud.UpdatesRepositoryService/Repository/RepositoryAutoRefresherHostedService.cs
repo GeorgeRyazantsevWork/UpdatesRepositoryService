@@ -1,4 +1,5 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Properties;
+﻿using Microsoft.Extensions.Options;
+using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Diagnostics;
 
 namespace ServiceCloud.UpdatesRepositoryService.Repository
@@ -15,14 +16,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
         /// <param name="updatesRepository">Репозиторий с обновлениями конфигураций ИБ</param>
-        /// <param name="refreshInterval">Интервал между запусками обновления репозитория</param>
         /// <param name="logger">Регистратор событий работы сервиса</param>
+        /// <param name="options">Настройки репозитория обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан обязательный аргумент</exception>
-        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, ILogger logger, TimeSpan refreshInterval = default)
+        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, 
+            ILogger<RepositoryAutoRefresherHostedService> logger, IOptions<RepositoryOptions> options)
         {
+            ArgumentNullException.ThrowIfNull(options);
+
             repository = updatesRepository ?? throw new ArgumentNullException(nameof(updatesRepository));
-            RefreshInterval = refreshInterval == default ? TimeSpan.FromMinutes(30) : refreshInterval;
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+            var refreshInterval = options.Value.RefreshInterval;
+            RefreshInterval = refreshInterval == default
+                ? RepositoryOptions.DefaultRefreshInterval
+                : refreshInterval;
         }
 
         /// <summary>

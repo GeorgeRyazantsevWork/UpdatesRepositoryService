@@ -1,4 +1,5 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
+﻿using Microsoft.Extensions.Options;
+using ServiceCloud.UpdatesRepositoryService.Helpers;
 using ServiceCloud.UpdatesRepositoryService.Models;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Collections.Concurrent;
@@ -18,10 +19,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
-        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirPath)
+        /// <param name="repositoryIndex">Индекс репозитория обновлений</param>
+        /// <param name="options">Настройки репозитория обновлений</param>
+        /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, IOptions<RepositoryOptions> options)
         {
+            ArgumentNullException.ThrowIfNull(options);
+
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
-            RootDirectoryPath = rootDirPath;
+            RootDirectoryPath = options.Value.Path;
         }
 
         /// <summary>
@@ -85,7 +91,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        /// <exception cref="SecurityException">Не удалось получить доступ к "корневому" каталогу</exception>
         /// <exception cref="InvalidOperationException">Путь к "корневому" каталогу не задан или содержит недопустимые знаки</exception>
         /// <exception cref="PathTooLongException">Путь к "корневому" каталогу слишком длинный</exception>
         /// <exception cref="Exception">Не удалось провести анализ "корневого" каталога</exception>

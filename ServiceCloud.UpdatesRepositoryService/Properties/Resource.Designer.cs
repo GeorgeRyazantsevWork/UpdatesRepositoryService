@@ -61,6 +61,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Нажмите любую клавишу, чтобы запустить сервер....
+        /// </summary>
+        internal static string DebugMessage_PressAnyKeyToContinue {
+            get {
+                return ResourceManager.GetString("DebugMessage_PressAnyKeyToContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка при обновлении репозитория! Длительность до ошибки: {0} мс.
         /// </summary>
         internal static string LogMessage_RefreshError {

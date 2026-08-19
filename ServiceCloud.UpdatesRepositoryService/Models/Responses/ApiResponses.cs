@@ -1,5 +1,8 @@
 ﻿namespace ServiceCloud.UpdatesRepositoryService.Models.Responses
 {
+    /// <summary>
+    /// Описывает возможные ответы от сервиса
+    /// </summary>
     public class ApiResponses
     {
         /// <summary>
