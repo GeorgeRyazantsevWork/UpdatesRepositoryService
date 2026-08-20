@@ -65,6 +65,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// Получить конкретное обновление
         /// </summary>
         /// <param name="request">Целевая конфигурация информационной базы</param>
+        /// <param name="transitive">Признак, указывающи является ли обновление переходным</param>
         /// <returns>Описание найденного обновления</returns>
         /// <response code="200">Обновление найдено</response>
         /// <response code="400">Конфигурация не задана или задана не полностью</response>
@@ -73,9 +74,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         [ProducesResponseType(typeof(UpdateModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UpdateModel> GetUpdate([FromQuery] ConfigurationModel request)
+        public ActionResult<UpdateModel> GetUpdate([FromQuery] ConfigurationModel request, [FromQuery] bool transitive = false)
         {
-            var update = repository.GetUpdate(request, transitive: false);
+            var update = repository.GetUpdate(request, transitive);
 
             if (update == null)
             {
