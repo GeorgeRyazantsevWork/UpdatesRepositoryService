@@ -46,7 +46,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken) // TODO реализовать логику отмены с помощью токена
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
