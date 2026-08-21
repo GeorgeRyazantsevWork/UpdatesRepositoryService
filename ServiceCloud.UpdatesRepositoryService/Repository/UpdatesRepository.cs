@@ -11,7 +11,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     /// </summary>
     public class UpdatesRepository : IUpdatesRepository
     {
-        private readonly SemaphoreSlim refreshLock = new(1, 1);
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
@@ -94,10 +93,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <exception cref="InvalidOperationException">Путь к "корневому" каталогу не задан или содержит недопустимые знаки</exception>
         /// <exception cref="PathTooLongException">Путь к "корневому" каталогу слишком длинный</exception>
         /// <exception cref="Exception">Не удалось провести анализ "корневого" каталога</exception>
-        public async Task Refresh()
+        public Task Refresh()
         {
-            await refreshLock.WaitAsync();
-
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
@@ -135,10 +132,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue,
                     nameof(RootDirectoryPath), RootDirectoryPath));
             }
-            finally
-            {
-                refreshLock.Release();
-            }
+
+            return Task.CompletedTask;
         }
 
         private void BuildRepository(DirectoryInfo directory, int depth,

@@ -11,6 +11,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     {
         private IUpdatesRepository repository;
         private ILogger logger;
+        private readonly SemaphoreSlim refreshLock = new(1, 1);
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -50,12 +51,12 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         {
             try
             {
-                await RefreshRepository();
+                await RefreshRepository(stoppingToken);
                 using var timer = new PeriodicTimer(RefreshInterval);
 
                 while (await timer.WaitForNextTickAsync(stoppingToken))
                 {
-                    await RefreshRepository();
+                    await RefreshRepository(stoppingToken);
                 }
             }
             catch (Exception ex)
@@ -65,8 +66,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             }
         }
 
-        private async Task RefreshRepository()
+        private async Task RefreshRepository(CancellationToken stoppingToken)
         {
+            await refreshLock.WaitAsync(stoppingToken);
             logger.LogInformation(Resource.LogMessage_RefreshingWasStarted);
 
             var stopwatch = Stopwatch.StartNew();
@@ -82,6 +84,19 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 logger.LogError(ex, string.Format(Resource.LogMessage_RefreshError, stopwatch.ElapsedMilliseconds));
                 throw;
             }
+            finally
+            {
+                refreshLock.Release();
+            }
+        }
+
+        /// <summary>
+        /// Освободить ресурсы объекта
+        /// </summary>
+        public override void Dispose()
+        {
+            refreshLock.Dispose();
+            base.Dispose();
         }
     }
 }
