@@ -14,6 +14,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
+        private const int SEARCH_WIDTH = 10;
         private bool disposed;
 
         /// <summary>
@@ -150,7 +151,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 return;
             }
 
-            Parallel.ForEach(directory.EnumerateDirectories(), subDir =>
+            var subDirs = directory.EnumerateDirectories().Take(SEARCH_WIDTH);
+
+            Parallel.ForEach(subDirs, subDir =>
                 BuildRepository(subDir, depth, parsedUpdates));
         }
 
