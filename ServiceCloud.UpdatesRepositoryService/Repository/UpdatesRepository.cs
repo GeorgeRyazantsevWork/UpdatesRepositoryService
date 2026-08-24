@@ -18,14 +18,13 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
-        /// <param name="repositoryIndex">Индекс репозитория обновлений</param>
         /// <param name="options">Настройки репозитория обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
-        public UpdatesRepository(IRepositoryIndex repositoryIndex, IOptions<RepositoryOptions> options)
+        public UpdatesRepository(IOptions<RepositoryOptions> options)
         {
             ArgumentNullException.ThrowIfNull(options);
 
-            repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
+            repository = new RepositoryIndex();
             RootDirectoryPath = options.Value.Path;
         }
 
