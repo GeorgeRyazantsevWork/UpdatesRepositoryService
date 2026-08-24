@@ -9,11 +9,12 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
     /// <summary>
     /// Описывает репозиторий обновлений для конфигураций 1С
     /// </summary>
-    public class UpdatesRepository : IUpdatesRepository
+    public class UpdatesRepository : IUpdatesRepository, IDisposable
     {
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
+        private bool disposed;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -229,5 +230,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 cacheAccessLock.ExitReadLock();
             }
         }
+
+
+        #region Члены IDisposable
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            if (disposed)
+            {
+                return;
+            }
+            cacheAccessLock.Dispose();
+            disposed = true;
+        }
+
+        #endregion
     }
 }
