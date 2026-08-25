@@ -3,6 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
 {
+    /// <summary>
+    /// Класс-помощник для преобразования найденного файла конфигурации в объект типа <see cref="UpdateModel"/>
+    /// </summary>
     public static class RepositoryParser
     {
         /// <summary>
