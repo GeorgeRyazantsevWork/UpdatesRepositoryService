@@ -3,7 +3,6 @@ using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
 using ServiceCloud.UpdatesRepositoryService;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
-using ServiceCloud.UpdatesRepositoryService.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
