@@ -1,7 +1,6 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Models;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
 using System.Diagnostics.CodeAnalysis;
-
-namespace ServiceCloud.UpdatesRepositoryService.Helpers
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
 {
     public static class RepositoryParser
     {
@@ -218,4 +217,3 @@ namespace ServiceCloud.UpdatesRepositoryService.Helpers
         }
     }
 }
-

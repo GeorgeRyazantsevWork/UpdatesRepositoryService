@@ -1,9 +1,9 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Properties;
-using ServiceCloud.UpdatesRepositoryService.Repository.Keys;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository.Keys;
 using System.Collections.Concurrent;
 
-namespace ServiceCloud.UpdatesRepositoryService.Repository
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
 {
     /// <summary>
     /// Представляет индекс репозитория обновлений информационных баз 1С.

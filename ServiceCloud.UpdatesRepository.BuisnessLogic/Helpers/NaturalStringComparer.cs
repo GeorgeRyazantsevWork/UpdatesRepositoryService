@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace ServiceCloud.UpdatesRepositoryService.Helpers
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
 {
     /// <summary>
     /// Сравнение строк с учетом содержащихся в них чисел

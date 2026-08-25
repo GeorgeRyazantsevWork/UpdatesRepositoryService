@@ -1,4 +1,7 @@
 using Asp.Versioning;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
+using ServiceCloud.UpdatesRepositoryService;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 using ServiceCloud.UpdatesRepositoryService.Repository;

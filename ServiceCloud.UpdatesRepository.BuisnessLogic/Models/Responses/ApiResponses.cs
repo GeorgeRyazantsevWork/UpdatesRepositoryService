@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Models.Responses
+﻿namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Models.Responses
 {
     /// <summary>
     /// Описывает возможные ответы от сервиса

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceCloud.UpdatesRepositoryService.Properties {
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServiceCloud.UpdatesRepositoryService.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServiceCloud.UpdatesRepository.BuisnessLogic.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Нажмите любую клавишу, чтобы запустить сервер....
         /// </summary>
-        internal static string DebugMessage_PressAnyKeyToContinue {
+        public static string DebugMessage_PressAnyKeyToContinue {
             get {
                 return ResourceManager.GetString("DebugMessage_PressAnyKeyToContinue", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка при обновлении репозитория! Длительность до ошибки: {0} мс.
         /// </summary>
-        internal static string LogMessage_RefreshError {
+        public static string LogMessage_RefreshError {
             get {
                 return ResourceManager.GetString("LogMessage_RefreshError", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Начато обновление репозитория.
         /// </summary>
-        internal static string LogMessage_RefreshingWasStarted {
+        public static string LogMessage_RefreshingWasStarted {
             get {
                 return ResourceManager.GetString("LogMessage_RefreshingWasStarted", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Служба автообновления репозитория аварийно завершена, репозиторий будет очищен!.
         /// </summary>
-        internal static string LogMessage_RefreshRepositoryError {
+        public static string LogMessage_RefreshRepositoryError {
             get {
                 return ResourceManager.GetString("LogMessage_RefreshRepositoryError", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Обновление репозитория успешно завершено за {0} мс.
         /// </summary>
-        internal static string LogMessage_RefreshWasFinished {
+        public static string LogMessage_RefreshWasFinished {
             get {
                 return ResourceManager.GetString("LogMessage_RefreshWasFinished", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации.
         /// </summary>
-        internal static string Message_IncorrectConfigProperties {
+        public static string Message_IncorrectConfigProperties {
             get {
                 return ResourceManager.GetString("Message_IncorrectConfigProperties", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Не задан путь к репозиторию обновлений!.
         /// </summary>
-        internal static string Message_IncorrectRepositoryPath {
+        public static string Message_IncorrectRepositoryPath {
             get {
                 return ResourceManager.GetString("Message_IncorrectRepositoryPath", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка обработки запроса.
         /// </summary>
-        internal static string Message_RequestProcessingError {
+        public static string Message_RequestProcessingError {
             get {
                 return ResourceManager.GetString("Message_RequestProcessingError", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Отсутствует идентификатор целевой конфигурации для проверки наличия обновлений.
         /// </summary>
-        internal static string Message_TargetConfigIDdNotSpecified {
+        public static string Message_TargetConfigIDdNotSpecified {
             get {
                 return ResourceManager.GetString("Message_TargetConfigIDdNotSpecified", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Отсутствует целевая конфигурация информационной базы.
         /// </summary>
-        internal static string Message_TargetConfigNotSpecified {
+        public static string Message_TargetConfigNotSpecified {
             get {
                 return ResourceManager.GetString("Message_TargetConfigNotSpecified", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Недопустимое значение свойства &quot;{0}&quot;: {1}.
         /// </summary>
-        internal static string MessageTemplate_IncorrectPropertyValue {
+        public static string MessageTemplate_IncorrectPropertyValue {
             get {
                 return ResourceManager.GetString("MessageTemplate_IncorrectPropertyValue", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Не задан обязательный параметр запроса: {0}.
         /// </summary>
-        internal static string ReplyErrorMessageTemplate_RequestFieldNotDefined {
+        public static string ReplyErrorMessageTemplate_RequestFieldNotDefined {
             get {
                 return ResourceManager.GetString("ReplyErrorMessageTemplate_RequestFieldNotDefined", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Некорректные параметры запроса: {0}.
         /// </summary>
-        internal static string ReplyMessageTemplate_IncorrectRequestData {
+        public static string ReplyMessageTemplate_IncorrectRequestData {
             get {
                 return ResourceManager.GetString("ReplyMessageTemplate_IncorrectRequestData", resourceCulture);
             }

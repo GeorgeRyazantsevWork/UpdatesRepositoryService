@@ -1,6 +1,6 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Models;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
 
-namespace ServiceCloud.UpdatesRepositoryService.Repository.Keys
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository.Keys
 {
     /// <summary>
     /// Уникальный ключ обновления конфигурации информационной базы.

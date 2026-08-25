@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Repository.Keys
+﻿namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository.Keys
 {
     /// <summary>
     /// Уникальный ключ конфигурации информационной базы

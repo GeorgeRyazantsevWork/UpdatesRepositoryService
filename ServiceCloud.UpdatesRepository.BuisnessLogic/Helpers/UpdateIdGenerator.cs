@@ -1,9 +1,9 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Models;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ServiceCloud.UpdatesRepositoryService.Helpers
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
 {
     /// <summary>
     /// Генератор идентификатора для обновления информационной базы внутри репозитория

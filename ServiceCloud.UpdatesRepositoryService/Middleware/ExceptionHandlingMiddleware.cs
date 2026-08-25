@@ -1,4 +1,4 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Properties;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
 
 namespace ServiceCloud.UpdatesRepositoryService.Middleware
 {

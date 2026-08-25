@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Repository;
-using static ServiceCloud.UpdatesRepositoryService.Models.Responses.ApiResponses;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
+using static ServiceCloud.UpdatesRepository.BuisnessLogic.Models.Responses.ApiResponses;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using ServiceCloud.UpdatesRepositoryService.Helpers;
-using ServiceCloud.UpdatesRepositoryService.Models;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
+using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Collections.Concurrent;
 
