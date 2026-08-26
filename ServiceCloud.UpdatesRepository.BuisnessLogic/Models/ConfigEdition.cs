@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Models
+﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Models
 {
     /// <summary>
     /// Возможные типы (редакции) конфигураций информационных баз 1С

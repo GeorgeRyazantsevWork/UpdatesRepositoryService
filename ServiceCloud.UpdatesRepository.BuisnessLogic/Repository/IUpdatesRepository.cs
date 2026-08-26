@@ -1,6 +1,6 @@
-﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
 
-namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
     /// Интерфейс репозитория с обновлениями конфигураций информационных баз 1С

@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
+﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Helpers
 {
     /// <summary>
     /// Вспомогательный класс для расчёта хэш-кода объектов

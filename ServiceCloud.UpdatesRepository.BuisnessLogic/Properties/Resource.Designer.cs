@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Properties {
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServiceCloud.UpdatesRepository.BuisnessLogic.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServiceCloud.UpdatesRepository.BusinessLogic.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

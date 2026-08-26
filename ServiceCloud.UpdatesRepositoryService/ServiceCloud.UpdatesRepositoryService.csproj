@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ServiceCloud.UpdatesRepository.BuisnessLogic\ServiceCloud.UpdatesRepository.BuisnessLogic.csproj" />
+	  <ProjectReference Include="..\ServiceCloud.UpdatesRepository.BuisnessLogic\ServiceCloud.UpdatesRepository.BusinessLogic.csproj" />
 	</ItemGroup>
 
 </Project>

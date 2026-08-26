@@ -1,9 +1,9 @@
-﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers;
-using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
-using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using System.Collections.Concurrent;
 
-namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
     /// Описывает репозиторий обновлений для конфигураций 1С
