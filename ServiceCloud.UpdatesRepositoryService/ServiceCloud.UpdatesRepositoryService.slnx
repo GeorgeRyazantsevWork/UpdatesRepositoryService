@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../ServiceCloud.UpdatesRepository.BusinessLogic.Tests/ServiceCloud.UpdatesRepository.BusinessLogic.Tests.csproj" Id="5ca31256-6787-44b3-84a6-bab11bc890ce" />
   <Project Path="ServiceCloud.UpdatesRepositoryService.csproj" />
 </Solution>
