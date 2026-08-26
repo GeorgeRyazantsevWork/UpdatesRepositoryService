@@ -92,7 +92,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 
         /// <inheritdoc/>
         /// <exception cref="InvalidOperationException">Путь к "корневому" каталогу не задан или содержит недопустимые знаки</exception>
-        /// <exception cref="PathTooLongException">Путь к "корневому" каталогу слишком длинный</exception>
         /// <exception cref="Exception">Не удалось провести анализ "корневого" каталога</exception>
         public void Refresh()
         {
