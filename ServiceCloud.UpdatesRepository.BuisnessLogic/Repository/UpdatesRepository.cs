@@ -23,7 +23,7 @@ namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
         public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
 
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
             RootDirectoryPath = rootDirectoryPath;

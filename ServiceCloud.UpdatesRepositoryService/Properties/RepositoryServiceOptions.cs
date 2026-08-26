@@ -3,7 +3,7 @@
     /// <summary>
     /// Настройки репозитория обновлений, соответствующие секции конфигурации <c>Repository</c>
     /// </summary>
-    public sealed class RepositoryOptions
+    public sealed class RepositoryServiceOptions
     {
         /// <summary>
         /// Название сервиса

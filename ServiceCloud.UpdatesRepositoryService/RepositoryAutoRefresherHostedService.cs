@@ -22,7 +22,7 @@ namespace ServiceCloud.UpdatesRepositoryService
         /// <param name="options">Настройки репозитория обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан обязательный аргумент</exception>
         public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository,
-            ILogger<RepositoryAutoRefresherHostedService> logger, IOptions<RepositoryOptions> options)
+            ILogger<RepositoryAutoRefresherHostedService> logger, IOptions<RepositoryServiceOptions> options)
         {
             ArgumentNullException.ThrowIfNull(options);
 
@@ -31,7 +31,7 @@ namespace ServiceCloud.UpdatesRepositoryService
 
             var refreshInterval = options.Value.RefreshInterval;
             RefreshInterval = refreshInterval == default
-                ? RepositoryOptions.DefaultRefreshInterval
+                ? RepositoryServiceOptions.DefaultRefreshInterval
                 : refreshInterval;
         }
 
