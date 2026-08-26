@@ -74,7 +74,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                await repository.Refresh();
+                repository.Refresh();
                 stopwatch.Stop();
                 logger.LogInformation(string.Format(Resource.LogMessage_RefreshWasFinished, stopwatch.ElapsedMilliseconds));
             }

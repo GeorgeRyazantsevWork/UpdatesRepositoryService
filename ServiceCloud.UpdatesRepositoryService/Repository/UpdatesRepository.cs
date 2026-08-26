@@ -94,7 +94,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <exception cref="InvalidOperationException">Путь к "корневому" каталогу не задан или содержит недопустимые знаки</exception>
         /// <exception cref="PathTooLongException">Путь к "корневому" каталогу слишком длинный</exception>
         /// <exception cref="Exception">Не удалось провести анализ "корневого" каталога</exception>
-        public Task Refresh()
+        public void Refresh()
         {
             try
             {
@@ -133,8 +133,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue,
                     nameof(RootDirectoryPath), RootDirectoryPath));
             }
-
-            return Task.CompletedTask;
         }
 
         private void BuildRepository(DirectoryInfo directory, int depth,
