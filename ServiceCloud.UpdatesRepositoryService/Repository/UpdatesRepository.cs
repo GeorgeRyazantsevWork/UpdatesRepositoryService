@@ -14,7 +14,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
-        private const int SEARCH_WIDTH = 10;
+        private const int MAX_SUBLEVEL_CONCURRENCY = 10;
         private bool disposed;
 
         /// <summary>
@@ -149,10 +149,13 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
                 return;
             }
 
-            var subDirs = directory.EnumerateDirectories().Take(SEARCH_WIDTH);
+            var subDirs = directory.EnumerateDirectories();
 
-            Parallel.ForEach(subDirs, subDir =>
-                BuildRepository(subDir, depth, parsedUpdates));
+            Parallel.ForEach(
+                directory.EnumerateDirectories(),
+                new ParallelOptions { MaxDegreeOfParallelism = MAX_SUBLEVEL_CONCURRENCY }, // ограничение параллельности: каждый конкретный вызов Parallel.ForEach                                                                                           выполняет
+                                                                                           // выполняет максимум заданное число параллельных операций
+                subDir => BuildRepository(subDir, depth, parsedUpdates)); 
         }
 
         private static void ParseUpdateDirectory(DirectoryInfo directory,
