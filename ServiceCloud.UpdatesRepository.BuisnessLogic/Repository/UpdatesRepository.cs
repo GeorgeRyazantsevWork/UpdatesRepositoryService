@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.Options;
-using ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers;
+﻿using ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
-using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
-using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Collections.Concurrent;
 
-namespace ServiceCloud.UpdatesRepositoryService
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
 {
     /// <summary>
     /// Описывает репозиторий обновлений для конфигураций 1С
@@ -22,14 +19,14 @@ namespace ServiceCloud.UpdatesRepositoryService
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
         /// <param name="repositoryIndex">Индекс репозитория обновлений</param>
-        /// <param name="options">Настройки репозитория обновлений</param>
+        /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
-        public UpdatesRepository(IRepositoryIndex repositoryIndex, IOptions<RepositoryOptions> options)
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
         {
-            ArgumentNullException.ThrowIfNull(options);
+            ArgumentException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
 
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
-            RootDirectoryPath = options.Value.Path;
+            RootDirectoryPath = rootDirectoryPath;
         }
 
         /// <summary>

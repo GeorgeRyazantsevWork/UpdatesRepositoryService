@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
+namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Repository
 {
     /// <summary>
     /// Генератор идентификатора для обновления информационной базы внутри репозитория

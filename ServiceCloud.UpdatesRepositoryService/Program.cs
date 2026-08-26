@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.Extensions.Options;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
 using ServiceCloud.UpdatesRepositoryService;
@@ -37,7 +38,13 @@ builder.Services
     .ValidateOnStart();
 
 builder.Services.AddSingleton<IRepositoryIndex, RepositoryIndex>();
-builder.Services.AddSingleton<IUpdatesRepository, UpdatesRepository>();
+builder.Services.AddSingleton<IUpdatesRepository>(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<RepositoryOptions>>();
+    return new UpdatesRepository(
+        sp.GetRequiredService<IRepositoryIndex>(),
+        options.Value.Path);
+});
 builder.Services.AddHostedService<RepositoryAutoRefresherHostedService>();
 
 var app = builder.Build();
