@@ -8,7 +8,7 @@ namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Helpers
     /// <summary>
     /// Генератор идентификатора для обновления информационной базы внутри репозитория
     /// </summary>
-    sealed class UpdateIdGenerator : IDisposable
+    public sealed class UpdateIdGenerator : IDisposable
     {
         SHA256 hashCalculator;
         StringBuilder builder;

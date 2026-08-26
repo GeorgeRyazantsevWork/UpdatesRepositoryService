@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
+using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Diagnostics;
 
 namespace ServiceCloud.UpdatesRepositoryService

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Models;
 using ServiceCloud.UpdatesRepository.BuisnessLogic.Repository;
-using static ServiceCloud.UpdatesRepository.BuisnessLogic.Models.Responses.ApiResponses;
+using static ServiceCloud.UpdatesRepositoryService.ApiResponses;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {

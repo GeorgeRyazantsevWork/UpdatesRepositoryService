@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepository.BuisnessLogic.Properties
+﻿namespace ServiceCloud.UpdatesRepositoryService.Properties
 {
     /// <summary>
     /// Настройки репозитория обновлений, соответствующие секции конфигурации <c>Repository</c>
