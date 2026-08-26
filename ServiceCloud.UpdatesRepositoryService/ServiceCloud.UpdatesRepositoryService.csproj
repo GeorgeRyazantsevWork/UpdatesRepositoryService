@@ -9,13 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Services\**" />
-		<Content Remove="Services\**" />
-		<EmbeddedResource Remove="Services\**" />
-		<None Remove="Services\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc" Version="10.2.1" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="10.2.1" />
 		<PackageReference Include="Asp.Versioning.OpenApi" Version="10.2.2" />
@@ -24,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ServiceCloud.UpdatesRepository.BuisnessLogic\ServiceCloud.UpdatesRepository.BusinessLogic.csproj" />
+	  <ProjectReference Include="..\ServiceCloud.UpdatesRepository.BusinessLogic\ServiceCloud.UpdatesRepository.BusinessLogic.csproj" />
 	</ItemGroup>
 
 </Project>
