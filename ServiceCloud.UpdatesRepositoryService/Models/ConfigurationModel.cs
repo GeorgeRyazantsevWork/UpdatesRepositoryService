@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-namespace ServiceCloud.UpdatesRepositoryService.Models
+﻿namespace ServiceCloud.UpdatesRepositoryService.Models
 {
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
@@ -27,7 +25,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <summary>
         /// Версия конфигурации
         /// </summary>
-        [XmlIgnore]
         public InfoBaseConfigVersion? Version
         {
             get;
@@ -37,7 +34,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <summary>
         /// Строковое представление версии конфигурации
         /// </summary>
-        [XmlElement("Version")]
         public string? VersionString
         {
             get => Version?.ToString();
