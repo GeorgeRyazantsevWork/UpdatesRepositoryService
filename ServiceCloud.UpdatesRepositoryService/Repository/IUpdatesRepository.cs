@@ -20,7 +20,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Обновить данные о доступных обновлениях в репозитории
         /// </summary>
-        Task Refresh();
+        void Refresh();
 
         /// <summary>
         /// Проверить наличие обновления для заданной конфигурации информационной базы
