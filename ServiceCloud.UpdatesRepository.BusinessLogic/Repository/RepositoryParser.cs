@@ -1,7 +1,7 @@
 ﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Helpers
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
     /// Класс-помощник для преобразования найденного файла конфигурации в объект типа <see cref="UpdateModel"/>
