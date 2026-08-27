@@ -26,6 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="DataSet\**\*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Using Include="NUnit.Framework" />
 	</ItemGroup>
 

@@ -37,7 +37,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        private Dictionary<string, string>? LocationMap { get; set; }
+        protected Dictionary<string, string>? LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<InfoBaseUpdate> Updates

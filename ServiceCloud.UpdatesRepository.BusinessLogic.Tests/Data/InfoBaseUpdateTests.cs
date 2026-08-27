@@ -1,11 +1,13 @@
 ﻿using NUnit.Framework.Legacy;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
 {
     [TestFixture]
     public class InfoBaseUpdateTests
     {
-        private InfoBaseUpdate CreateTarget()
+        private InfoBaseUpdate CreateTestObject()
         {
             return new InfoBaseUpdate()
             {
@@ -18,7 +20,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Equals_SameObject_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
             var operand = target;
 
             var answer = target.Equals(operand);
@@ -29,8 +31,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Equals_EquivalentOperand_Test()
         {
-            var target = CreateTarget();
-            var operand = CreateTarget();
+            var target = CreateTestObject();
+            var operand = CreateTestObject();
 
             var answer = target.Equals(operand);
 
@@ -41,7 +43,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [TestCaseSource(typeof(InfoBaseUpdateTestContext), nameof(InfoBaseUpdateTestContext.InequivalentOperand))]
         public void InfoBaseUpdate_Equals_InequivalentOperand_Test(InfoBaseUpdate operand)
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = target.Equals(operand);
 
@@ -51,7 +53,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Equals_NullOperand_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = target.Equals(null);
 
@@ -61,7 +63,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_EqualityOperator_SameObjects_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
             var operand = target;
 
             var answer = (target == operand);
@@ -72,8 +74,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_EqualityOperator_EquivalentOperands_Test()
         {
-            var target = CreateTarget();
-            var operand = CreateTarget();
+            var target = CreateTestObject();
+            var operand = CreateTestObject();
 
             var answer = (target == operand);
 
@@ -84,7 +86,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [TestCaseSource(typeof(InfoBaseUpdateTestContext), nameof(InfoBaseUpdateTestContext.InequivalentOperand))]
         public void InfoBaseUpdate_EqualityOperator_InequivalentOperands_Test(InfoBaseUpdate operand)
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (target == operand);
 
@@ -94,7 +96,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_EqualityOperator_NullLeftOperand_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (null == target);
 
@@ -104,7 +106,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_EqualityOperator_NullRightOperand_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (target == null);
 
@@ -114,7 +116,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_InequalityOperator_SameObjects_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
             var operand = target;
 
             var answer = (target != operand);
@@ -125,8 +127,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_InequalityOperator_EquivalentOperands_Test()
         {
-            var target = CreateTarget();
-            var operand = CreateTarget();
+            var target = CreateTestObject();
+            var operand = CreateTestObject();
 
             var answer = (target != operand);
 
@@ -137,7 +139,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [TestCaseSource(typeof(InfoBaseUpdateTestContext), nameof(InfoBaseUpdateTestContext.InequivalentOperand))]
         public void InfoBaseUpdate_InequalityOperator_InequivalentOperands_Test(InfoBaseUpdate operand)
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (target != operand);
 
@@ -147,7 +149,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_InequalityOperator_NullLeftOperand_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (null != target);
 
@@ -157,7 +159,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_InequalityOperator_NullRightOperand_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var answer = (target != null);
 
@@ -175,7 +177,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_DestinationConfig_SetNullValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             Assert.Throws<ArgumentNullException>(
                 () => target.DestinationConfig = null!
@@ -185,7 +187,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_DestinationConfig_SetValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
             var expected = new InfobaseConfig();
             target.DestinationConfig = expected;
 
@@ -204,7 +206,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_SourseConfigs_NullValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             Assert.Throws<ArgumentNullException>(
                 () => target.SourseConfigs = null!
@@ -214,7 +216,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_SourseConfigs_SetValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             var expected = new InfobaseConfig[0];
             target.SourseConfigs = expected;
@@ -224,7 +226,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Transitive_DefaultValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             Assert.That(target.IsTransitive, Is.False);
         }
@@ -232,7 +234,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Transitive_SetValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
             var expected = true;
 
             target.IsTransitive = expected;
@@ -243,7 +245,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [Test]
         public void InfoBaseUpdate_Id_DefaultValue_Test()
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             Assert.That(target.Id, Is.Null);
         }
@@ -253,7 +255,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
         [TestCase("$?!")]
         public void InfoBaseUpdate_Id_SetValue_Test(string? expected)
         {
-            var target = CreateTarget();
+            var target = CreateTestObject();
 
             target.Id = expected;
 
