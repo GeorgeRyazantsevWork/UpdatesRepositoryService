@@ -9,7 +9,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
     [TestFixture]
     public partial class UpdatesControllerTests
     {
-        private UpdatesController CreateTarget(Context context)
+        private UpdatesController CreateTarget(TestContext context)
         {
             return new UpdatesController(context.MockRepository.Object);
         }
@@ -17,7 +17,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdatesCount_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             var result = target.GetUpdatesCount();
@@ -28,7 +28,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdatesCount_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             target.GetUpdatesCount();
@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdatesList_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             var result = target.GetUpdatesList();
@@ -50,7 +50,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdatesList_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             target.GetUpdatesList();
@@ -61,7 +61,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_ContainsUpdate_PositiveResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.ContainsUpdate(It.IsAny<InfobaseConfig>()))
                 .Returns(true);
@@ -76,7 +76,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_ContainsUpdate_NegativeResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             var result = target.ContainsUpdate(context.UnknownConfig);
@@ -87,7 +87,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_ContainsUpdate_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             target.ContainsUpdate(context.ExistingConfig);
@@ -98,7 +98,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdate_PositiveResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetUpdate(It.IsAny<InfobaseConfig>(), It.IsAny<bool>()))
                 .Returns(context.ExistingUpdate);
@@ -113,7 +113,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdate_NegativeResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetUpdate(It.IsAny<InfobaseConfig>(), It.IsAny<bool>()))
                 .Returns((InfoBaseUpdate?)null);
@@ -128,7 +128,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetUpdate_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetUpdate(It.IsAny<InfobaseConfig>(), It.IsAny<bool>()))
                 .Returns(context.ExistingUpdate);
@@ -143,7 +143,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetPotentialUpdates_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetPotentialUpdates(It.IsAny<InfobaseConfig>()))
                 .Returns(context.Updates);
@@ -158,7 +158,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetPotentialUpdates_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             var target = CreateTarget(context);
 
             target.GetPotentialUpdates(context.ExistingConfig);
@@ -169,7 +169,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetLocation_PositiveResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetLocation(It.IsAny<string>()))
                 .Returns(context.Location);
@@ -184,7 +184,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetLocation_NegativeResult_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetLocation(It.IsAny<string>()))
                 .Returns((string)null!);
@@ -199,7 +199,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
         [Test]
         public void UpdatesController_GetLocation_InteractionWithRepository_Test()
         {
-            var context = new Context();
+            var context = new TestContext();
             context.MockRepository
                 .Setup(x => x.GetLocation(It.IsAny<string>()))
                 .Returns(context.Location);

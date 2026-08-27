@@ -44,6 +44,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
                 IsTransitive = false
             };
 
+            // Не совпадают наборы исходных конфигураций
+            yield return new InfoBaseUpdate()
+            {
+                DestinationConfig = DestinationConfig,
+                SourseConfigs = new InfobaseConfig[2],
+                IsTransitive = false
+            };
+
             // Не совпадает свойство Id
             yield return new InfoBaseUpdate()
             {

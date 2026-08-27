@@ -6,9 +6,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
 {
     public partial class UpdatesControllerTests
     {
-        class Context
+        class TestContext
         {
-            public Context()
+            public TestContext()
             {
                 ExistingConfig = new InfobaseConfig
                 {
