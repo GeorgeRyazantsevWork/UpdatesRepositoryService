@@ -1,4 +1,6 @@
-﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
 {
     [TestFixture]
     public abstract class IUpdatesRepositoryTests

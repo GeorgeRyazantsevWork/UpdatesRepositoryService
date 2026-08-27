@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
 {
     class InfoBaseUpdateTestContext
     {

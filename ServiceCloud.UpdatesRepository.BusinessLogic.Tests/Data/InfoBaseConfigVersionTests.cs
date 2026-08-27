@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework.Legacy;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
 {
     [TestFixture]
     public class InfoBaseConfigVersionTests

@@ -1,7 +1,4 @@
-﻿using NUnit.Framework;
-using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
-using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
-using System;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
 {

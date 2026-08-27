@@ -1,6 +1,4 @@
 ﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
-using System;
-using System.Collections.Generic;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
 {

@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
+using System.Collections;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
 {
     static class InfobaseConfigTestContext
     {

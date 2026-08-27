@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework.Legacy;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
-using ServiceCloud.UpdatesRepository.BusinessLogic.Data.Tests;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
 {

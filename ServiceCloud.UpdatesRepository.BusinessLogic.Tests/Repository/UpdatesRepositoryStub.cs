@@ -1,5 +1,7 @@
-﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
+﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
 {
+    using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+
     /// <summary>
     /// Вспомогательный класс для тестирования класса UpdatesRepository
     /// </summary>
@@ -21,7 +23,7 @@
                 var id = context.ExistingUpdates[i].Id;
                 if (id != null)
                 {
-                    LocationMap?[id] = context.ExistingLocations[i];
+                    LocationMap?[id] = context.ExistingLocations[i];// TODO
                 }
             }
         }

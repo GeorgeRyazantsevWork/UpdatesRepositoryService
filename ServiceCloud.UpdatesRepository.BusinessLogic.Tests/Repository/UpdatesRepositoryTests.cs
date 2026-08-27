@@ -1,8 +1,9 @@
 ﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
 {
-    [TestFixture]
+    using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+
     public class UpdatesRepositoryTests : IUpdatesRepositoryTests
     {
         protected override IUpdatesRepository CreateTargetObject()

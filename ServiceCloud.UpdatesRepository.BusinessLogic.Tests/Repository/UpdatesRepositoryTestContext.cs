@@ -1,11 +1,7 @@
-﻿using NUnit.Framework;
-using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
-using System;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
 {
     /// <summary>
     /// Вспомогательный класс для тестирования класса UpdatesRepository
