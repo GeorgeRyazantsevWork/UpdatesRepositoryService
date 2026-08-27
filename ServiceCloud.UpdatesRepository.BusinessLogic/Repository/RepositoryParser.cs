@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
-    /// Класс-помощник для преобразования найденного файла конфигурации в объект типа <see cref="UpdateModel"/>
+    /// Класс-помощник для преобразования найденного файла конфигурации в объект типа <see cref="InfoBaseUpdate"/>
     /// </summary>
     public static class RepositoryParser
     {
@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <param name="path">Полный путь к файлу</param>
         /// <param name="update">Объект в который будет помещен результат</param>
         /// <returns>Обновление, описанное в cuc-файле</returns>
-        public static bool TryParseСUCFile(string path, [NotNullWhen(true)] out UpdateModel? update)
+        public static bool TryParseСUCFile(string path, [NotNullWhen(true)] out InfoBaseUpdate? update)
         {
             update = null;
             try
@@ -52,7 +52,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                     rawData = reader.ReadToEnd();
                 }
 
-                update = new UpdateModel();
+                update = new InfoBaseUpdate();
 
                 // извлекаем конфигурацию, хранящуюся в обновлении
                 update.DestinationConfig = ParseDestinationConfigDescription(rawData);
@@ -83,7 +83,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             return false;
         }
 
-        private static ConfigurationModel ParseDestinationConfigDescription(string text)
+        private static InfobaseConfig ParseDestinationConfigDescription(string text)
         {
             // вычисляем позицию конца записи
             var configRecordEnd = text.LastIndexOf("\",") + 1;
@@ -123,9 +123,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             return InfoBaseConfigEdition.PROF;
         }
 
-        private static ConfigurationModel ParseConfigurationDescription(string text, char[] separator)
+        private static InfobaseConfig ParseConfigurationDescription(string text, char[] separator)
         {
-            ConfigurationModel config = new ConfigurationModel();
+            InfobaseConfig config = new InfobaseConfig();
             string[] fields = text.Split(separator, 3, StringSplitOptions.None);
 
             config.Publisher = TrimQuots(fields[1]);
@@ -169,9 +169,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             return versionText;
         }
 
-        private static LinkedList<ConfigurationModel> ParseSourceConfigsListDescription(string text)
+        private static LinkedList<InfobaseConfig> ParseSourceConfigsListDescription(string text)
         {
-            var result = new LinkedList<ConfigurationModel>();
+            var result = new LinkedList<InfobaseConfig>();
 
             // извлекаем количество записей в списке
             var counterFieldEnd = text.IndexOf(",\"");

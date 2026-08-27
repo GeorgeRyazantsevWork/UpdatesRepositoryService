@@ -31,7 +31,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <exception cref="ArgumentNullException">Не задана ссылка на объект</exception>
         /// <exception cref="ArgumentException">Объект содержит недостаточно данных для генерации идентификатора</exception>
         /// <exception cref="ObjectDisposedException">Ресурсы объекта освобождены. Дальнейшее использование объекта невозможно</exception>
-        public string NewId(UpdateModel? update)
+        public string NewId(InfoBaseUpdate? update)
         {
             if (disposed)
             {
@@ -46,7 +46,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             return HexString(hashValue);
         }
 
-        private string BuildId(UpdateModel update)
+        private string BuildId(InfoBaseUpdate update)
         {
             builder.Clear();
 
@@ -66,7 +66,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             return builder.ToString();
         }
 
-        private void AddToBuilder(ConfigurationModel config)
+        private void AddToBuilder(InfobaseConfig config)
         {
             builder.Append(config.Publisher);
             builder.Append(DELIMITER);
@@ -77,7 +77,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             builder.Append(config.Edition.ToString());
         }
 
-        private void Validate([NotNull] UpdateModel? update)
+        private void Validate([NotNull] InfoBaseUpdate? update)
         {
             if (update == null)
             {
@@ -85,7 +85,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             }
 
             if (update.DestinationConfig == null
-                || update.DestinationConfig == ConfigurationModel.Empty)
+                || update.DestinationConfig == InfobaseConfig.Empty)
             {
                 throw new ArgumentException("У объекта, описывающего обновление, не задана целевая конфигурация");
             }
@@ -110,7 +110,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             }
         }
 
-        private bool CheckInfoBaseConfig(ConfigurationModel config)
+        private bool CheckInfoBaseConfig(InfobaseConfig config)
         {
             return !(string.IsNullOrEmpty(config.Publisher)
                     || string.IsNullOrEmpty(config.Name)

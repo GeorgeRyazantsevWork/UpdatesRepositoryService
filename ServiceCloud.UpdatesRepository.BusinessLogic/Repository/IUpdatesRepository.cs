@@ -10,7 +10,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <summary>
         /// Коллекция доступных обновлений конфигураций информационных баз 1С
         /// </summary>
-        IEnumerable<UpdateModel> Updates { get; }
+        IEnumerable<InfoBaseUpdate> Updates { get; }
 
         /// <summary>
         /// Количество доступных обновлений конфигураций информационных баз 1С
@@ -27,7 +27,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// </summary>
         /// <param name="config">Конфигурации информационной базы</param>
         /// <returns>TRUE - обновление присутствует в репозитории, FALSE - в противном случае</returns>
-        bool ContainsUpdate(ConfigurationModel ? config);
+        bool ContainsUpdate(InfobaseConfig ? config);
 
         /// <summary>
         /// Получить данные об обновлении информационной базы до указанной конфигурации с учётом необходимости перехода на новую редакцию
@@ -38,14 +38,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <exception cref="ArgumentNullException">Не задана целевая конфигурация</exception>
         /// <exception cref="KeyNotFoundException">Обновление для конфигурации не найдено в репозитории</exception>
         /// <returns>Данные об обновлении</returns>
-        UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive);
+        InfoBaseUpdate? GetUpdate(InfobaseConfig? config, bool transitive);
 
         /// <summary>
         /// Получить список обновлений, которые предположительно можно установить на указанную конфигурацию
         /// </summary>
         /// <param name="config">Конфигурация информационной базы 1С</param>
         /// <returns>Коллекция обновлений</returns>
-        IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config);
+        IEnumerable<InfoBaseUpdate> GetPotentialUpdates(InfobaseConfig? config);
 
         /// <summary>
         /// Получить информацию о расположении данных обновления конфигурации информационной базы 1С

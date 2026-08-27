@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         private Dictionary<string, string>? LocationMap { get; set; }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> Updates
+        public IEnumerable<InfoBaseUpdate> Updates
         {
             get
             {
@@ -73,7 +73,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public bool ContainsUpdate(ConfigurationModel? config)
+        public bool ContainsUpdate(InfobaseConfig? config)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
@@ -99,7 +99,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
-                var parsedUpdates = new ConcurrentBag<(UpdateModel Update, string Directory)>();
+                var parsedUpdates = new ConcurrentBag<(InfoBaseUpdate Update, string Directory)>();
 
                 BuildRepository(directory, 0, parsedUpdates);
 
@@ -140,7 +140,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         private void BuildRepository(DirectoryInfo directory, int depth,
-            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
+            ConcurrentBag<(InfoBaseUpdate Update, string Directory)> parsedUpdates)
         {
             if (depth++ > SEARCH_DEPTH)
             {
@@ -158,11 +158,11 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         private static void ParseUpdateDirectory(DirectoryInfo directory,
-            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
+            ConcurrentBag<(InfoBaseUpdate Update, string Directory)> parsedUpdates)
         {
             foreach (var cucFile in directory.EnumerateFiles("*.cuc"))
             {
-                if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
+                if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out InfoBaseUpdate? update))
                 {
                     parsedUpdates.Add((update, directory.FullName));
                 }
@@ -203,7 +203,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config)
+        public IEnumerable<InfoBaseUpdate> GetPotentialUpdates(InfobaseConfig? config)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
@@ -219,7 +219,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive)
+        public InfoBaseUpdate? GetUpdate(InfobaseConfig? config, bool transitive)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 

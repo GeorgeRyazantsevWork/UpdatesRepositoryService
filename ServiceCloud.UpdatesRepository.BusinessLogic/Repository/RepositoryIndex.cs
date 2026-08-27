@@ -12,8 +12,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
     /// </summary>
     public class RepositoryIndex : IRepositoryIndex
     {
-        private readonly ConcurrentDictionary<UpdateKey, UpdateModel> updates;
-        private readonly ConcurrentDictionary<ConfigKey, List<UpdateModel>> updatesByConfig;
+        private readonly ConcurrentDictionary<UpdateKey, InfoBaseUpdate> updates;
+        private readonly ConcurrentDictionary<ConfigKey, List<InfoBaseUpdate>> updatesByConfig;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -28,13 +28,13 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         public int Count => updates.Count;
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetUpdates()
+        public IEnumerable<InfoBaseUpdate> GetUpdates()
         {
             return updates.Values;
         }
 
         /// <inheritdoc/>
-        public bool Contains(ConfigurationModel targetConfig)
+        public bool Contains(InfobaseConfig targetConfig)
         {
             if (!ValidateConfig(targetConfig))
             {
@@ -46,7 +46,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive)
+        public InfoBaseUpdate? GetUpdate(InfobaseConfig targetConfig, bool transitive)
         {
             return ValidateConfig(targetConfig) ?
                 updates.GetValueOrDefault(CreateUpdateKey(targetConfig, transitive)) :
@@ -54,17 +54,17 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel config)
+        public IEnumerable<InfoBaseUpdate> GetPotentialUpdates(InfobaseConfig config)
         {
             return ValidateConfig(config) ?
                SelectUpdates(config) :
                throw new ArgumentException(Resource.Message_IncorrectConfigProperties);
         }
 
-        private IEnumerable<UpdateModel> SelectUpdates(ConfigurationModel config)
+        private IEnumerable<InfoBaseUpdate> SelectUpdates(InfobaseConfig config)
         {
             var version = config.Version!;
-            var result = new List<UpdateModel>();
+            var result = new List<InfoBaseUpdate>();
 
             if (config.Edition == InfoBaseConfigEdition.BASE)
             {
@@ -126,7 +126,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <inheritdoc/>
-        public void Add(UpdateModel update)
+        public void Add(InfoBaseUpdate update)
         {
             var config = update.DestinationConfig;
 
@@ -157,19 +157,19 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             updatesByConfig.Clear();
         }
 
-        private bool ValidateConfig(ConfigurationModel config)
+        private bool ValidateConfig(InfobaseConfig config)
         {
             return !(string.IsNullOrEmpty(config.Publisher) ||
                 string.IsNullOrEmpty(config.Name) ||
                 string.IsNullOrEmpty(config.VersionString));
         }
 
-        private UpdateKey CreateUpdateKey(ConfigurationModel config, bool transitive = false)
+        private UpdateKey CreateUpdateKey(InfobaseConfig config, bool transitive = false)
         {
             return new(config.Publisher!, config.Name!, config.Version!, transitive);
         }
 
-        private ConfigKey CreateConfigKey(ConfigurationModel config)
+        private ConfigKey CreateConfigKey(InfobaseConfig config)
         {
             return new(config.Publisher!, config.Name!);
         }
