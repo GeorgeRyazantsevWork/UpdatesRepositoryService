@@ -1,6 +1,6 @@
 ﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Models
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные об обновлении конфигурации информационной базы 1С

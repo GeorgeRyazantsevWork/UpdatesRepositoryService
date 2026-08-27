@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 using static ServiceCloud.UpdatesRepositoryService.ApiResponses;
 

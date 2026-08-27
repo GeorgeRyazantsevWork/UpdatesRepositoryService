@@ -1,4 +1,4 @@
-﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using System.Collections.Concurrent;
 

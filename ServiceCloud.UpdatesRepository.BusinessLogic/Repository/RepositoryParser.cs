@@ -1,4 +1,4 @@
-﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Models;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository

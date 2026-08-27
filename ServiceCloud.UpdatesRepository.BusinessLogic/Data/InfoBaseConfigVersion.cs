@@ -1,6 +1,6 @@
 ﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Models
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Описывает версию конфигурации информационной базы

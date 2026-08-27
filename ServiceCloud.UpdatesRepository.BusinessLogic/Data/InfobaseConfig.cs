@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Models
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
