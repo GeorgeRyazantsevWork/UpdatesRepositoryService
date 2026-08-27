@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
+﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
@@ -27,7 +25,6 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
         /// <summary>
         /// Версия конфигурации
         /// </summary>
-        [XmlIgnore]
         public InfoBaseConfigVersion? Version
         {
             get;
@@ -37,7 +34,6 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
         /// <summary>
         /// Строковое представление версии конфигурации
         /// </summary>
-        [XmlElement("Version")]
         public string? VersionString
         {
             get => Version?.ToString();

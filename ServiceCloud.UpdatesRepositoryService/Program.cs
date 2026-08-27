@@ -37,7 +37,6 @@ builder.Services
     .Validate(options => !string.IsNullOrWhiteSpace(options.Path), Resource.Message_IncorrectRepositoryPath)
     .ValidateOnStart();
 
-builder.Services.AddSingleton<IRepositoryIndex, RepositoryIndex>();
 builder.Services.AddSingleton<IUpdatesRepository>(sp =>
 {
     var options = sp.GetRequiredService<IOptions<RepositoryServiceOptions>>();

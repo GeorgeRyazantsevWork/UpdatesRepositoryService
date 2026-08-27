@@ -13,6 +13,7 @@ namespace ServiceCloud.UpdatesRepositoryService
     {
         private IUpdatesRepository repository;
         private ILogger logger;
+        private readonly SemaphoreSlim refreshLock = new(1, 1);
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -52,12 +53,12 @@ namespace ServiceCloud.UpdatesRepositoryService
         {
             try
             {
-                await RefreshRepository();
+                await RefreshRepository(stoppingToken);
                 using var timer = new PeriodicTimer(RefreshInterval);
 
                 while (await timer.WaitForNextTickAsync(stoppingToken))
                 {
-                    await RefreshRepository();
+                    await RefreshRepository(stoppingToken);
                 }
             }
             catch (Exception ex)
@@ -67,14 +68,15 @@ namespace ServiceCloud.UpdatesRepositoryService
             }
         }
 
-        private async Task RefreshRepository()
+        private async Task RefreshRepository(CancellationToken stoppingToken)
         {
+            await refreshLock.WaitAsync(stoppingToken);
             logger.LogInformation(Resource.LogMessage_RefreshingWasStarted);
 
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                await repository.Refresh();
+                repository.Refresh();
                 stopwatch.Stop();
                 logger.LogInformation(string.Format(Resource.LogMessage_RefreshWasFinished, stopwatch.ElapsedMilliseconds));
             }
@@ -84,6 +86,19 @@ namespace ServiceCloud.UpdatesRepositoryService
                 logger.LogError(ex, string.Format(Resource.LogMessage_RefreshError, stopwatch.ElapsedMilliseconds));
                 throw;
             }
+            finally
+            {
+                refreshLock.Release();
+            }
+        }
+
+        /// <summary>
+        /// Освободить ресурсы объекта
+        /// </summary>
+        public override void Dispose()
+        {
+            refreshLock.Dispose();
+            base.Dispose();
         }
     }
 }

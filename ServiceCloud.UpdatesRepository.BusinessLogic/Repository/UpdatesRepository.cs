@@ -7,12 +7,13 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
     /// <summary>
     /// Описывает репозиторий обновлений для конфигураций 1С
     /// </summary>
-    public class UpdatesRepository : IUpdatesRepository
+    public class UpdatesRepository : IUpdatesRepository, IDisposable
     {
-        private readonly SemaphoreSlim refreshLock = new(1, 1);
         private readonly ReaderWriterLockSlim cacheAccessLock = new(LockRecursionPolicy.NoRecursion);
         private IRepositoryIndex repository;
         private const int SEARCH_DEPTH = 64;
+        private const int MAX_SUBLEVEL_CONCURRENCY = 10;
+        private bool disposed;
 
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
@@ -90,12 +91,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 
         /// <inheritdoc/>
         /// <exception cref="InvalidOperationException">Путь к "корневому" каталогу не задан или содержит недопустимые знаки</exception>
-        /// <exception cref="PathTooLongException">Путь к "корневому" каталогу слишком длинный</exception>
         /// <exception cref="Exception">Не удалось провести анализ "корневого" каталога</exception>
-        public async Task Refresh()
+        public void Refresh()
         {
-            await refreshLock.WaitAsync();
-
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
@@ -133,10 +131,6 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 throw new InvalidOperationException(string.Format(Resource.MessageTemplate_IncorrectPropertyValue,
                     nameof(RootDirectoryPath), RootDirectoryPath));
             }
-            finally
-            {
-                refreshLock.Release();
-            }
         }
 
         private void BuildRepository(DirectoryInfo directory, int depth,
@@ -153,8 +147,13 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 return;
             }
 
-            Parallel.ForEach(directory.EnumerateDirectories(), subDir =>
-                BuildRepository(subDir, depth, parsedUpdates));
+            var subDirs = directory.EnumerateDirectories();
+
+            Parallel.ForEach(
+                directory.EnumerateDirectories(),
+                new ParallelOptions { MaxDegreeOfParallelism = MAX_SUBLEVEL_CONCURRENCY }, // ограничение параллельности: каждый конкретный вызов Parallel.ForEach                                                                                           выполняет
+                                                                                           // выполняет максимум заданное число параллельных операций
+                subDir => BuildRepository(subDir, depth, parsedUpdates)); 
         }
 
         private static void ParseUpdateDirectory(DirectoryInfo directory,
@@ -233,5 +232,21 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 cacheAccessLock.ExitReadLock();
             }
         }
+
+
+        #region Члены IDisposable
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            if (disposed)
+            {
+                return;
+            }
+            cacheAccessLock.Dispose();
+            disposed = true;
+        }
+
+        #endregion
     }
 }
