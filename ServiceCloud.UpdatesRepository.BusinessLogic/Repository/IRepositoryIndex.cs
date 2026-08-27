@@ -1,6 +1,6 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Models;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 
-namespace ServiceCloud.UpdatesRepositoryService.Repository
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
     /// Интерфейс индекса репозитория обновлений информационных баз 1С
@@ -16,13 +16,13 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// Получить коллекцию доступных обновлений конфигураций информационных баз 1С
         /// </summary>
         /// <returns>Коллекция доступных обновлений</returns>
-        public IEnumerable<UpdateModel> GetUpdates();
+        public IEnumerable<InfoBaseUpdate> GetUpdates();
 
         /// <summary>
         /// Добавляет описание обновления в репозиторий
         /// </summary>
         /// <param name="update">добавляемое обновление</param>
-        public void Add(UpdateModel update);
+        public void Add(InfoBaseUpdate update);
 
         /// <summary>
         /// Получить обновление по целевой конфигурации
@@ -30,21 +30,21 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <param name="targetConfig">Целевая конфигурация</param>
         /// <param name="transitive">Признак, означающий является ли конфигурация переходной</param>
         /// <returns>Обновление для заданной конфигурации</returns>
-        public UpdateModel? GetUpdate(ConfigurationModel targetConfig, bool transitive);
+        public InfoBaseUpdate? GetUpdate(InfobaseConfig targetConfig, bool transitive);
 
         /// <summary>
         /// Получить список обновлений, теоретически подходящих для указанной конфигурации
         /// </summary>
         /// <param name="config">Указанная конфигурация информационной базы 1С</param>
         /// <returns>Список обновлений</returns>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel config);
+        public IEnumerable<InfoBaseUpdate> GetPotentialUpdates(InfobaseConfig config);
 
         /// <summary>
         /// Определить по целевой конфигурации обновления содержится ли оно в репозитории 
         /// </summary>
         /// <param name="targetConfig">Конфигурация искомого обновления</param>
         /// <returns>true - обновление существует в репозитории, false - в обратном случае</returns>
-        public bool Contains(ConfigurationModel targetConfig);
+        public bool Contains(InfobaseConfig targetConfig);
 
         /// <summary>ы
         /// Очистить индекс репозитория

@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Repository;
-using static ServiceCloud.UpdatesRepositoryService.Models.Responses.ApiResponses;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+using static ServiceCloud.UpdatesRepositoryService.ApiResponses;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {
@@ -38,7 +38,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// <returns>Коллекция описаний обновлений</returns>
         /// <response code="200">Список обновлений успешно получен</response>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<UpdateModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<InfoBaseUpdate>), StatusCodes.Status200OK)]
         public IActionResult GetUpdatesList()
         {
             var updates = repository.Updates;
@@ -55,7 +55,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         [HttpGet("contains")]
         [ProducesResponseType(typeof(ContainsUpdateResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        public ActionResult<ContainsUpdateResponse> ContainsUpdate([FromQuery] ConfigurationModel config)
+        public ActionResult<ContainsUpdateResponse> ContainsUpdate([FromQuery] InfobaseConfig config)
         {
             var result = repository.ContainsUpdate(config);
             return Ok(new ContainsUpdateResponse(result));
@@ -71,10 +71,10 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// <response code="400">Конфигурация не задана или задана не полностью</response>
         /// <response code="404">Обновление для указанной конфигурации отсутствует</response>
         [HttpGet("concrete")]
-        [ProducesResponseType(typeof(UpdateModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(InfoBaseUpdate), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UpdateModel> GetUpdate([FromQuery] ConfigurationModel request, [FromQuery] bool transitive = false)
+        public ActionResult<InfoBaseUpdate> GetUpdate([FromQuery] InfobaseConfig request, [FromQuery] bool transitive = false)
         {
             var update = repository.GetUpdate(request, transitive);
 
@@ -94,9 +94,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         /// <response code="200">Список потенциальных обновлений успешно получен</response>
         /// <response code="400">Конфигурация не задана или задана не полностью</response>
         [HttpGet("potential")]
-        [ProducesResponseType(typeof(IEnumerable<UpdateModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<InfoBaseUpdate>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<UpdateModel>> GetPotentialUpdates([FromQuery] ConfigurationModel config)
+        public ActionResult<IEnumerable<InfoBaseUpdate>> GetPotentialUpdates([FromQuery] InfobaseConfig config)
         {
             var updates = repository.GetPotentialUpdates(config);
             return Ok(updates);

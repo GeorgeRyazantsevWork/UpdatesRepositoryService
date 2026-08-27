@@ -9,13 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Services\**" />
-		<Content Remove="Services\**" />
-		<EmbeddedResource Remove="Services\**" />
-		<None Remove="Services\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc" Version="10.2.1" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="10.2.1" />
 		<PackageReference Include="Asp.Versioning.OpenApi" Version="10.2.2" />
@@ -24,19 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Properties\Resource.Designer.cs">
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>Resource.resx</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Update="Properties\Resource.resx">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
+	  <ProjectReference Include="..\ServiceCloud.UpdatesRepository.BusinessLogic\ServiceCloud.UpdatesRepository.BusinessLogic.csproj" />
 	</ItemGroup>
 
 </Project>

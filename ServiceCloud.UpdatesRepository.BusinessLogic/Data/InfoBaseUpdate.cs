@@ -1,20 +1,20 @@
-﻿using ServiceCloud.UpdatesRepositoryService.Helpers;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
 
-namespace ServiceCloud.UpdatesRepositoryService.Models
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные об обновлении конфигурации информационной базы 1С
     /// </summary>
     [Serializable]
-    public class UpdateModel : IEquatable<UpdateModel>
+    public class InfoBaseUpdate : IEquatable<InfoBaseUpdate>
     {
-        private ConfigurationModel destinationConfig = ConfigurationModel.Empty;
-        private IEnumerable<ConfigurationModel> sourseConfigs = new ConfigurationModel[0];
+        private InfobaseConfig destinationConfig = InfobaseConfig.Empty;
+        private IEnumerable<InfobaseConfig> sourseConfigs = new InfobaseConfig[0];
 
         /// <summary>
         /// Конструктор объектов класса, используемый для отложенной инициализации свойств объекта
         /// </summary>
-        public UpdateModel() { }
+        public InfoBaseUpdate() { }
 
         /// <summary>
         /// Конструктор объектов класса
@@ -23,7 +23,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <param name="sources">Коллекция конфигураций, к которым применимо обновление</param>
         /// <param name="isTransitive">Признак, определяющий является ли обновление "переходным"</param>
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров метода</exception>
-        public UpdateModel(ConfigurationModel? destination, IEnumerable<ConfigurationModel>? sources, bool isTransitive = false)
+        public InfoBaseUpdate(InfobaseConfig? destination, IEnumerable<InfobaseConfig>? sources, bool isTransitive = false)
         {
             DestinationConfig = destination;
             SourseConfigs = sources;
@@ -40,7 +40,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// </summary>
         /// <remarks>Конфигурация, которая будет у базы 1С после применения к ней данного обновления</remarks>
         /// <exception cref="System.ArgumentNullException">Не задана конфигурация</exception>
-        public ConfigurationModel? DestinationConfig
+        public InfobaseConfig? DestinationConfig
         {
             get => destinationConfig;
             set => destinationConfig = value ?? throw new ArgumentNullException(nameof(DestinationConfig));
@@ -50,7 +50,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// Список конфигураций информационных баз 1С, для которых предназначено это обновление
         /// </summary>
         /// <exception cref="System.ArgumentNullException">Не задана коллекция конфигураций</exception>
-        public IEnumerable<ConfigurationModel>? SourseConfigs
+        public IEnumerable<InfobaseConfig>? SourseConfigs
         {
             get => sourseConfigs;
             set => sourseConfigs = value ?? throw new ArgumentNullException(nameof(SourseConfigs));
@@ -71,7 +71,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// </summary>
         /// <param name="config">Проверяемая конфигурация базы 1С</param>
         /// <returns>TRUE - обновление можно применить для указанной конфигурации базы, FALSE - в противном случае</returns>
-        public bool IsApplicableTo(ConfigurationModel? config)
+        public bool IsApplicableTo(InfobaseConfig? config)
         {
             return sourseConfigs.Contains(config);
         }
@@ -81,7 +81,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            return Equals(obj as UpdateModel);
+            return Equals(obj as InfoBaseUpdate);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// </summary>
         /// <param name="other">Объект, с которым происходит сравнение</param>
         /// <returns>TRUE - объекты равны, FALSE - в противном случае</returns>
-        public bool Equals(UpdateModel? other)
+        public bool Equals(InfoBaseUpdate? other)
         {
             if (ReferenceEquals(other, null))
             {
@@ -133,7 +133,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <param name="left">Сравниваемый объект</param>
         /// <param name="right">Объект, с которым сравниваем</param>
         /// <returns>TRUE - объекты идентичны, FALSE - в противном случае</returns>
-        public static bool operator ==(UpdateModel? left, UpdateModel? right)
+        public static bool operator ==(InfoBaseUpdate? left, InfoBaseUpdate? right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -152,7 +152,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Models
         /// <param name="left">Сравниваемый объект</param>
         /// <param name="right">Объект, с которым сравниваем</param>
         /// <returns>TRUE - объекты отличаются друг от друга, FALSE - объекты идентичны</returns>
-        public static bool operator !=(UpdateModel? left, UpdateModel? right)
+        public static bool operator !=(InfoBaseUpdate? left, InfoBaseUpdate? right)
         {
             return !(left == right);
         }
