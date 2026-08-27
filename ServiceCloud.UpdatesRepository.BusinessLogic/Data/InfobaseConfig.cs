@@ -1,16 +1,16 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Models
+﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
     /// </summary>
-    public class ConfigurationModel : IEquatable<ConfigurationModel>, IComparable<ConfigurationModel>
+    public class InfobaseConfig : IEquatable<InfobaseConfig>, IComparable<InfobaseConfig>
     {
-        private static ConfigurationModel empty = new ConfigurationModel() { Name = "Конфигурация" };
+        private static InfobaseConfig empty = new InfobaseConfig() { Name = "Конфигурация" };
 
         /// <summary>
         /// "Пустая" конфигурация информационной базы 1С (конфигурация не установлена)
         /// </summary>
-        public static ConfigurationModel Empty => empty;
+        public static InfobaseConfig Empty => empty;
 
         /// <summary>
         /// Наименование конфигурации
@@ -48,12 +48,12 @@
         #region Перегрузка операторов "==" и "!="
 
         /// <summary>
-        /// Оператор сравнения двух объектов класса <see cref="ConfigurationModel"/>  на равенство
+        /// Оператор сравнения двух объектов класса <see cref="InfobaseConfig"/>  на равенство
         /// </summary>
         /// <param name="left">Сравниваемый объект</param>
         /// <param name="right">Объект, с которым сравниваем</param>
         /// <returns>TRUE - объекты идентичны, FALSE - в противном случае</returns>
-        public static bool operator ==(ConfigurationModel? left, ConfigurationModel? right)
+        public static bool operator ==(InfobaseConfig? left, InfobaseConfig? right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -67,12 +67,12 @@
         }
 
         /// <summary>
-        /// Оператор сравнения двух объектов класса <see cref="ConfigurationModel"/> на неравенство
+        /// Оператор сравнения двух объектов класса <see cref="InfobaseConfig"/> на неравенство
         /// </summary>
         /// <param name="left">Сравниваемый объект</param>
         /// <param name="right">Объект, с которым сравниваем</param>
         /// <returns>TRUE - объекты отличаются друг от друга, FALSE - объекты идентичны</returns>
-        public static bool operator !=(ConfigurationModel? left, ConfigurationModel? right)
+        public static bool operator !=(InfobaseConfig? left, InfobaseConfig? right)
         {
             return !(left == right);
         }
@@ -86,7 +86,7 @@
         /// </summary>
         /// <param name="other">Объект, с которым происходит сравнение</param>
         /// <returns>TRUE - объекты равны, FALSE - в противном случае</returns>
-        public bool Equals(ConfigurationModel? other)
+        public bool Equals(InfobaseConfig? other)
         {
             if (ReferenceEquals(other, null))
             {
@@ -105,7 +105,7 @@
         /// <returns>TRUE - объекты равны, FALSE - в противном случае</returns>
         public override bool Equals(object? other)
         {
-            return Equals(other as ConfigurationModel);
+            return Equals(other as InfobaseConfig);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@
         /// </summary>
         /// <param name="other">Объект, с которым производим сравнение</param>
         /// <returns> 0 - объекты равны, меньше 0 - текущий объект меньше заданного, больше 0 - текущий объект больше заданного</returns>
-        public int CompareTo(ConfigurationModel? other)
+        public int CompareTo(InfobaseConfig? other)
         {
             if (other == null)
             {

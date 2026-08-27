@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Options;
-using ServiceCloud.UpdatesRepositoryService.Helpers;
-using ServiceCloud.UpdatesRepositoryService.Models;
-using ServiceCloud.UpdatesRepositoryService.Properties;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using System.Collections.Concurrent;
 
-namespace ServiceCloud.UpdatesRepositoryService.Repository
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 {
     /// <summary>
     /// Описывает репозиторий обновлений для конфигураций 1С
@@ -20,14 +18,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
-        /// <param name="options">Настройки репозитория обновлений</param>
+        /// <param name="repositoryIndex">Индекс репозитория обновлений</param>
+        /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
-        public UpdatesRepository(IOptions<RepositoryOptions> options)
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
         {
-            ArgumentNullException.ThrowIfNull(options);
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
 
-            repository = new RepositoryIndex();
-            RootDirectoryPath = options.Value.Path;
+            repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
+            RootDirectoryPath = rootDirectoryPath;
         }
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         private Dictionary<string, string>? LocationMap { get; set; }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> Updates
+        public IEnumerable<InfoBaseUpdate> Updates
         {
             get
             {
@@ -75,7 +74,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public bool ContainsUpdate(ConfigurationModel? config)
+        public bool ContainsUpdate(InfobaseConfig? config)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
@@ -98,7 +97,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
             try
             {
                 var directory = new DirectoryInfo(RootDirectoryPath ?? Directory.GetCurrentDirectory());
-                var parsedUpdates = new ConcurrentBag<(UpdateModel Update, string Directory)>();
+                var parsedUpdates = new ConcurrentBag<(InfoBaseUpdate Update, string Directory)>();
 
                 BuildRepository(directory, 0, parsedUpdates);
 
@@ -135,7 +134,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         private void BuildRepository(DirectoryInfo directory, int depth,
-            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
+            ConcurrentBag<(InfoBaseUpdate Update, string Directory)> parsedUpdates)
         {
             if (depth++ > SEARCH_DEPTH)
             {
@@ -158,11 +157,11 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         private static void ParseUpdateDirectory(DirectoryInfo directory,
-            ConcurrentBag<(UpdateModel Update, string Directory)> parsedUpdates)
+            ConcurrentBag<(InfoBaseUpdate Update, string Directory)> parsedUpdates)
         {
             foreach (var cucFile in directory.EnumerateFiles("*.cuc"))
             {
-                if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out UpdateModel? update))
+                if (RepositoryParser.TryParseСUCFile(cucFile.FullName, out InfoBaseUpdate? update))
                 {
                     parsedUpdates.Add((update, directory.FullName));
                 }
@@ -203,7 +202,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UpdateModel> GetPotentialUpdates(ConfigurationModel? config)
+        public IEnumerable<InfoBaseUpdate> GetPotentialUpdates(InfobaseConfig? config)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 
@@ -219,7 +218,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         }
 
         /// <inheritdoc/>
-        public UpdateModel? GetUpdate(ConfigurationModel? config, bool transitive)
+        public InfoBaseUpdate? GetUpdate(InfobaseConfig? config, bool transitive)
         {
             ArgumentNullException.ThrowIfNull(config, Resource.Message_TargetConfigNotSpecified);
 

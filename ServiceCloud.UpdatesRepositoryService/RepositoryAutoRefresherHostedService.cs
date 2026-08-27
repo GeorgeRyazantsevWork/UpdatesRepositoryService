@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 using System.Diagnostics;
 
-namespace ServiceCloud.UpdatesRepositoryService.Repository
+namespace ServiceCloud.UpdatesRepositoryService
 {
     /// <summary>
     /// Фоновый сервис, выполняющий обновление репозитория с заданной периодичностью
@@ -20,8 +22,8 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
         /// <param name="logger">Регистратор событий работы сервиса</param>
         /// <param name="options">Настройки репозитория обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан обязательный аргумент</exception>
-        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository, 
-            ILogger<RepositoryAutoRefresherHostedService> logger, IOptions<RepositoryOptions> options)
+        public RepositoryAutoRefresherHostedService(IUpdatesRepository updatesRepository,
+            ILogger<RepositoryAutoRefresherHostedService> logger, IOptions<RepositoryServiceOptions> options)
         {
             ArgumentNullException.ThrowIfNull(options);
 
@@ -30,7 +32,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Repository
 
             var refreshInterval = options.Value.RefreshInterval;
             RefreshInterval = refreshInterval == default
-                ? RepositoryOptions.DefaultRefreshInterval
+                ? RepositoryServiceOptions.DefaultRefreshInterval
                 : refreshInterval;
         }
 

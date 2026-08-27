@@ -1,7 +1,10 @@
 using Asp.Versioning;
+using Microsoft.Extensions.Options;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+using ServiceCloud.UpdatesRepositoryService;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
 using ServiceCloud.UpdatesRepositoryService.Properties;
-using ServiceCloud.UpdatesRepositoryService.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,19 +25,25 @@ builder.Services.AddApiVersioning(options =>
 {
     options.Document.AddDocumentTransformer((document, context, cancellationToken) =>
     {
-        document.Info.Title = RepositoryOptions.ServiceName;
-        document.Info.Description = RepositoryOptions.ServiceDescription;
+        document.Info.Title = RepositoryServiceOptions.ServiceName;
+        document.Info.Description = RepositoryServiceOptions.ServiceDescription;
         return Task.CompletedTask;
     });
 });
 
 builder.Services
-    .AddOptions<RepositoryOptions>()
-    .BindConfiguration(RepositoryOptions.SectionName)
+    .AddOptions<RepositoryServiceOptions>()
+    .BindConfiguration(RepositoryServiceOptions.SectionName)
     .Validate(options => !string.IsNullOrWhiteSpace(options.Path), Resource.Message_IncorrectRepositoryPath)
     .ValidateOnStart();
 
-builder.Services.AddSingleton<IUpdatesRepository, UpdatesRepository>();
+builder.Services.AddSingleton<IUpdatesRepository>(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<RepositoryServiceOptions>>();
+    return new UpdatesRepository(
+        sp.GetRequiredService<IRepositoryIndex>(),
+        options.Value.Path);
+});
 builder.Services.AddHostedService<RepositoryAutoRefresherHostedService>();
 
 var app = builder.Build();
@@ -48,7 +57,7 @@ if (app.Environment.IsDevelopment())
         {
             options.SwaggerEndpoint(
                 $"/openapi/{description.GroupName}.json",
-                $"{RepositoryOptions.ServiceName} {description.GroupName}");
+                $"{RepositoryServiceOptions.ServiceName} {description.GroupName}");
         }
     });
 
