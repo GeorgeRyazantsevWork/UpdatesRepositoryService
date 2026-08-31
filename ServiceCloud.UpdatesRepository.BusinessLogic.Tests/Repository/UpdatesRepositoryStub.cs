@@ -23,7 +23,7 @@
                 var id = context.ExistingUpdates[i].Id;
                 if (id != null)
                 {
-                    LocationMap?[id] = context.ExistingLocations[i];// TODO
+                    LocationMap?[id] = context.ExistingLocations[i];
                 }
             }
         }

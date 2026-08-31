@@ -27,6 +27,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 
             repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
             RootDirectoryPath = rootDirectoryPath;
+            LocationMap = new();
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        protected Dictionary<string, string>? LocationMap { get; set; }
+        protected Dictionary<string, string> LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<InfoBaseUpdate> Updates
@@ -193,7 +194,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             try
             {
                 repository.Clear();
-                LocationMap?.Clear();
+                LocationMap.Clear();
             }
             finally
             {

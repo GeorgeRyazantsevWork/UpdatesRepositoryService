@@ -1,4 +1,3 @@
-using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
