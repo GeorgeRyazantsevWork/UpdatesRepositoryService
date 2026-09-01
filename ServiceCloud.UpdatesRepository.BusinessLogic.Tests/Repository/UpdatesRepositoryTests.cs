@@ -156,7 +156,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
             var target = CreateTargetObject(context);
             string targetUpdateId = "key";
 
-            Assert.Catch<KeyNotFoundException>(() => target.GetLocation(targetUpdateId));
+            var expected = target.GetLocation(targetUpdateId);
+
+            Assert.That(expected, Is.EqualTo(string.Empty));
         }
 
         [Test]

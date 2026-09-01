@@ -30,6 +30,21 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         }
 
         /// <summary>
+        /// Конструктор для тестирования объекта класса
+        /// </summary>
+        /// <param name="repositoryIndex">Индекс репозитория обновлений </param>
+        /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
+        {
+            ArgumentNullException.ThrowIfNull(repositoryIndex);
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
+
+            repository = repositoryIndex;
+            RootDirectoryPath = rootDirectoryPath;
+            LocationMap = new();
+        }
+
+        /// <summary>
         /// Полный путь к директории, в которой находятся файлы обновлений
         /// </summary>
         public string? RootDirectoryPath { get; set; }

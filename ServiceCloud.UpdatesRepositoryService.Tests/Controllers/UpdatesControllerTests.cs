@@ -193,7 +193,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
 
             var result = target.GetLocation("missing");
 
-            Assert.That(result.Result, Is.InstanceOf<NotFoundResult>());
+            Assert.That(result.Result, Is.InstanceOf<NotFoundObjectResult>());
         }
 
         [Test]
