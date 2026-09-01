@@ -175,7 +175,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             cacheAccessLock.EnterReadLock();
             try
             {
-                return LocationMap![updateId!];
+                LocationMap!.TryGetValue(updateId, out string? location);
+
+                return location ?? string.Empty;
             }
             finally
             {

@@ -124,6 +124,15 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не удалось получить расположение: обновление с id ={0} не найдено! .
+        /// </summary>
+        public static string Message_NoUpdateWithThisIdWasFound {
+            get {
+                return ResourceManager.GetString("Message_NoUpdateWithThisIdWasFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка обработки запроса.
         /// </summary>
         public static string Message_RequestProcessingError {

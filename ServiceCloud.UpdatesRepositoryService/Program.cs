@@ -37,7 +37,12 @@ builder.Services
     .Validate(options => !string.IsNullOrWhiteSpace(options.Path), Resource.Message_IncorrectRepositoryPath)
     .ValidateOnStart();
 
-builder.Services.AddSingleton<IUpdatesRepository, UpdatesRepository>();
+builder.Services.AddSingleton<IUpdatesRepository>(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<RepositoryServiceOptions>>();
+    return new UpdatesRepository(options.Value.Path);
+});
+
 builder.Services.AddHostedService<RepositoryAutoRefresherHostedService>();
 
 var app = builder.Build();
