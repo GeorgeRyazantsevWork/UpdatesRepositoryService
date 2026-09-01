@@ -34,14 +34,10 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// </summary>
         /// <param name="repositoryIndex">Индекс репозитория обновлений </param>
         /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
-        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath) : this(rootDirectoryPath)
         {
             ArgumentNullException.ThrowIfNull(repositoryIndex);
-            ArgumentNullException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
-
             repository = repositoryIndex;
-            RootDirectoryPath = rootDirectoryPath;
-            LocationMap = new();
         }
 
         /// <summary>
