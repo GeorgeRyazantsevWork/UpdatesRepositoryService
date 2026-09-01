@@ -18,14 +18,13 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <summary>
         /// Конструктор экземпляров класса. Инициализирует объект необходимыми данными
         /// </summary>
-        /// <param name="repositoryIndex">Индекс репозитория обновлений</param>
         /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
         /// <exception cref="ArgumentNullException">Не задан один из обязательных параметров</exception>
-        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath)
+        public UpdatesRepository(string rootDirectoryPath)
         {
             ArgumentNullException.ThrowIfNullOrWhiteSpace(rootDirectoryPath);
 
-            repository = repositoryIndex ?? throw new ArgumentNullException(nameof(repositoryIndex));
+            repository = new RepositoryIndex();
             RootDirectoryPath = rootDirectoryPath;
         }
 
@@ -153,7 +152,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 directory.EnumerateDirectories(),
                 new ParallelOptions { MaxDegreeOfParallelism = MAX_SUBLEVEL_CONCURRENCY }, // ограничение параллельности: каждый конкретный вызов Parallel.ForEach                                                                                           выполняет
                                                                                            // выполняет максимум заданное число параллельных операций
-                subDir => BuildRepository(subDir, depth, parsedUpdates)); 
+                subDir => BuildRepository(subDir, depth, parsedUpdates));
         }
 
         private static void ParseUpdateDirectory(DirectoryInfo directory,
