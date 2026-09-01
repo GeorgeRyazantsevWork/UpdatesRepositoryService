@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 using static ServiceCloud.UpdatesRepositoryService.ApiResponses;
 
@@ -118,9 +119,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers
         {
             var location = repository.GetLocation(updateId);
 
-            if (location == null)
+            if (string.IsNullOrEmpty(location))
             {
-                return NotFound();
+                return NotFound(string.Format(Resource.Message_NoUpdateWithThisIdWasFound, updateId));
             }
 
             return Ok(new UpdateLocationResponse(location));
