@@ -54,6 +54,22 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Middleware
         }
 
         [Test]
+        public void ExceptionHandlingMiddleware_InvokeAsync_GrpcRequest_DoesNotHandleException_Test()
+        {
+            var httpContext = new DefaultHttpContext
+            {
+                Request = { ContentType = "application/grpc" }
+            };
+            var target = new ExceptionHandlingMiddleware(
+                _ => throw new InvalidOperationException("fail"),
+                NullLogger<ExceptionHandlingMiddleware>.Instance);
+
+            Assert.That(
+                async () => await target.InvokeAsync(httpContext),
+                Throws.TypeOf<InvalidOperationException>());
+        }
+
+        [Test]
         public async Task ExceptionHandlingMiddleware_InvokeAsync_UnhandledException_Test()
         {
             var httpContext = CreateHttpContext();

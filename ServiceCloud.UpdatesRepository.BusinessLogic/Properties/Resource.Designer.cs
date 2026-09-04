@@ -108,6 +108,12 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации.
         /// </summary>
+        public static string Message_ConfigurationIsInvalid {
+            get {
+                return ResourceManager.GetString("Message_ConfigurationIsInvalid", resourceCulture);
+            }
+        }
+        
         public static string Message_IncorrectConfigProperties {
             get {
                 return ResourceManager.GetString("Message_IncorrectConfigProperties", resourceCulture);
@@ -156,6 +162,18 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
         public static string Message_TargetConfigNotSpecified {
             get {
                 return ResourceManager.GetString("Message_TargetConfigNotSpecified", resourceCulture);
+            }
+        }
+        
+        public static string Message_UpdateIdentifierIsNotSet {
+            get {
+                return ResourceManager.GetString("Message_UpdateIdentifierIsNotSet", resourceCulture);
+            }
+        }
+        
+        public static string Message_UpdateWasNotFound {
+            get {
+                return ResourceManager.GetString("Message_UpdateWasNotFound", resourceCulture);
             }
         }
         

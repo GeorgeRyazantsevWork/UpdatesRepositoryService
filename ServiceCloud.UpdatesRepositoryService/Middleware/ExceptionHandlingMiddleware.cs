@@ -29,6 +29,12 @@ namespace ServiceCloud.UpdatesRepositoryService.Middleware
         /// <returns>Асинхронная задача, представляющая обработку HTTP-запроса</returns>
         public async Task InvokeAsync(HttpContext context)
         {
+            if (IsGrpcRequest(context))
+            {
+                await next(context);
+                return;
+            }
+
             try
             {
                 await next(context);
@@ -39,6 +45,11 @@ namespace ServiceCloud.UpdatesRepositoryService.Middleware
 
                 await HandleExceptionAsync(context, ex);
             }
+        }
+
+        private static bool IsGrpcRequest(HttpContext context)
+        {
+            return context.Request.ContentType?.StartsWith("application/grpc", StringComparison.OrdinalIgnoreCase) == true;
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)

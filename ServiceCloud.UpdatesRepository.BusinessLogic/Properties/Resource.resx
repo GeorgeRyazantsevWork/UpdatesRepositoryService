@@ -135,6 +135,9 @@
   <data name="MessageTemplate_IncorrectPropertyValue" xml:space="preserve">
     <value>Недопустимое значение свойства "{0}": {1}</value>
   </data>
+  <data name="Message_ConfigurationIsInvalid" xml:space="preserve">
+    <value>Недостаточно данных о конфигурации информационной базы</value>
+  </data>
   <data name="Message_IncorrectConfigProperties" xml:space="preserve">
     <value>Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации</value>
   </data>
@@ -152,6 +155,12 @@
   </data>
   <data name="Message_TargetConfigNotSpecified" xml:space="preserve">
     <value>Отсутствует целевая конфигурация информационной базы</value>
+  </data>
+  <data name="Message_UpdateIdentifierIsNotSet" xml:space="preserve">
+    <value>Не задан идентификатор обновления</value>
+  </data>
+  <data name="Message_UpdateWasNotFound" xml:space="preserve">
+    <value>Обновление конфигурации базы не найдено</value>
   </data>
   <data name="ReplyErrorMessageTemplate_RequestFieldNotDefined" xml:space="preserve">
     <value>Не задан обязательный параметр запроса: {0}</value>
