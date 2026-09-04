@@ -4,7 +4,7 @@ using DataUpdate = ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfoBaseUpd
 namespace ServiceCloud.UpdatesRepositoryService.Grpc
 {
     /// <summary>
-    /// Преобразование protobuf-сообщений старого gRPC-контракта в модели бизнес-логики и обратно
+    /// Преобразование protobuf-сообщений gRPC-контракта в модели бизнес-логики и обратно
     /// </summary>
     public static class GrpcMessageExtensions
     {

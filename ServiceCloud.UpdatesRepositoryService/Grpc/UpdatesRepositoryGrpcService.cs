@@ -5,7 +5,7 @@ using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 namespace ServiceCloud.UpdatesRepositoryService.Grpc
 {
     /// <summary>
-    /// gRPC-адаптер старого контракта поверх текущего репозитория обновлений
+    /// gRPC-адаптер контракта поверх текущего репозитория обновлений
     /// </summary>
     public class UpdatesRepositoryGrpcService : UpdatesRepository.UpdatesRepositoryBase
     {
