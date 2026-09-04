@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Protos\repository.proto" GrpcServices="Server" />
+		<Protobuf Include="repository.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
