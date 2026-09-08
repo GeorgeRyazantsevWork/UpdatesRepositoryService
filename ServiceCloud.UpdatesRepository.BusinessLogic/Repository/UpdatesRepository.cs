@@ -26,6 +26,18 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
 
             repository = new RepositoryIndex();
             RootDirectoryPath = rootDirectoryPath;
+            LocationMap = new();
+        }
+
+        /// <summary>
+        /// Конструктор для тестирования объекта класса
+        /// </summary>
+        /// <param name="repositoryIndex">Индекс репозитория обновлений </param>
+        /// <param name="rootDirectoryPath">Путь к директории, в которой находятся файлы обновлений</param>
+        public UpdatesRepository(IRepositoryIndex repositoryIndex, string rootDirectoryPath) : this(rootDirectoryPath)
+        {
+            ArgumentNullException.ThrowIfNull(repositoryIndex);
+            repository = repositoryIndex;
         }
 
         /// <summary>
@@ -36,7 +48,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <summary>
         /// Словарь, позволяющий определить расположение обновлений, содержащихся в репозитории
         /// </summary>
-        private Dictionary<string, string>? LocationMap { get; set; }
+        protected Dictionary<string, string> LocationMap { get; set; }
 
         /// <inheritdoc/>
         public IEnumerable<InfoBaseUpdate> Updates
@@ -194,7 +206,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             try
             {
                 repository.Clear();
-                LocationMap?.Clear();
+                LocationMap.Clear();
             }
             finally
             {

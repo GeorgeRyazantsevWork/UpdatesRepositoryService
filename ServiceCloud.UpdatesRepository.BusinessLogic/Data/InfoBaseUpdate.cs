@@ -1,4 +1,5 @@
-﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
+﻿using ServiceCloud.Repository1CService.Helpers;
+using ServiceCloud.UpdatesRepository.BusinessLogic.Helpers;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
@@ -97,8 +98,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
             }
 
             return IsTransitive == other.IsTransitive
-                   && Id == other.Id
-                   && DestinationConfig == other.DestinationConfig;
+                        && Id == other.Id
+                        && DestinationConfig == other.DestinationConfig
+                        && CollectionsComparer.CollectionsAreContainsSameElements(SourseConfigs, other.SourseConfigs);
         }
 
         /// <summary>
