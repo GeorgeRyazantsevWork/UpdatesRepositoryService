@@ -1,14 +1,24 @@
 using Asp.Versioning;
+using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+using RepositoryImpl = ServiceCloud.UpdatesRepository.BusinessLogic.Repository.UpdatesRepository;
 using ServiceCloud.UpdatesRepositoryService;
+using ServiceCloud.UpdatesRepositoryService.Grpc;
 using ServiceCloud.UpdatesRepositoryService.Middleware;
 using ServiceCloud.UpdatesRepositoryService.Properties;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = WindowsServiceHelpers.IsWindowsService() ? AppContext.BaseDirectory : default
+});
+
+builder.Host.UseWindowsService();
 
 builder.Services.AddControllers();
+builder.Services.AddGrpc();
 builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -40,7 +50,7 @@ builder.Services
 builder.Services.AddSingleton<IUpdatesRepository>(sp =>
 {
     var options = sp.GetRequiredService<IOptions<RepositoryServiceOptions>>();
-    return new UpdatesRepository(options.Value.Path);
+    return new RepositoryImpl(options.Value.Path);
 });
 
 builder.Services.AddHostedService<RepositoryAutoRefresherHostedService>();
@@ -65,7 +75,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseHttpsRedirection();
+app.UseWhen(
+    context => HttpProtocol.IsHttp11(context.Request.Protocol),
+    branch => branch.UseHttpsRedirection());
 app.MapControllers();
+app.MapGrpcService<UpdatesRepositoryGrpcService>();
 
 app.Run();
