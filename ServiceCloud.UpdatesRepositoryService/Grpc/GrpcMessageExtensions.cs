@@ -1,3 +1,5 @@
+﻿// Ignore Spelling: Grpc
+
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using DataUpdate = ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfoBaseUpdate;
 

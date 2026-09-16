@@ -1,4 +1,6 @@
-﻿namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
+﻿// Ignore Spelling: Infobase
+
+namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
 {
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
