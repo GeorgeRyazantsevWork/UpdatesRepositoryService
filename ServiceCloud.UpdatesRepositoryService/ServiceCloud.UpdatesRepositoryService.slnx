@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="../ServiceCloud.UpdatesRepository.BusinessLogic.Tests/ServiceCloud.UpdatesRepository.BusinessLogic.Tests.csproj" Id="457e4890-6573-4cc9-9cdd-e42e19456e16" />
-  <Project Path="../ServiceCloud.UpdatesRepository.BusinessLogic/ServiceCloud.UpdatesRepository.BusinessLogic.csproj" Id="8156ab77-d99c-4a31-b4ae-41cb24168313" />
-  <Project Path="../ServiceCloud.UpdatesRepositoryService.Tests/ServiceCloud.UpdatesRepositoryService.Tests.csproj" Id="6bd820d3-bd98-4e41-b71c-809101947554" />
-  <Project Path="ServiceCloud.UpdatesRepositoryService.csproj" />
-</Solution>
