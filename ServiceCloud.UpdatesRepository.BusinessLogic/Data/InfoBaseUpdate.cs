@@ -27,7 +27,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
         public InfoBaseUpdate(InfobaseConfig? destination, IEnumerable<InfobaseConfig>? sources, bool isTransitive = false)
         {
             DestinationConfig = destination;
-            SourseConfigs = sources;
+            SourceConfigs = sources;
             IsTransitive = isTransitive;
         }
 
@@ -51,10 +51,10 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
         /// Список конфигураций информационных баз 1С, для которых предназначено это обновление
         /// </summary>
         /// <exception cref="System.ArgumentNullException">Не задана коллекция конфигураций</exception>
-        public IEnumerable<InfobaseConfig>? SourseConfigs
+        public IEnumerable<InfobaseConfig>? SourceConfigs
         {
             get => sourseConfigs;
-            set => sourseConfigs = value ?? throw new ArgumentNullException(nameof(SourseConfigs));
+            set => sourseConfigs = value ?? throw new ArgumentNullException(nameof(SourceConfigs));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
             return IsTransitive == other.IsTransitive
                         && Id == other.Id
                         && DestinationConfig == other.DestinationConfig
-                        && CollectionsComparer.CollectionsAreContainsSameElements(SourseConfigs, other.SourseConfigs);
+                        && CollectionsComparer.CollectionsAreContainsSameElements(SourceConfigs, other.SourceConfigs);
         }
 
         /// <summary>
@@ -117,9 +117,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
             if (DestinationConfig != null)
                 hash ^= DestinationConfig.GetHashCode();
 
-            if (SourseConfigs != null)
+            if (SourceConfigs != null)
             {
-                hash ^= HashCalculator.CalculateHash(SourseConfigs);
+                hash ^= HashCalculator.CalculateHash(SourceConfigs);
             }
 
             return hash;

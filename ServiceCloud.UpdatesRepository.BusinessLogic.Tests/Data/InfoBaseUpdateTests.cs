@@ -11,7 +11,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             return new InfoBaseUpdate()
             {
                 DestinationConfig = InfoBaseUpdateTestContext.DestinationConfig,
-                SourseConfigs = InfoBaseUpdateTestContext.SourseConfigs,
+                SourceConfigs = InfoBaseUpdateTestContext.SourseConfigs,
                 IsTransitive = false
             };
         }
@@ -198,8 +198,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
         {
             var target = new InfoBaseUpdate();
 
-            Assert.IsNotNull(target.SourseConfigs);
-            CollectionAssert.IsEmpty(target.SourseConfigs);
+            Assert.IsNotNull(target.SourceConfigs);
+            CollectionAssert.IsEmpty(target.SourceConfigs);
         }
 
         [Test]
@@ -208,7 +208,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             var target = CreateTestObject();
 
             Assert.Throws<ArgumentNullException>(
-                () => target.SourseConfigs = null!
+                () => target.SourceConfigs = null!
             );
         }
 
@@ -218,8 +218,8 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             var target = CreateTestObject();
 
             var expected = new InfobaseConfig[0];
-            target.SourseConfigs = expected;
-            Assert.AreEqual(expected, target.SourseConfigs);
+            target.SourceConfigs = expected;
+            Assert.AreEqual(expected, target.SourceConfigs);
         }
 
         [Test]

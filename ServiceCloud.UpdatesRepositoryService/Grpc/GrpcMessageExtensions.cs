@@ -50,9 +50,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Grpc
                 DestinationConfig = data.DestinationConfig?.ToGrpcMessage()
             };
 
-            if (data.SourseConfigs != null)
+            if (data.SourceConfigs != null)
             {
-                update.SourceConfigs.AddRange(data.SourseConfigs.Select(config => config.ToGrpcMessage()));
+                update.SourceConfigs.AddRange(data.SourceConfigs.Select(config => config.ToGrpcMessage()));
             }
 
             return update;

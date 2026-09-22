@@ -58,7 +58,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 update.DestinationConfig = ParseDestinationConfigDescription(rawData);
 
                 // извлекаем список конфигураций, для которых обновление подходит
-                update.SourseConfigs = ParseSourceConfigsListDescription(rawData);
+                update.SourceConfigs = ParseSourceConfigsListDescription(rawData);
 
                 // определяем, является ли обновление переходным
                 update.IsTransitive = IsTransitiveUpdate(path);

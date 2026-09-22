@@ -53,7 +53,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
             AddToBuilder(update.DestinationConfig!);
 
             builder.Append(DELIMITER);
-            var orderedSorceConfigs = update.SourseConfigs!.OrderBy(item => item);
+            var orderedSorceConfigs = update.SourceConfigs!.OrderBy(item => item);
 
             foreach (var config in orderedSorceConfigs)
             {
@@ -95,13 +95,13 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
                 throw new ArgumentException("У объекта, описывающего обновление, не корректно заданы свойства целевой конфигурации");
             }
 
-            if (update.SourseConfigs == null
-               || update.SourseConfigs.Any() == false)
+            if (update.SourceConfigs == null
+               || update.SourceConfigs.Any() == false)
             {
                 throw new ArgumentException("У объекта, описывающего обновление, не задана коллекция исходных конфигураций");
             }
 
-            foreach (var config in update.SourseConfigs)
+            foreach (var config in update.SourceConfigs)
             {
                 if (!CheckInfoBaseConfig(config))
                 {

@@ -1,4 +1,4 @@
-using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
+﻿using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 
 namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
 {
@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 Assert.That(update, Is.Not.Null);
                 Assert.That(update!.DestinationConfig, Is.EqualTo(entry.Update.DestinationConfig));
                 Assert.That(update.IsTransitive, Is.EqualTo(entry.Update.IsTransitive));
-                Assert.That(update.SourseConfigs, Is.EquivalentTo(entry.Update.SourseConfigs!));
+                Assert.That(update.SourceConfigs, Is.EquivalentTo(entry.Update.SourceConfigs!));
             }
         }
 

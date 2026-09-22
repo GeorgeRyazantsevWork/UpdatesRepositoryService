@@ -32,7 +32,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             yield return new InfoBaseUpdate()
             {
                 DestinationConfig = DestinationConfig,
-                SourseConfigs = SourseConfigs,
+                SourceConfigs = SourseConfigs,
                 IsTransitive = true
             };
 
@@ -40,7 +40,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             yield return new InfoBaseUpdate()
             {
                 DestinationConfig = new InfobaseConfig(),
-                SourseConfigs = SourseConfigs,
+                SourceConfigs = SourseConfigs,
                 IsTransitive = false
             };
 
@@ -48,7 +48,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             yield return new InfoBaseUpdate()
             {
                 DestinationConfig = DestinationConfig,
-                SourseConfigs = new InfobaseConfig[2],
+                SourceConfigs = new InfobaseConfig[2],
                 IsTransitive = false
             };
 
@@ -57,7 +57,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Id = "1",
                 DestinationConfig = DestinationConfig,
-                SourseConfigs = SourseConfigs,
+                SourceConfigs = SourseConfigs,
                 IsTransitive = false
             };
         }

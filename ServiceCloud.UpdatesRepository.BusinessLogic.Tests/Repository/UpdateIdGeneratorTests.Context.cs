@@ -18,7 +18,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                         Edition = InfoBaseConfigEdition.PROF
                     },
 
-                    SourseConfigs = new InfobaseConfig[]
+                    SourceConfigs = new InfobaseConfig[]
                     {
                         new InfobaseConfig()
                         {
@@ -43,7 +43,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                     // Не задана целевая конфигурация
                     yield return new InfoBaseUpdate()
                     {
-                        SourseConfigs = new InfobaseConfig[]
+                        SourceConfigs = new InfobaseConfig[]
                         {
                         new InfobaseConfig()
                         {
@@ -68,7 +68,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
-                        SourseConfigs = new InfobaseConfig[]
+                        SourceConfigs = new InfobaseConfig[]
                         {
                             new InfobaseConfig()
                             {
@@ -107,7 +107,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
-                        SourseConfigs = new InfobaseConfig[]
+                        SourceConfigs = new InfobaseConfig[]
                         {
                             new InfobaseConfig()
                             {
@@ -138,7 +138,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
-                            SourseConfigs = new InfobaseConfig[]
+                            SourceConfigs = new InfobaseConfig[]
                             {
                                 new InfobaseConfig()
                                 {
@@ -164,7 +164,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
-                            SourseConfigs = new InfobaseConfig[]
+                            SourceConfigs = new InfobaseConfig[]
                             {
                                 new InfobaseConfig()
                                 {
@@ -190,7 +190,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository.Tests
                                 Edition = InfoBaseConfigEdition.CORP
                             },
 
-                            SourseConfigs = new InfobaseConfig[]
+                            SourceConfigs = new InfobaseConfig[]
                             {
                                 new InfobaseConfig()
                                 {

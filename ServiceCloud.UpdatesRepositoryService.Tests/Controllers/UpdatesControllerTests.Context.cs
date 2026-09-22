@@ -1,4 +1,4 @@
-using Moq;
+﻿using Moq;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 
@@ -30,7 +30,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers
                 {
                     Id = "103EB5F83D0EE3AAB321E667FE3641771874AD6A6AB3FDAF871639EFFA6A6FC7",
                     DestinationConfig = ExistingConfig,
-                    SourseConfigs =
+                    SourceConfigs =
                     [
                         new InfobaseConfig
                         {
