@@ -5,7 +5,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
     /// <summary>
     /// Описывает версию конфигурации информационной базы
     /// </summary>
-    public class InfoBaseConfigVersion : IComparable, IComparable<InfoBaseConfigVersion>, IEquatable<InfoBaseConfigVersion>
+    public sealed class InfoBaseConfigVersion : IComparable, IComparable<InfoBaseConfigVersion>, IEquatable<InfoBaseConfigVersion>
     {
         private readonly string value = string.Empty;
 

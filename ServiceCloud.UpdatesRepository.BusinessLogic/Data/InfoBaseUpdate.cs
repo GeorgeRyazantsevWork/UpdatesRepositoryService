@@ -6,8 +6,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
     /// <summary>
     /// Данные об обновлении конфигурации информационной базы 1С
     /// </summary>
-    [Serializable]
-    public class InfoBaseUpdate : IEquatable<InfoBaseUpdate>
+    public sealed class InfoBaseUpdate : IEquatable<InfoBaseUpdate>
     {
         private InfobaseConfig destinationConfig = InfobaseConfig.Empty;
         private IEnumerable<InfobaseConfig> sourseConfigs = new InfobaseConfig[0];

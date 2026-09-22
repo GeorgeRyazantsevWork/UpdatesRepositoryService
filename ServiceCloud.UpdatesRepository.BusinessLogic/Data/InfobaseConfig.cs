@@ -5,7 +5,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
     /// <summary>
     /// Данные о конфигурации информационной базы 1С
     /// </summary>
-    public class InfobaseConfig : IEquatable<InfobaseConfig>, IComparable<InfobaseConfig>
+    public sealed class InfobaseConfig : IEquatable<InfobaseConfig>, IComparable<InfobaseConfig>
     {
         private static InfobaseConfig empty = new InfobaseConfig() { Name = "Конфигурация" };
 

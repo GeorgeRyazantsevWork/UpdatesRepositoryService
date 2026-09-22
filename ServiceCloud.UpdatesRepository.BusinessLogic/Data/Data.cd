@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfobaseConfig" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <Members>
+      <Field Name="empty" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAQAiAIAAAQCAAAAAIAAQAAAQAAAAiA=</HashCode>
+      <FileName>Data\InfobaseConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfoBaseConfigVersion" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="1.25" Width="2.25" />
+    <Members>
+      <Field Name="value" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEgACAAgAAAAAAAKAAAAAAAAAAByA=</HashCode>
+      <FileName>Data\InfoBaseConfigVersion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfoBaseUpdate" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="1.25" Width="1.75" />
+    <Members>
+      <Field Name="destinationConfig" Hidden="true" />
+      <Field Name="sourseConfigs" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAIAAAAAAgAAAAAgAAAAAAJAAAAAAgAIAAiA=</HashCode>
+      <FileName>Data\InfoBaseUpdate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="ServiceCloud.UpdatesRepository.BusinessLogic.Data.InfoBaseConfigEdition">
+    <Position X="1.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAEAAAAAAAAABA=</HashCode>
+      <FileName>Data\InfobaseConfigEdition.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
