@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
-using ServiceCloud.UpdatesRepositoryService.Controllers;
+using ServiceCloud.UpdatesRepositoryService.Controllers.v1;
 using ServiceCloud.UpdatesRepositoryService.Responses.v1;
 
 namespace ServiceCloud.UpdatesRepositoryService.Tests.Controllers

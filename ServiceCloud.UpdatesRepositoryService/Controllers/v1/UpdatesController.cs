@@ -5,7 +5,7 @@ using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
 using ServiceCloud.UpdatesRepositoryService.Responses.v1;
 
-namespace ServiceCloud.UpdatesRepositoryService.Controllers
+namespace ServiceCloud.UpdatesRepositoryService.Controllers.v1
 {
     /// <summary>
     /// Предоставляет API-методы для работы с обновлениями через репозиторий 
