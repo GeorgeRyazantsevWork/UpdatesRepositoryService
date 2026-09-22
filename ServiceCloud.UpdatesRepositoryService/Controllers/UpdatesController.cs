@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
-using ServiceCloud.UpdatesRepositoryService.Responses;
+using ServiceCloud.UpdatesRepositoryService.Responses.v1;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers
 {

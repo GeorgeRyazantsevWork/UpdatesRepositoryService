@@ -1,4 +1,4 @@
-﻿namespace ServiceCloud.UpdatesRepositoryService.Responses
+﻿namespace ServiceCloud.UpdatesRepositoryService.Responses.v1
 {
     /// <summary>
     /// Количество обновлений, доступных в репозитории
