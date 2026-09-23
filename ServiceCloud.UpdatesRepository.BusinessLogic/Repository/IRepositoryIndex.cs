@@ -46,7 +46,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Repository
         /// <returns>true - обновление существует в репозитории, false - в обратном случае</returns>
         public bool Contains(InfobaseConfig targetConfig);
 
-        /// <summary>ы
+        /// <summary>
         /// Очистить индекс репозитория
         /// </summary>
         public void Clear();
