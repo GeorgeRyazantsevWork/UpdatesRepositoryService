@@ -36,6 +36,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         /// <param name="configPublisher">Название издателя конфигурации информационной базы 1С</param>
         /// <param name="configEdition">Редакция конфигурации информационной базы 1С</param>
         /// <param name="transitive">Признак переходного обновления с одной редакции на другую</param>
+        /// <param name="configVersionCondition">
+        /// Условие сравнения исходных данных по свойству configVersion. В выборку попадаю только данных,
+        /// удовлетворяющие условию сравнения.
+        /// 
+        /// Например:
+        /// ?configVersion=3.0.120.0.25&configVersionCondition=Greater
+        /// - в выборку попадут данные, у которых значение версии конфигурации больше того, которое указано
+        /// в свойстве Version
+        /// </param>
         /// <returns>Количество обновлений, удовлетворяющих заданному критерию</returns>
         [HttpGet("count")]
         [Produces("application/json")]
@@ -44,8 +53,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
             string? configName,
             string? configVersion,
             string? configPublisher,
-            InfoBaseConfigEdition? configEdition,
-            bool? transitive)
+            InfoBaseConfigEdition configEdition = InfoBaseConfigEdition.Unknown,
+            ComparisonOperator configVersionCondition = ComparisonOperator.Equal,
+            bool transitive = false)
         {
             //var result = repository.ContainsUpdate(config);
             //return Ok(new ContainsUpdateResponse(result));
@@ -61,6 +71,15 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         /// <param name="configPublisher">Название издателя конфигурации информационной базы 1С</param>
         /// <param name="configEdition">Редакция конфигурации информационной базы 1С</param>
         /// <param name="transitive">Признак переходного обновления с одной редакции на другую</param>
+        /// <param name="configVersionCondition">
+        /// Условие сравнения исходных данных по свойству configVersion. В выборку попадаю только данных,
+        /// удовлетворяющие условию сравнения.
+        /// 
+        /// Например:
+        /// ?configVersion=3.0.120.0.25&configVersionCondition=Greater
+        /// - в выборку попадут данные, у которых значение версии конфигурации больше того, которое указано
+        /// в свойстве Version
+        /// </param>
         /// <returns>Коллекция описаний обновлений, удовлетворяющих заданному критерию</returns>
         [HttpGet("filter")]
         [Produces("application/json")]
@@ -69,8 +88,9 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
             string? configName,
             string? configVersion,
             string? configPublisher,
-            InfoBaseConfigEdition? configEdition,
-            bool? transitive)
+            InfoBaseConfigEdition configEdition = InfoBaseConfigEdition.Unknown,
+            ComparisonOperator configVersionCondition = ComparisonOperator.Equal,
+            bool transitive = false)
         {
             //var updates = repository.Updates;
 
@@ -100,29 +120,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
             //}
 
             //return Ok(update);
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Получить потенциальные обновления для заданной конфигурации информационной базы 1С
-        /// </summary>
-        /// <param name="configName">Название конфигурации информационной базы 1С</param>
-        /// <param name="configVersion">Номер версии конфигурации информационной базы 1С</param>
-        /// <param name="configPublisher">Название издателя конфигурации информационной базы 1С</param>
-        /// <param name="configEdition">Редакция конфигурации информационной базы 1С</param>
-        /// <returns>Коллекция подходящих обновлений</returns>
-        [HttpGet("potential")]
-        [ProducesResponseType(typeof(TotalResponse<InfoBaseUpdate>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<InfoBaseUpdate>> GetPotentialUpdates(
-            string configName,
-            string configVersion,
-            string configPublisher,
-            InfoBaseConfigEdition configEdition)
-        {
-            //var updates = repository.GetPotentialUpdates(config);
-            //return Ok(updates);
 
             throw new NotImplementedException();
         }
