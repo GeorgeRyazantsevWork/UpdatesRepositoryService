@@ -17,7 +17,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Grpc
                 {
                     Publisher = "Фирма \"1С\"",
                     Name = "БухгалтерияПредприятия",
-                    Version = new InfoBaseConfigVersion("3.0.58.41"),
+                    VersionString = "3.0.58.41",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -25,7 +25,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Grpc
                 {
                     Publisher = "Рарус",
                     Name = "Микрофининсы",
-                    Version = new InfoBaseConfigVersion("1.0.5.186"),
+                    VersionString = "1.0.5.186",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -39,7 +39,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Tests.Grpc
                         {
                             Publisher = "Фирма \"1С\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("3.0.58.26"),
+                            VersionString = "3.0.58.26",
                             Edition = InfoBaseConfigEdition.PROF
                         }
                     ]

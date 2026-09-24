@@ -8,7 +8,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
         {
             Publisher = "ООО СервисКлауд",
             Name = "Облако",
-            Version = new InfoBaseConfigVersion("1.0.0.1"),
+            VersionString = "1.0.0.1",
             Edition = InfoBaseConfigEdition.Unknown
         };
 
@@ -18,7 +18,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Publisher = "ООО СервисКлауд",
                 Name = "Облако",
-                Version = new InfoBaseConfigVersion("1.0.0.0"),
+                VersionString = "1.0.0.0",
                 Edition = InfoBaseConfigEdition.Unknown
             }
         };

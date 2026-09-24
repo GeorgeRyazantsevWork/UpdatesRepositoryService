@@ -9,7 +9,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
         {
             Publisher = "ООО СервисКлауд",
             Name = "Облако",
-            Version = new InfoBaseConfigVersion("1.0.0.1")
+            VersionString = "1.0.0.1"
         };
 
         public static IEnumerable CompareCases()
@@ -20,14 +20,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
                {
                    Publisher = "B",
                    Name = "A",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                new InfobaseConfig()
                {
                    Publisher = "A",
                    Name = "A",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                1
@@ -39,14 +39,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
                {
                    Publisher = "A",
                    Name = "B",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                new InfobaseConfig()
                {
                    Publisher = "A",
                    Name = "B",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                0
@@ -58,14 +58,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
                {
                    Publisher = "A",
                    Name = "A",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                new InfobaseConfig()
                {
                    Publisher = "A",
                    Name = "B",
-                   Version = new InfoBaseConfigVersion("0.0.0.1")
+                   VersionString = "0.0.0.1"
                },
 
                -1
@@ -79,7 +79,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Publisher = "СервисКлауд",
                 Name = "Облако",
-                Version = new InfoBaseConfigVersion("1.0.0.1")
+                VersionString = "1.0.0.1"
             };
 
             // Не совпадает Name
@@ -87,7 +87,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Publisher = "СервисКлауд",
                 Name = "Яблако",
-                Version = new InfoBaseConfigVersion("1.0.0.1")
+                VersionString = "1.0.0.1"
             };
 
             // Не совпадает Version
@@ -95,7 +95,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Publisher = "СервисКлауд",
                 Name = "Яблако",
-                Version = new InfoBaseConfigVersion("1.0.0.0")
+                VersionString = "1.0.0.0"
             };
 
             // Не совпадает Edition
@@ -103,7 +103,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
             {
                 Publisher = "СервисКлауд",
                 Name = "Яблако",
-                Version = new InfoBaseConfigVersion("1.0.0.1"),
+                VersionString = "1.0.0.1",
                 Edition = InfoBaseConfigEdition.BASE
             };
         }

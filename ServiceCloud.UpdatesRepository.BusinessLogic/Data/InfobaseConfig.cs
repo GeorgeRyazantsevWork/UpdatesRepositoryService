@@ -27,7 +27,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Data
         /// <summary>
         /// Версия конфигурации
         /// </summary>
-        public InfoBaseConfigVersion? Version
+        internal InfoBaseConfigVersion? Version
         {
             get;
             set;

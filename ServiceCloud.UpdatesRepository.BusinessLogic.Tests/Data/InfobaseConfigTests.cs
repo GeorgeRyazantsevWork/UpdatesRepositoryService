@@ -195,7 +195,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
         {
             var target = new InfobaseConfig();
 
-            Assert.IsNull(target.Version);
+            Assert.IsNull(target.VersionString);
         }
 
         [Test]
@@ -203,18 +203,18 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Data
         {
             var target = CreateTarget();
 
-            Assert.DoesNotThrow(() => target.Version = null);
+            Assert.DoesNotThrow(() => target.VersionString = null);
         }
 
         [Test]
         public void InfobaseConfig_Version_SetValue_Test()
         {
             var target = CreateTarget();
-            var expected = new InfoBaseConfigVersion("1.2.3");
+            var expected = "1.2.3";
 
-            target.Version = expected;
+            target.VersionString = expected;
 
-            Assert.AreEqual(expected, target.Version);
+            Assert.AreEqual(expected, target.VersionString);
         }
 
         [Test]

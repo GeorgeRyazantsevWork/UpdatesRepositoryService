@@ -58,7 +58,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "БухгалтерияПредприятия",
                             Publisher = "Фирма \"1С\"",
-                            Version = new InfoBaseConfigVersion("3.0.173.32"),
+                            VersionString = "3.0.173.32",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -68,7 +68,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.172.32"),
+                                VersionString = "3.0.172.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -76,7 +76,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.171.32"),
+                                VersionString = "3.0.171.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -84,22 +84,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.170.32"),
+                                VersionString = "3.0.170.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
                             new InfobaseConfig()
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.169.32"),
-                                Edition = InfoBaseConfigEdition.PROF
-                            },
-
-                            new InfobaseConfig()
-                            {
-                                Name = "БухгалтерияПредприятия",
-                                Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.168.32"),
+                                VersionString = "3.0.169.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -107,7 +99,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.167.32"),
+                                VersionString = "3.0.168.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -115,7 +107,15 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.166.32"),
+                                VersionString = "3.0.167.32",
+                                Edition = InfoBaseConfigEdition.PROF
+                            },
+
+                            new InfobaseConfig()
+                            {
+                                Name = "БухгалтерияПредприятия",
+                                Publisher = "Фирма \"1С\"",
+                                VersionString = "3.0.166.32",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         }
@@ -134,7 +134,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "БухгалтерияПредприятия",
                             Publisher = "Фирма \"1С\"",
-                            Version = new InfoBaseConfigVersion("3.0.58.26"),
+                            VersionString = "3.0.58.26",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -144,7 +144,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.55.14"),
+                                VersionString = "3.0.55.14",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -152,7 +152,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.55.16"),
+                                VersionString = "3.0.55.16",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -160,22 +160,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.56.22"),
+                                VersionString = "3.0.56.22",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
                             new InfobaseConfig()
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.10"),
-                                Edition = InfoBaseConfigEdition.PROF
-                            },
-
-                            new InfobaseConfig()
-                            {
-                                Name = "БухгалтерияПредприятия",
-                                Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.15"),
+                                VersionString = "3.0.57.10",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -183,7 +175,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.17"),
+                                VersionString = "3.0.57.15",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -191,7 +183,15 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.58.20"),
+                                VersionString = "3.0.57.17",
+                                Edition = InfoBaseConfigEdition.PROF
+                            },
+
+                            new InfobaseConfig()
+                            {
+                                Name = "БухгалтерияПредприятия",
+                                Publisher = "Фирма \"1С\"",
+                                VersionString = "3.0.58.20",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         }
@@ -210,7 +210,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "БухгалтерияПредприятия",
                             Publisher = "Фирма \"1С\"",
-                            Version = new InfoBaseConfigVersion("3.0.58.41"),
+                            VersionString = "3.0.58.41",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -220,7 +220,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.55.16"),
+                                VersionString = "3.0.55.16",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -228,22 +228,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.56.22"),
+                                VersionString = "3.0.56.22",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
                             new InfobaseConfig()
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.10"),
-                                Edition = InfoBaseConfigEdition.PROF
-                            },
-
-                            new InfobaseConfig()
-                            {
-                                Name = "БухгалтерияПредприятия",
-                                Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.15"),
+                                VersionString = "3.0.57.10",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -251,7 +243,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.57.17"),
+                                VersionString = "3.0.57.15",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -259,7 +251,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.58.20"),
+                                VersionString = "3.0.57.17",
                                 Edition = InfoBaseConfigEdition.PROF
                             },
 
@@ -267,7 +259,15 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("3.0.58.26"),
+                                VersionString = "3.0.58.20",
+                                Edition = InfoBaseConfigEdition.PROF
+                            },
+
+                            new InfobaseConfig()
+                            {
+                                Name = "БухгалтерияПредприятия",
+                                Publisher = "Фирма \"1С\"",
+                                VersionString = "3.0.58.26",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         }
@@ -286,7 +286,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "СалонКрасоты",
                             Publisher = "ООО \"Лаборатория программного обеспечения\"",
-                            Version = new InfoBaseConfigVersion("2.0.9.2"),
+                            VersionString = "2.0.9.2",
                             Edition = InfoBaseConfigEdition.Unknown
                         },
 
@@ -296,7 +296,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "СалонКрасоты",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("2.0.8.1"),
+                                VersionString = "2.0.8.1",
                                 Edition = InfoBaseConfigEdition.PROF
 
                             },
@@ -305,7 +305,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "СалонКрасоты",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("2.0.9.1"),
+                                VersionString = "2.0.9.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         }
@@ -324,7 +324,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "БухгалтерияПредприятия",
                             Publisher = "Фирма \"1С\"",
-                            Version = new InfoBaseConfigVersion("2.0.66.135"),
+                            VersionString = "2.0.66.135",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -334,7 +334,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятияБазовая",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("2.0.66.135"),
+                                VersionString = "2.0.66.135",
                                 Edition = InfoBaseConfigEdition.BASE
                             }
                         },
@@ -355,7 +355,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Name = "БухгалтерияПредприятияКОРП",
                             Publisher = "Фирма \"1С\"",
-                            Version = new InfoBaseConfigVersion("2.0.66.135"),
+                            VersionString = "2.0.66.135",
                             Edition = InfoBaseConfigEdition.CORP
                         },
 
@@ -365,7 +365,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Name = "БухгалтерияПредприятия",
                                 Publisher = "Фирма \"1С\"",
-                                Version = new InfoBaseConfigVersion("2.0.66.135"),
+                                VersionString = "2.0.66.135",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -435,7 +435,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.2")
+                            VersionString = "0.0.0.2"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -444,7 +444,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.1")
+                                VersionString = "0.0.0.1"
                             }
                         }
                     },
@@ -456,7 +456,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.3")
+                            VersionString = "0.0.0.3"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -465,7 +465,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.2")
+                                VersionString = "0.0.0.2"
                             },
                         }
                     }
@@ -475,7 +475,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Publisher = "another_publisher",
                     Name = "target",
-                    Version = new InfoBaseConfigVersion("0.0.0.2")
+                    VersionString = "0.0.0.2"
                 },
 
                 new List<InfoBaseUpdate>()
@@ -493,7 +493,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.2")
+                            VersionString = "0.0.0.2"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -502,7 +502,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.1")
+                                VersionString = "0.0.0.1"
                             }
                         }
                     },
@@ -514,7 +514,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.3")
+                            VersionString = "0.0.0.3"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -523,7 +523,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.2")
+                                VersionString = "0.0.0.2"
                             },
                         }
                     },
@@ -535,7 +535,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "another_publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.3")
+                            VersionString = "0.0.0.3"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -544,7 +544,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "another_publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.2")
+                                VersionString = "0.0.0.2"
                             },
                         }
                     },
@@ -556,7 +556,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "another_name",
-                            Version = new InfoBaseConfigVersion("0.0.0.3")
+                            VersionString = "0.0.0.3"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -565,7 +565,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "another_name",
-                                Version = new InfoBaseConfigVersion("0.0.0.2")
+                                VersionString = "0.0.0.2"
                             },
                         }
                     }
@@ -576,7 +576,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Publisher = "publisher",
                     Name = "target",
-                    Version = new InfoBaseConfigVersion("0.0.0.2")
+                    VersionString = "0.0.0.2"
                 },
 
                 new List<InfoBaseUpdate>()
@@ -588,7 +588,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "publisher",
                             Name = "target",
-                            Version = new InfoBaseConfigVersion("0.0.0.3")
+                            VersionString = "0.0.0.3"
                         },
 
                         SourceConfigs = new List<InfobaseConfig>()
@@ -597,7 +597,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "publisher",
                                 Name = "target",
-                                Version = new InfoBaseConfigVersion("0.0.0.2")
+                                VersionString = "0.0.0.2"
                             },
                         }
                     }
@@ -617,7 +617,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятияКОРП",
-                            Version = new InfoBaseConfigVersion("0.0.0.1"),
+                            VersionString = "0.0.0.1",
                             Edition = InfoBaseConfigEdition.CORP
                         },
 
@@ -627,7 +627,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятия",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -643,7 +643,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятияКОРП",
-                            Version = new InfoBaseConfigVersion("0.0.0.2"),
+                            VersionString = "0.0.0.2",
                             Edition = InfoBaseConfigEdition.CORP
                         },
 
@@ -653,7 +653,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятияКОРП",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.CORP
                             }
                         },
@@ -667,7 +667,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("0.0.0.2"),
+                            VersionString = "0.0.0.2",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -677,7 +677,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятия",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -688,7 +688,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Publisher = "Фирма \"1C\"",
                     Name = "БухгалтерияПредприятия",
-                    Version = new InfoBaseConfigVersion("0.0.0.1"),
+                    VersionString = "0.0.0.1",
                     Edition = InfoBaseConfigEdition.PROF
                 },
 
@@ -702,7 +702,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятияКОРП",
-                            Version = new InfoBaseConfigVersion("0.0.0.1"),
+                            VersionString = "0.0.0.1",
                             Edition = InfoBaseConfigEdition.CORP
                         },
 
@@ -712,7 +712,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятия",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -728,7 +728,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("0.0.0.2"),
+                            VersionString = "0.0.0.2",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -738,7 +738,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятия",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -759,7 +759,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("0.0.0.1"),
+                            VersionString = "0.0.0.1",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -769,7 +769,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятияБазовая",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.BASE
                             }
                         },
@@ -785,7 +785,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("0.0.0.2"),
+                            VersionString = "0.0.0.2",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -795,7 +795,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятия",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.PROF
                             }
                         },
@@ -806,7 +806,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Publisher = "Фирма \"1C\"",
                     Name = "БухгалтерияПредприятияБазовая",
-                    Version = new InfoBaseConfigVersion("0.0.0.1"),
+                    VersionString = "0.0.0.1",
                     Edition = InfoBaseConfigEdition.BASE
                 },
 
@@ -820,7 +820,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                         {
                             Publisher = "Фирма \"1C\"",
                             Name = "БухгалтерияПредприятия",
-                            Version = new InfoBaseConfigVersion("0.0.0.1"),
+                            VersionString = "0.0.0.1",
                             Edition = InfoBaseConfigEdition.PROF
                         },
 
@@ -830,7 +830,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                             {
                                 Publisher = "Фирма \"1C\"",
                                 Name = "БухгалтерияПредприятияБазовая",
-                                Version = new InfoBaseConfigVersion("0.0.0.1"),
+                                VersionString = "0.0.0.1",
                                 Edition = InfoBaseConfigEdition.BASE
                             }
                         },
@@ -851,14 +851,14 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = string.Empty,
                     Publisher = string.Empty,
-                    Version = new InfoBaseConfigVersion()
+                    VersionString = ""
                 };
 
                 yield return new InfobaseConfig()
                 {
                     Name = null,
                     Publisher = "Фирма \"1С\"",
-                    Version = new InfoBaseConfigVersion("3.0.58.26"),
+                    VersionString = "3.0.58.26",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -866,7 +866,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = string.Empty,
                     Publisher = "Фирма \"1С\"",
-                    Version = new InfoBaseConfigVersion("3.0.58.26"),
+                    VersionString = "3.0.58.26",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -874,7 +874,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = "БухгалтерияПредприятия",
                     Publisher = null,
-                    Version = new InfoBaseConfigVersion("3.0.58.26"),
+                    VersionString = "3.0.58.26",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -882,7 +882,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = "БухгалтерияПредприятия",
                     Publisher = string.Empty,
-                    Version = new InfoBaseConfigVersion("3.0.58.26"),
+                    VersionString = "3.0.58.26",
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -890,7 +890,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = "БухгалтерияПредприятия",
                     Publisher = "Фирма \"1С\"",
-                    Version = null,
+                    VersionString = null,
                     Edition = InfoBaseConfigEdition.PROF
                 };
 
@@ -898,7 +898,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Tests.Repository
                 {
                     Name = "БухгалтерияПредприятия",
                     Publisher = "Фирма \"1С\"",
-                    Version = new InfoBaseConfigVersion(),
+                    VersionString = "",
                     Edition = InfoBaseConfigEdition.PROF
                 };
             }
