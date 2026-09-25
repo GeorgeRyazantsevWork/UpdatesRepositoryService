@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Data;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Repository;
-using ServiceCloud.UpdatesRepositoryService.Data;
 using ServiceCloud.UpdatesRepositoryService.Responses.v2;
 
 namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
@@ -110,7 +109,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         [ProducesResponseType(typeof(FileResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DownloadUpdate(string id, TransitiveUpdateType updateType = TransitiveUpdateType.BaseTopProf)
+        public IActionResult DownloadUpdate(string id, UpdateType updateType = UpdateType.ConfigurationUpdate)
         {
             //var update = repository.GetUpdate(request, transitive);
 
