@@ -28,41 +28,6 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         }
 
         /// <summary>
-        /// Вернуть количество обновлений конфигураций ИБ 1С, доступных в репозитории
-        /// </summary>
-        /// <param name="configName">Название конфигурации информационной базы 1С</param>
-        /// <param name="configVersion">Номер версии конфигурации информационной базы 1С</param>
-        /// <param name="configPublisher">Название издателя конфигурации информационной базы 1С</param>
-        /// <param name="configEdition">Редакция конфигурации информационной базы 1С</param>
-        /// <param name="transitive">Признак переходного обновления с одной редакции на другую</param>
-        /// <param name="configVersionCondition">
-        /// Условие сравнения исходных данных по свойству configVersion. В выборку попадаю только данных,
-        /// удовлетворяющие условию сравнения.
-        /// 
-        /// Например:
-        /// ?configVersion=3.0.120.0.25&configVersionCondition=Greater
-        /// - в выборку попадут данные, у которых значение версии конфигурации больше того, которое указано
-        /// в свойстве Version
-        /// </param>
-        /// <returns>Количество обновлений, удовлетворяющих заданному критерию</returns>
-        [HttpGet("count")]
-        [Produces("application/json")]
-        [ProducesResponseType(typeof(TotalResponse<UpdatesCountResult>), StatusCodes.Status200OK)]
-        public IActionResult GetUpdatesCount(
-            string? configName,
-            string? configVersion,
-            string? configPublisher,
-            InfoBaseConfigEdition configEdition = InfoBaseConfigEdition.Unknown,
-            ComparisonOperator configVersionCondition = ComparisonOperator.Equal,
-            bool transitive = false)
-        {
-            //var result = repository.ContainsUpdate(config);
-            //return Ok(new ContainsUpdateResponse(result));
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Получить список всех обновлений конфигураций ИБ 1С, доступных в репозитории
         /// </summary>
         /// <param name="configName">Название конфигурации информационной базы 1С</param>

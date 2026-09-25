@@ -16,10 +16,4 @@
     /// <param name="Details">Дополнительные сведения об ошибке</param>
     public sealed record ErrorResponse(int Code, string Details)
         : TotalResponse<object>(Code, Details, Array.Empty<object>());
-
-    /// <summary>
-    /// Количество обновлений ИБ 1С, доступных в репозитории по заданному критерию запроса
-    /// </summary>
-    /// <param name="Count">Количество обновлений</param>
-    public sealed record UpdatesCountResult(int Count);
 }
