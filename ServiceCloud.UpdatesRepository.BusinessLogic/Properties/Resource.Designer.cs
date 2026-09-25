@@ -61,15 +61,6 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Нажмите любую клавишу, чтобы запустить сервер....
-        /// </summary>
-        public static string DebugMessage_PressAnyKeyToContinue {
-            get {
-                return ResourceManager.GetString("DebugMessage_PressAnyKeyToContinue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка при обновлении репозитория! Длительность до ошибки: {0} мс.
         /// </summary>
         public static string LogMessage_RefreshError {
@@ -106,7 +97,7 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации.
+        ///   Ищет локализованную строку, похожую на Недостаточно данных о конфигурации информационной базы.
         /// </summary>
         public static string Message_ConfigurationIsInvalid {
             get {
@@ -114,6 +105,9 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
             }
         }
         
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задано обязательное свойство(наименование/версия/издатель) у целевой конфигурации.
+        /// </summary>
         public static string Message_IncorrectConfigProperties {
             get {
                 return ResourceManager.GetString("Message_IncorrectConfigProperties", resourceCulture);
@@ -165,12 +159,18 @@ namespace ServiceCloud.UpdatesRepository.BusinessLogic.Properties {
             }
         }
         
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задан идентификатор обновления.
+        /// </summary>
         public static string Message_UpdateIdentifierIsNotSet {
             get {
                 return ResourceManager.GetString("Message_UpdateIdentifierIsNotSet", resourceCulture);
             }
         }
         
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Обновление конфигурации базы не найдено.
+        /// </summary>
         public static string Message_UpdateWasNotFound {
             get {
                 return ResourceManager.GetString("Message_UpdateWasNotFound", resourceCulture);

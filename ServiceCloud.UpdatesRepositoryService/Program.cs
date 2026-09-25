@@ -1,4 +1,4 @@
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.Extensions.Options;
 using ServiceCloud.UpdatesRepository.BusinessLogic.Properties;
@@ -69,9 +69,6 @@ if (app.Environment.IsDevelopment())
                 $"{RepositoryServiceOptions.ServiceName} {description.GroupName}");
         }
     });
-
-    Console.WriteLine(Resource.DebugMessage_PressAnyKeyToContinue);
-    Console.ReadLine();
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
