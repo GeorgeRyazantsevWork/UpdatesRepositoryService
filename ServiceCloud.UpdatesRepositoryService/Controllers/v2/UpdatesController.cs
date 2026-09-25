@@ -48,6 +48,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         [HttpGet("filter")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(TotalResponse<InfoBaseUpdate>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         public IActionResult GetUpdatesList(
             string? configName,
             string? configVersion,
@@ -73,7 +74,7 @@ namespace ServiceCloud.UpdatesRepositoryService.Controllers.v2
         [Produces("application/octet-stream")]
         [ProducesResponseType(typeof(FileResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public IActionResult DownloadUpdate(string id, UpdateType updateType = UpdateType.ConfigurationUpdate)
         {
             //var update = repository.GetUpdate(request, transitive);
