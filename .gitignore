@@ -365,3 +365,4 @@ FodyWeavers.xsd
 /Deploy/Test
 /Deploy/Setup
 /ServiceCloud.Repository1CService.Setup/ServiceCloud.Repository1CService-cache
+.ssh/
